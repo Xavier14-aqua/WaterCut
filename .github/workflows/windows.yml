@@ -1,0 +1,25 @@
+name: Windows build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run make
+      - uses: actions/upload-artifact@v7
+        with:
+          name: WaterCut-windows-x64
+          path: out/make/zip/win32/x64/*.zip
+          if-no-files-found: error

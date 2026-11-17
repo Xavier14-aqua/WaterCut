@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible WaterCut problem
+body:
+  - type: input
+    id: version
+    attributes:
+      label: WaterCut version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use a small test project without private media or API keys.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
