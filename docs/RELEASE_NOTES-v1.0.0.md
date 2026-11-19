@@ -1,4 +1,4 @@
-# WaterCut v0.1.0 预览版
+# WaterCut v1.0.0 预览版
 
 WaterCut 是本地优先的视频创作工作台。此版本面向 Windows x64，提供免安装 ZIP。
 
@@ -12,7 +12,7 @@ WaterCut 是本地优先的视频创作工作台。此版本面向 Windows x64�
 
 ## 安装与数据
 
-下载 `WaterCut-win32-x64-0.1.0.zip`，完整解压后运行 `WaterCut.exe`。无需安装 Node.js 或系统 FFmpeg；不配置 AI Key 也能手工创作。仓库外运行时，项目默认保存在用户“文档/WaterCut Projects”。当前程序未签名，Windows 可能显示来源警告。
+下载 `WaterCut-win32-x64-1.0.0.zip`，完整解压后运行 `WaterCut.exe`。无需安装 Node.js 或系统 FFmpeg；不配置 AI Key 也能手工创作。仓库外运行时，项目默认保存在用户“文档/WaterCut Projects”。当前程序未签名，Windows 可能显示来源警告。
 
 ## 当前限制
 

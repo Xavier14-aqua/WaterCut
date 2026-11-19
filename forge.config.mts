@@ -6,7 +6,7 @@ const config: ForgeConfig = {
   outDir: process.env.WATERCUT_BUILD_OUT || 'out',
   packagerConfig: {
     asar: true,
-    extraResource: ['LICENSE', 'THIRD_PARTY_NOTICES.txt'],
+    extraResource: ['LICENSE', 'THIRD_PARTY_NOTICES.txt', '.build-resources/MediaInfoModule.wasm', '.build-resources/build-info.json'],
   },
   rebuildConfig: {},
   makers: [
@@ -17,6 +17,12 @@ const config: ForgeConfig = {
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
       // If you are familiar with Vite configuration, it will look really familiar.
       build: [
+        { entry: 'src/probe-worker.ts', config: 'vite.main.config.mts', target: 'main' },
+        {
+          entry: 'src/data-worker.ts',
+          config: 'vite.main.config.mts',
+          target: 'main',
+        },
         {
           // `entry` is just an alias for `build.lib.entry` in the corresponding file of `config`.
           entry: 'src/main.ts',

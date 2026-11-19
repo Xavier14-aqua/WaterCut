@@ -20,6 +20,7 @@ for (const [location, data] of packages) {
   if (!source) throw new Error(`Missing license text for ${metadata.name}`);
   notices.push('='.repeat(72), `${metadata.name} ${metadata.version} (${data.license || metadata.license})`, '', readFileSync(source, 'utf8').trim(), '');
 }
+notices.push('='.repeat(72), 'pyJianYingDraft draft templates (Apache-2.0)', 'Copyright 2024 Gary Guan', 'https://github.com/GuanYixuan/pyJianYingDraft', '', readFileSync(path.join(root,'licenses/pyJianYingDraft-APACHE-2.0.txt'),'utf8').trim(), '');
 notices.push('Electron and Chromium notices are distributed separately as LICENSE and LICENSES.chromium.html in the application archive.', '');
 writeFileSync(path.join(root, 'THIRD_PARTY_NOTICES.txt'), notices.join('\n'), 'utf8');
 console.log(`Wrote notices for ${packages.length} runtime packages.`);

@@ -18,8 +18,18 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run make
+      - run: npm run smoke -- --packaged
+      - run: npm run smoke -- --ideas --packaged
+      - run: npm run smoke -- --stage3 --packaged
+      - run: npm run smoke -- --patch131 --packaged
+      - run: npm run smoke -- --boxes --packaged
+      - run: npm run smoke -- --stage4a --packaged
+      - run: npm run audit:dist
       - uses: actions/upload-artifact@v7
         with:
           name: WaterCut-windows-x64
-          path: out/make/zip/win32/x64/*.zip
+          path: |
+            out/make/zip/win32/x64/*.zip
+            out/make/zip/win32/x64/SHA256SUMS.txt
+            .build-resources/build-info.json
           if-no-files-found: error
