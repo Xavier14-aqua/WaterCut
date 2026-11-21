@@ -218,6 +218,7 @@ app.on('web-contents-created', (_event, wc) => {
       await input(wc, '.inspector textarea', '选择主画面前尚未保存的文字');
       await input(wc, '[aria-label="主画面"]', assetIds[0]);
       await waitFor(wc, `(await window.watercut.readProject(window.__dir)).shotAssets.some(b=>b.shotId===window.__a.shots[4].id&&b.assetId===${JSON.stringify(assetIds[0])})`, 'first primary');
+      await waitFor(wc, `document.querySelector('[aria-label="主画面"]')?.value===${JSON.stringify(assetIds[0])}`, 'primary selection rendered after save');
       assert(await evaluate(wc, `document.querySelector('[aria-label="主画面"]').value===${JSON.stringify(assetIds[0])}`), 'primary selection survives a pending automatic save and controlled-select rerender');
       await input(wc, '[aria-label="主画面"]', assetIds[1]);
       await waitFor(wc, `(await window.watercut.readProject(window.__dir)).shotAssets.some(b=>b.shotId===window.__a.shots[4].id&&b.assetId===${JSON.stringify(assetIds[1])})`, 'change primary');

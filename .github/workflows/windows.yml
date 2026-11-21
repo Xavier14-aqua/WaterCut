@@ -38,6 +38,10 @@ jobs:
         env:
           WATERCUT_BGM_SCENARIO: suspend-during-load
         run: npm run smoke -- --stage4a --bgm-only --packaged
+      - name: Verify held video cannot cancel BGM loading
+        env:
+          WATERCUT_BGM_SCENARIO: paused-video-position
+        run: npm run smoke -- --stage4a --bgm-only --packaged
       - run: npm run audit:dist
       - name: Upload playback diagnostics
         if: always()

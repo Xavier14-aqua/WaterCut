@@ -2,6 +2,14 @@
 function installPreviewDiagnostics(scenario = 'normal') {
   const Original = window.AudioContext;
   const audio = window.__audio = { contexts: [], gains: [], starts: [], stops: 0, events: [], scenario };
+  if (scenario === 'paused-video-position') {
+    const position = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'currentTime');
+    Object.defineProperty(HTMLMediaElement.prototype, 'currentTime', {
+      configurable: true,
+      get() { const time = position.get.call(this); return this instanceof HTMLVideoElement && this.paused ? Math.max(0, time - .1) : time; },
+      set(value) { position.set.call(this, value); }
+    });
+  }
   const record = (event, detail = {}) => {
     audio.events.push({ at: Math.round(performance.now()), event, ...detail });
     if (audio.events.length > 300) audio.events.shift();

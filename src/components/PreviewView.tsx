@@ -3,6 +3,7 @@ import type { Project, Shot } from '../shared/models';
 import { buildPreviewSequence } from '../shared/duration';
 import { mediaUrl } from './Resources';
 import { AudioTransport } from '../shared/audio-transport';
+import { correctPlayingVideo } from '../shared/video-sync';
 import { BGMPanel } from './BGMPanel';
 type Resize = {
   id: string;
@@ -90,14 +91,14 @@ export function PreviewView({
     if(!playing){engine.pause(cursorRef.current);player?.pause();return;}
     if(playableVideo&&(!ready||readyId!==clip?.shot.id||buffering)){engine.pause(cursorRef.current);player?.pause();return;}
     let live=true;
-    void engine.play(cursorRef.current,project.audioClips,project.assets,total).then(ok=>{if(ok&&live&&player&&playableVideo){const target=(clip!.sourceStartMs+Math.max(0,cursorRef.current-clip!.startMs))/1000;if(Math.abs(player.currentTime-target)>.06)player.currentTime=target;void player.play().catch(()=>{if(live){setPlaying(false);setNotice('媒体无法播放，请检查格式后重试');}});}}).catch(e=>{if(live){setPlaying(false);setNotice(String(e));}});
+    void engine.play(cursorRef.current,project.audioClips,project.assets,total).then(ok=>{if(ok&&live&&player&&playableVideo){void player.play().catch(()=>{if(live){setPlaying(false);setNotice('媒体无法播放，请检查格式后重试');}});}}).catch(e=>{if(live){setPlaying(false);setNotice(String(e));}});
     return()=>{live=false;engine.pause(cursorRef.current);player?.pause();};
   },[playing,clip?.shot.id,clip?.asset?.id,ready,readyId,buffering,playableVideo,total,audioSignature]);
   useEffect(()=>{
     if(!playing||!clip)return;let handle=0;
     function tick(){const engine=sound(),active=clipsRef.current.find(c=>cursorRef.current>=c.startMs&&cursorRef.current<c.startMs+c.durationMs);if(!active){engine.pause(total);setPlaying(false);return;}
       let next=Math.min(total,active.startMs+active.durationMs,engine.playing?engine.position():cursorRef.current);
-      const player=video.current;if(playableVideo&&ready&&readyId===active.shot.id&&player&&!player.seeking&&!buffering){const target=(active.sourceStartMs+Math.max(0,next-active.startMs))/1000;if(Math.abs(player.currentTime-target)>.09)player.currentTime=target;}
+      const player=video.current;if(playableVideo&&ready&&readyId===active.shot.id&&player&&!buffering){const target=(active.sourceStartMs+Math.max(0,next-active.startMs))/1000;correctPlayingVideo(player,target,engine.playing);}
       cursorRef.current=next;setCursor(next);if(next>=total){engine.pause(total);setPlaying(false);return;}handle=requestAnimationFrame(tick);
     }
     handle=requestAnimationFrame(tick);return()=>cancelAnimationFrame(handle);
@@ -123,7 +124,7 @@ export function PreviewView({
       cursorRef.current = 0;
       if (video.current) video.current.currentTime = (clips[0]?.sourceStartMs ?? 0) / 1000;
     }
-    if(playing)sound().pause(cursorRef.current);else sound().wake();
+    if(playing)sound().pause(cursorRef.current);else{setNotice('');sound().wake();}
     setPlaying(old => !old);
   }
   function jump(time: number) {
