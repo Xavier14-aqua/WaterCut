@@ -43,6 +43,12 @@ async function input(wc, selector, value) {
   await waitFor(wc, `!!document.querySelector(${JSON.stringify(selector)})&&!document.querySelector(${JSON.stringify(selector)}).matches(':disabled')`, 'enabled input '+selector);
   await evaluate(wc, `(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw Error('Input missing: '+${JSON.stringify(selector)});const p=e instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:e instanceof HTMLSelectElement?HTMLSelectElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(p,'value').set.call(e,${JSON.stringify(value)});e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));})()`);
 }
+async function drag(wc, sourceSelector, targetSelector) {
+  // A reorder renders its result before App.run finishes reloading the library.
+  // Wait for the current handle to be enabled, just as a real user must do.
+  await waitFor(wc, `document.querySelector(${JSON.stringify(sourceSelector)})?.matches('[draggable="true"]:not(:disabled)')&&!!document.querySelector(${JSON.stringify(targetSelector)})`, 'enabled drag handle');
+  await evaluate(wc, `(()=>{const from=document.querySelector(${JSON.stringify(sourceSelector)}),target=document.querySelector(${JSON.stringify(targetSelector)}),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));if(!dt.getData('application/x-watercut-script'))throw Error('Drag did not start from an enabled handle');target.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt,clientY:target.getBoundingClientRect().top}));from.dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:dt}));})()`);
+}
 async function capture(wc, name) { fs.writeFileSync(path.join(output, name), (await wc.capturePage()).toPNG()); }
 async function idle(wc) { await waitFor(wc, "!document.querySelector('.app-status').textContent.includes('处理中')", 'idle'); await delay(120); }
 async function finish(code, error) {
@@ -182,10 +188,10 @@ app.on('web-contents-created', (_event, wc) => {
       await waitFor(wc, "document.querySelectorAll('.script-section-heading input').length===2", 'second section');
       await input(wc, '.script-section:last-child .script-section-heading input', '第二组：收尾');
       await input(wc, '.script-section:last-child .script-block textarea', '结尾草稿');
-      await evaluate(wc, `(()=>{const groups=document.querySelectorAll('.script-section'),from=groups[1].querySelector('.script-block [aria-label="拖动段落"]'),target=groups[2].querySelector('.script-block'),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));target.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt,clientY:target.getBoundingClientRect().top}));from.dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:dt}));})()`);
+      await drag(wc, '.script-section:nth-child(2) .script-block [aria-label="拖动段落"]', '.script-section:nth-child(3) .script-block');
       await waitFor(wc, "document.querySelectorAll('.script-section:last-child .script-block').length===2", 'cross section drag');
       assert(await evaluate(wc, "document.querySelector('.script-section:last-child .script-block:first-child textarea')?.value==='草稿乙'"), 'dragging a paragraph between titled blocks changes its group without losing text');
-      await evaluate(wc, `(()=>{const groups=document.querySelectorAll('.script-section'),from=groups[2].querySelector('.script-section-heading [draggable]'),target=groups[1].querySelector('.script-section-heading'),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));target.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));from.dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:dt}));})()`);
+      await drag(wc, '.script-section:nth-child(3) .script-section-heading [draggable]', '.script-section:nth-child(2) .script-section-heading');
       await waitFor(wc, "document.querySelector('.script-section-heading input')?.value==='第二组：收尾'", 'section drag');
       assert(await evaluate(wc, "document.querySelectorAll('.script-section')[1].querySelectorAll('.script-block').length===2"), 'dragging a title moves its whole section with all drafts');
       await capture(wc, '04-script-sections.png');
