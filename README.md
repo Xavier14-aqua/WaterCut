@@ -1,6 +1,6 @@
 # WaterCut
 
-v1.4.2 修复 Windows 云端测试的数据库初始化耗时和导出清理竞态，统一本机与 CI 测试配置，详见 [修复记录](./docs/RELEASE_NOTES-v1.4.2.md)。当前 GitHub Release v1.4.1 保留不变；新版工作流产物在 Actions 下载。
+v1.4.2 修复 Windows 云端测试的数据库初始化耗时、导出清理竞态和 Electron 启动路径。**GitHub 完整构建已通过：134 项测试、150 项原生断言、打包与分发审计。** 详见 [修复记录](./docs/RELEASE_NOTES-v1.4.2.md)，[新版程序产物在 Actions 下载](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44901915741/artifacts/14705604243)。当前 GitHub Release v1.4.1 保留不变。
 
 v1.4.1 补齐剪映实机验收：**剪映专业版 11.8.0.14778（Windows）基础交接通过**，已实际打开最终包导出的草稿并原生导出 MP4。验证范围与边界见 [实机验收](./docs/剪映11.8实机验收.md) 与 [发布说明](./docs/RELEASE_NOTES-v1.4.1.md)。v1.4.0 引入的精华子片段、区间使用足迹、BGM 与原声混音、拍摄清单筛选及 AI 建议确认继续保留。
 
