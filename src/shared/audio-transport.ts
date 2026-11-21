@@ -19,13 +19,29 @@ export class AudioTransport {
   constructor(settings:TimelineSettings,private url:(assetId:string)=>string,private warn:(message:string)=>void,private interrupted:()=>void,private factory:()=>AudioContext=()=>new AudioContext()){this.settings=settings;}
   private ensure(){
     if(!this.context){this.context=this.factory();this.master=this.context.createGain();this.master.connect(this.context.destination);this.master.gain.value=this.settings.bgmGain;
-      this.context.addEventListener('statechange',()=>{if(this.running&&this.context?.state==='suspended'){this.pause(this.position());this.interrupted();}});
+      this.context.addEventListener('statechange',()=>{if(this.running&&this.context?.state!=='running'){this.pause(this.position());this.interrupted();}});
     }
     return this.context;
   }
   get state(){return this.context?.state??'closed';}
   get playing(){return this.running;}
   wake(){void this.ensure().resume().catch(error=>this.warn(String(error)));}
+  private wait<T>(task:Promise<T>,signal:AbortSignal,timeoutMs=10000):Promise<T>{
+    return new Promise<T>((resolve,reject)=>{
+      let settled=false;
+      const finish=(action:()=>void)=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',cancel);action();};
+      const cancel=()=>finish(()=>reject(new Error('音频播放准备已取消')));
+      const timer=setTimeout(()=>finish(()=>reject(new Error('音频输出或解码超时，请检查设备和素材后重新播放'))),timeoutMs);
+      signal.addEventListener('abort',cancel,{once:true});
+      task.then(value=>finish(()=>resolve(value)),error=>finish(()=>reject(error)));
+      if(signal.aborted)cancel();
+    });
+  }
+  private async resume(ctx:AudioContext,signal:AbortSignal){
+    if(ctx.state==='closed')throw new Error('音频输出已关闭，请重新打开粗剪预览');
+    if(ctx.state!=='running')await this.wait(ctx.resume(),signal,5000);
+    if(ctx.state!=='running')throw new Error('音频输出尚未恢复，请检查设备后重新播放');
+  }
   position(){return this.running&&this.context?this.baseMs+Math.max(0,this.context.currentTime-this.epoch)*1000:this.baseMs;}
   setSettings(settings:TimelineSettings){this.settings=settings;if(this.context){this.master?.gain.setValueAtTime(settings.bgmGain,this.context.currentTime);for(const gain of this.mediaGains)gain.gain.setValueAtTime(settings.videoGain,this.context.currentTime);}}
   attachVideo(player:HTMLMediaElement){const ctx=this.ensure();let nodes=this.videoNodes.get(player);if(!nodes){nodes={source:ctx.createMediaElementSource(player),gain:ctx.createGain(),active:false};this.videoNodes.set(player,nodes);}if(!nodes.active){nodes.source.connect(nodes.gain);nodes.gain.connect(ctx.destination);nodes.active=true;this.mediaGains.add(nodes.gain);}nodes.gain.gain.setValueAtTime(this.settings.videoGain,ctx.currentTime);player.volume=1;}
@@ -37,8 +53,9 @@ export class AudioTransport {
   }
   async play(atMs:number,clips:AudioClip[],assets:Asset[],totalMs:number){
     this.pause(atMs);const token=this.generation,ctx=this.ensure(),controller=new AbortController();this.controller=controller;
+    try{
     // resume() starts in the user's click handler before asynchronous decoding.
-    await ctx.resume();
+    await this.resume(ctx,controller.signal);
     const relevant=clips.filter(c=>c.timelineStartMs<totalMs&&c.timelineStartMs+c.outMs-c.inMs>atMs),ids=[...new Set(relevant.map(c=>c.assetId))];
     let decodedBytes=0;
     const ready=new Set<string>();
@@ -49,7 +66,7 @@ export class AudioTransport {
       if(asset.size>64*1024**2||!duration||duration>600000){this.warn('实时 BGM 预览支持每份原件不超过 64 MB、10 分钟；请先截成较短音频，原件仍可交接');continue;}
       try{
         let buffer=this.buffers.get(id);
-        if(!buffer){const response=await fetch(this.url(id),{signal:controller.signal});if(!response.ok)throw new Error('原件读取失败');const reader=response.body?.getReader();if(!reader)throw new Error('原件无法读取');let bytes=0;const chunks:Uint8Array[]=[];while(true){const part=await reader.read();if(part.done)break;bytes+=part.value.byteLength;if(bytes>64*1024**2){await reader.cancel();throw new Error('音频超过预览内存限制');}chunks.push(part.value);}const encoded=new Uint8Array(bytes);let offset=0;for(const chunk of chunks){encoded.set(chunk,offset);offset+=chunk.length;}buffer=await ctx.decodeAudioData(encoded.buffer);}
+        if(!buffer){const response=await fetch(this.url(id),{signal:controller.signal});if(!response.ok)throw new Error('原件读取失败');const reader=response.body?.getReader();if(!reader)throw new Error('原件无法读取');let bytes=0;const chunks:Uint8Array[]=[];while(true){const part=await reader.read();if(part.done)break;bytes+=part.value.byteLength;if(bytes>64*1024**2){await reader.cancel();throw new Error('音频超过预览内存限制');}chunks.push(part.value);}const encoded=new Uint8Array(bytes);let offset=0;for(const chunk of chunks){encoded.set(chunk,offset);offset+=chunk.length;}buffer=await this.wait(ctx.decodeAudioData(encoded.buffer),controller.signal);}
         const size=buffer.length*buffer.numberOfChannels*4;
         if(decodedBytes+size>256*1024**2)throw new Error('BGM 解码缓存超过 256 MB，请减少同时使用的音频');
         if(token!==this.generation||this.disposed)return false;
@@ -57,6 +74,10 @@ export class AudioTransport {
       }catch(error){if(controller.signal.aborted||token!==this.generation)return false;this.warn(`BGM「${asset.name}」未参与预览：${error instanceof Error?error.message:String(error)}`);}
     }
     for(const id of this.buffers.keys())if(!ready.has(id))this.buffers.delete(id);
+    if(token!==this.generation||this.disposed)return false;
+    // The device may have suspended while fetch/decode was in flight. Resume
+    // again before establishing the epoch; never schedule on a frozen clock.
+    await this.resume(ctx,controller.signal);
     if(token!==this.generation||this.disposed)return false;
     // Epoch is established after all required audio has loaded. Loading never
     // advances a hidden independent music player ahead of the picture.
@@ -74,6 +95,10 @@ export class AudioTransport {
       source.onended=()=>{source.disconnect();gain.disconnect();};source.start(when,offset,Math.min(remaining/1000,available));this.sources.push(source);
     }
     return true;
+    }catch(error){
+      if(controller.signal.aborted||token!==this.generation||this.disposed)return false;
+      this.pause();throw error;
+    }
   }
-  async dispose(){if(this.disposed)return;this.disposed=true;this.pause();this.buffers.clear();for(const gain of this.mediaGains)gain.disconnect();this.mediaGains.clear();await this.context?.close();this.context=null;}
+  async dispose(){if(this.disposed)return;this.disposed=true;this.pause();this.buffers.clear();for(const gain of this.mediaGains)gain.disconnect();this.mediaGains.clear();if(this.context&&this.context.state!=='closed')await this.context.close();this.context=null;}
 }

@@ -32,7 +32,23 @@ jobs:
       - run: npm run smoke -- --patch131 --packaged
       - run: npm run smoke -- --boxes --packaged
       - run: npm run smoke -- --stage4a --packaged
+      - name: Repeat BGM playback in a fresh renderer
+        run: npm run smoke -- --stage4a --bgm-only --packaged
+      - name: Verify BGM suspension during loading
+        env:
+          WATERCUT_BGM_SCENARIO: suspend-during-load
+        run: npm run smoke -- --stage4a --bgm-only --packaged
       - run: npm run audit:dist
+      - name: Upload playback diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: WaterCut-playback-diagnostics
+          path: |
+            out/review-stage4a/report*.json
+            out/review-stage4a/playback*.json
+            out/review-stage4a/failure.png
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v7
         with:
           name: WaterCut-windows-x64
