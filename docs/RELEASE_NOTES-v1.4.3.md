@@ -25,3 +25,22 @@
 141 项测试和类型检查通过，其中音频传输 9 项、画面同步 3 项。原生回归增加加载中取消、实际输出 running、视频缓冲后再次推进的断言。CI 执行完整 4A、另一个全新 renderer 的正常播放、真实加载期间挂起，以及暂停视频时间偏差场景；故障注入保留原先的同步播放断言，没有延长其 25 秒时限或加失败重试。
 
 成功和失败都保存有界诊断 JSON；CI 始终上传 `WaterCut-playback-diagnostics`。记录仅来自隔离的合成样例，不写用户项目或密钥。最终便携包、云端运行和重复验收结果将在完成后补记。
+
+## 最终包与首轮云端结果
+
+程序源码提交 `0debf3f964ac09a7c98285101e306906190ea092`，[GitHub 第 9 次运行完整通过](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44908426222)。141 项测试、打包、6 组主回归 153 项断言、正常 BGM 复跑 19 项、加载挂起 20 项、暂停画面偏差 20 项，共 **212 项原生断言**，以及审计 / 产物上传全部成功。本机最终包也通过相同检查。
+
+[云端程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44908426222/artifacts/14708313161) 包含程序 ZIP、SHA256SUMS 和 build-info。[播放诊断产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44908426222/artifacts/14708188384) 保留每个场景的独立报告。首轮云端程序 ZIP 为 **159,611,028 字节**，内层程序 ZIP 的摘要为：
+
+```text
+SHA-256 ddb78e92ce5348c98f6c457045b3154416c399979e3d62030defcd8db6ebf634
+```
+
+本机程序在 `out/bgm-fix/make/zip/win32/x64/WaterCut-win32-x64-1.4.3.zip`，159,610,992 字节，摘要独立保存：
+
+```text
+SHA-256 834fda2a01e76d4c5df5832d3e8b43c4a6f407ff412a18785f66b5de914a0b6b
+sourceTreeSha256 0c74698e7813e24c8a19f5882b90203f45bbe0f2c5d0d132ccc27f3ba3501658
+```
+
+原生回归为静音自动检查，验证真实 Web Audio 调度、输出状态及画面推进，不冒充人工听音。独立云端全量复跑由本次仅文档回填提交触发，程序源码不变；结果完成后另记。
