@@ -12,6 +12,7 @@ GitHub [失败运行 #4](https://github.com/Xavier14-aqua/WaterCut/actions/runs/
 - 导入 / 导出测试显式跟踪任务，将 Vitest 超时信号传给真实 I/O。清理顺序为取消 → 等待完整任务（含 finally）结束 → 删除临时目录。
 - ZIP 写入在打开目标前验证全部源条目；输出流创建、ZIP 初始化、源流错误和取消共用异常处理。返回失败前等待输出和源句柄关闭，防止后台异常。
 - 新增初始化失败 / 回滚及 6 个 ZIP 故障回归用例；测试配置也纳入构建指纹。
+- 原生回归启动器使用 Electron 包自身的可执行路径解析 / 初始化入口，避免干净的 CI 环境尚无 `node_modules/electron/dist/electron.exe` 时直接 ENOENT。该问题在测试和打包首次通过后才执行到，已由 [修复中间运行](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44901598510) 的实际日志确认。
 
 ## 本机证据
 

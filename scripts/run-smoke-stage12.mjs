@@ -2,10 +2,13 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import { createRequire } from 'node:module';
 const root=path.resolve(import.meta.dirname,'..');
 const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;
 const outputFlag=process.argv.find(arg=>arg.startsWith('--out='));if(outputFlag)env.WATERCUT_SMOKE_OUT=outputFlag.slice('--out='.length);
-const electron=path.join(root,'node_modules','electron','dist',process.platform==='win32'?'electron.exe':'electron');
+// Electron resolves (and, on a clean checkout, installs) its pinned runtime.
+// Do not assume npm ci has populated node_modules/electron/dist already.
+const electron=createRequire(import.meta.url)('electron');
 const ideaRegression=process.argv.includes('--ideas');
 const stage3=process.argv.includes('--stage3');
 const patch131=process.argv.includes('--patch131');
