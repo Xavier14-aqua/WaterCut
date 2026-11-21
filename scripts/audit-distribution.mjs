@@ -20,7 +20,7 @@ if(info.version!==version||info.lockSha256!==lockSha)throw new Error('Build prov
 const sourceFiles=[];
 function visit(folder){for(const entry of fs.readdirSync(folder,{withFileTypes:true})){const file=path.join(folder,entry.name);if(entry.isDirectory())visit(file);else sourceFiles.push(path.relative(root,file).replaceAll('\\','/'));}}
 visit(path.join(root,'src'));visit(path.join(root,'scripts'));visit(path.join(root,'licenses'));
-sourceFiles.push('package.json','package-lock.json','forge.config.mts','vite.main.config.mts','vite.preload.config.mts','vite.renderer.config.mts','index.html','LICENSE');
+sourceFiles.push('package.json','package-lock.json','forge.config.mts','vitest.config.mts','vite.main.config.mts','vite.preload.config.mts','vite.renderer.config.mts','index.html','LICENSE');
 const sourceTree=createHash('sha256');for(const file of sourceFiles.sort())sourceTree.update(file+'\0'+await hashFile(path.join(root,file))+'\n');
 if(sourceTree.digest('hex')!==info.sourceTreeSha256)throw new Error('Runtime was built from a different source tree');
 if(await hashFile(path.join(resources,'MediaInfoModule.wasm'))!==info.mediaProbe.wasmSha256)throw new Error('Probe binary integrity mismatch');

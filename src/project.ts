@@ -5,6 +5,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { z } from 'zod';
+import { removeJobDirectory } from './file-jobs';
 import { ideaSchema, shotMetadataSchema, uuid } from './shared/schemas';
 import * as boxes from './idea-boxes';
 import { audioClipSchema,defaultTimelineSettings,timelineSettingsSchema,validateMediaRange } from './shared/creative';
@@ -172,21 +173,34 @@ export function createProject(root: string, nameInput: unknown): Project {
   mkdirSync(root, {
     recursive: true
   });
-  const directory = path.join(root, `${randomUUID()}.watercut`);
+  const directoryName = `${randomUUID()}.watercut`;
+  const directory = path.join(root, directoryName);
   mkdirSync(directory);
-  const db = new DatabaseSync(databaseFile(directory));
   try {
-    db.exec(`CREATE TABLE project (id TEXT PRIMARY KEY, name TEXT NOT NULL);
+    const db = new DatabaseSync(databaseFile(directory));
+    try {
+      // Schema, revision triggers and the initial record share one durable commit.
+      db.exec('PRAGMA foreign_keys=ON; BEGIN IMMEDIATE;');
+      db.exec(`CREATE TABLE project (id TEXT PRIMARY KEY, name TEXT NOT NULL);
       CREATE TABLE shots (id TEXT PRIMARY KEY, position INTEGER NOT NULL, description TEXT NOT NULL, duration_ms INTEGER NOT NULL);
       ${additions} ALTER TABLE shot_assets ADD COLUMN in_ms INTEGER NOT NULL DEFAULT 0;
       ALTER TABLE shot_assets ADD COLUMN out_ms INTEGER; ${additionsV4} ${additionsV5} ${additionsV6} ${additionsV7} ${additionsV8} ${additionsV9} ${boxes.ideaBoxTables}`);
-    installV11(db);
-    installChangeTriggers(db);
-    db.prepare('INSERT INTO project (id, name) VALUES (?, ?)').run(randomUUID(), name);
-  } finally {
-    db.close();
+      installV11(db);
+      installChangeTriggers(db);
+      db.prepare('INSERT INTO project (id, name) VALUES (?, ?)').run(randomUUID(), name);
+      db.exec('COMMIT');
+    } catch (error) {
+      if (db.isTransaction) db.exec('ROLLBACK');
+      throw error;
+    } finally {
+      db.close();
+    }
+    return readProject(directory);
+  } catch (error) {
+    // mkdir above guarantees this is the new directory owned by this call.
+    removeJobDirectory(directory, root, directoryName);
+    throw error;
   }
-  return readProject(directory);
 }
 export function readProject(directory: string, readOnly = false): Project {
   const db = readOnly ? new DatabaseSync(databaseFile(directory), {

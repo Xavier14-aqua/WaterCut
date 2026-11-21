@@ -1,4 +1,4 @@
-import { afterEach, expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -22,12 +22,50 @@ function stripV8(db: DatabaseSync) {
   for (const [table, names] of Object.entries(columns)) for (const name of names) db.exec(`ALTER TABLE ${table} DROP COLUMN ${name}`);
   db.exec('PRAGMA user_version=7');
 }
+function legacyProject(file: string, downgrade: string) {
+  const db = new DatabaseSync(file);
+  try {
+    db.exec('BEGIN IMMEDIATE');
+    stripV8(db);
+    db.exec(downgrade);
+    db.exec('COMMIT');
+  } catch (error) {
+    if (db.isTransaction) db.exec('ROLLBACK');
+    throw error;
+  } finally {
+    db.close();
+  }
+}
 const folders: string[] = [];
 afterEach(() => {
-  for (const folder of folders.splice(0)) rmSync(folder, {
-    recursive: true,
-    force: true
+  vi.restoreAllMocks();
+  for (const folder of folders.splice(0)) {
+    if (path.dirname(folder) !== path.resolve(tmpdir()) || !path.basename(folder).startsWith('watercut-test-')) throw new Error('Unsafe fixture cleanup');
+    rmSync(folder, { recursive: true, force: true });
+  }
+});
+
+test('failed project initialization rolls back its schema and removes only its new directory', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'watercut-test-'));
+  folders.push(root);
+  const existing = createProject(root, '保留的项目');
+  const exec = DatabaseSync.prototype.exec;
+  let transactionAtFailure = false;
+  let tablesAfterRollback = -1;
+  const spy = vi.spyOn(DatabaseSync.prototype, 'exec').mockImplementation(function (this: DatabaseSync, sql: string) {
+    if (sql.includes('CREATE TRIGGER IF NOT EXISTS change_shots_UPDATE')) {
+      transactionAtFailure = this.isTransaction;
+      throw new Error('Synthetic initialization failure');
+    }
+    exec.call(this, sql);
+    if (sql === 'ROLLBACK') tablesAfterRollback = Number(this.prepare("SELECT count(*) AS n FROM sqlite_master WHERE type='table'").get()!.n);
   });
+  expect(() => createProject(root, '应清理的项目')).toThrow('Synthetic initialization failure');
+  spy.mockRestore();
+  expect(transactionAtFailure).toBe(true);
+  expect(tablesAfterRollback).toBe(0);
+  expect(readdirSync(root)).toEqual([path.basename(existing.directory)]);
+  expect(readProject(existing.directory).name).toBe('保留的项目');
 });
 test('board positions and connections persist; deleting a card removes its connections', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'watercut-test-'));
@@ -63,10 +101,7 @@ test('v6 connections migrate with their original top and bottom anchors', () => 
   project = addIdea(project.directory, '乙');
   project = connectIdeas(project.directory, project.ideas[0].id, project.ideas[1].id);
   const file = path.join(project.directory, 'project.sqlite');
-  const db = new DatabaseSync(file);
-  stripV8(db);
-  db.exec('ALTER TABLE board_edges DROP COLUMN source_handle; ALTER TABLE board_edges DROP COLUMN target_handle; PRAGMA user_version = 6;');
-  db.close();
+  legacyProject(file, 'ALTER TABLE board_edges DROP COLUMN source_handle; ALTER TABLE board_edges DROP COLUMN target_handle; PRAGMA user_version = 6;');
   const migrated = readProject(project.directory);
   expect(migrated.boardEdges[0]).toMatchObject({
     sourceHandle: 'bottom',
@@ -81,10 +116,7 @@ test('v5 ideas migrate to positioned board cards with a backup', () => {
   project = addIdea(project.directory, '旧灵感一');
   project = addIdea(project.directory, '旧灵感二');
   const file = path.join(project.directory, 'project.sqlite');
-  const db = new DatabaseSync(file);
-  stripV8(db);
-  db.exec('DROP TABLE board_edges; ALTER TABLE ideas DROP COLUMN x; ALTER TABLE ideas DROP COLUMN y; PRAGMA user_version = 5;');
-  db.close();
+  legacyProject(file, 'DROP TABLE board_edges; ALTER TABLE ideas DROP COLUMN x; ALTER TABLE ideas DROP COLUMN y; PRAGMA user_version = 5;');
   const migrated = readProject(project.directory);
   expect(migrated.ideas.map(idea => idea.x)).toEqual([0, 230]);
   expect(migrated.boardEdges).toEqual([]);
@@ -151,11 +183,8 @@ test('v1 project migrates with a backup and keeps its shots', () => {
     durationMs: 2000
   });
   const file = path.join(project.directory, 'project.sqlite');
-  const db = new DatabaseSync(file);
-  stripV8(db);
-  db.exec(`DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio; DROP TABLE shot_assets; DROP TABLE assets; DROP TABLE ideas;
+  legacyProject(file, `DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio; DROP TABLE shot_assets; DROP TABLE assets; DROP TABLE ideas;
     ALTER TABLE shots DROP COLUMN action_dialogue; PRAGMA user_version = 1;`);
-  db.close();
   const migrated = readProject(project.directory);
   expect(migrated.shots[0].description).toBe('原有镜头');
   expect(migrated.assets).toEqual([]);
@@ -173,9 +202,7 @@ test('v2 links migrate to default full-video trim and preserve their asset', asy
   project = await importAsset(project.directory, source);
   project = linkAsset(project.directory, project.shots[0].id, project.assets[0].id);
   const file = path.join(project.directory, 'project.sqlite');
-  const db = new DatabaseSync(file);
-  stripV8(db);
-  db.exec(`DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio;
+  legacyProject(file, `DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio;
     ALTER TABLE shots DROP COLUMN action_dialogue;
     ALTER TABLE ideas DROP COLUMN x; ALTER TABLE ideas DROP COLUMN y;
     ALTER TABLE ideas DROP COLUMN tags; ALTER TABLE ideas DROP COLUMN notes; ALTER TABLE ideas DROP COLUMN source_asset_id;
@@ -184,7 +211,6 @@ test('v2 links migrate to default full-video trim and preserve their asset', asy
     DROP TABLE shot_assets;
     ALTER TABLE old_links RENAME TO shot_assets;
     PRAGMA user_version = 2;`);
-  db.close();
   const migrated = readProject(project.directory);
   expect(migrated.shotAssets[0]).toEqual({
     shotId: project.shots[0].id,
@@ -348,14 +374,11 @@ test('existing v3 project retains trim and main asset after v8 migration', async
   project = linkAsset(project.directory, project.shots[0].id, project.assets[0].id);
   project = updateTrim(project.directory, project.shots[0].id, 500, 900);
   const file = path.join(project.directory, 'project.sqlite');
-  const db = new DatabaseSync(file);
-  stripV8(db);
-  db.exec(`DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio;
+  legacyProject(file, `DROP TABLE board_edges; DROP TABLE shot_candidates; DROP TABLE shot_audio;
     ALTER TABLE shots DROP COLUMN action_dialogue;
     ALTER TABLE ideas DROP COLUMN x; ALTER TABLE ideas DROP COLUMN y;
     ALTER TABLE ideas DROP COLUMN tags; ALTER TABLE ideas DROP COLUMN notes; ALTER TABLE ideas DROP COLUMN source_asset_id;
     ALTER TABLE assets DROP COLUMN tags; PRAGMA user_version = 3;`);
-  db.close();
   const reopened = readProject(project.directory);
   expect(reopened.shotAssets[0]).toMatchObject({
     inMs: 500,

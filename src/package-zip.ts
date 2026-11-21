@@ -2,7 +2,7 @@ import * as yauzl from 'yauzl';
 import * as yazl from 'yazl';
 import { createReadStream, createWriteStream, mkdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { Transform, type Readable } from 'node:stream';
+import { Transform, type Readable, type Writable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
 import { checkCancelled, type JobOptions } from './file-jobs';
@@ -137,38 +137,64 @@ export async function writePackageZip(files: Array<{
   checkCancelled(options.signal);
   const zip = new yazl.ZipFile(),
     streams = new Set<Readable>();
+  let stopping = false;
+  let destination: Writable | undefined;
+  let output: Promise<void> | undefined;
   const cancel = () => {
+    stopping = true;
     for (const stream of streams) stream.destroy();
     (zip.outputStream as Readable).destroy(new Error('项目包导出已取消'));
   };
   options.signal?.addEventListener('abort', cancel, {
     once: true
   });
-  const output = pipeline(zip.outputStream, createWriteStream(target, {
-    flags: 'wx'
-  }), {
-    signal: options.signal
+  zip.on('error', e => {
+    stopping = true;
+    (zip.outputStream as Readable).destroy(e);
   });
-  zip.on('error', e => (zip.outputStream as Readable).destroy(e));
-  zip.addBuffer(manifest, 'manifest.json');
-  for (const item of files) zip.addReadStreamLazy(safePackagePath(item.path), {
-    compress: !item.path.startsWith('assets/'),
-    size: statSync(item.file).size
-  }, callback => {
-    if (options.signal?.aborted) {
-      callback(new Error('项目包导出已取消'), null as any);
-      return;
-    }
-    const stream = createReadStream(item.file);
-    stream.on('error',error=>{if(!options.signal?.aborted)(zip.outputStream as Readable).destroy(error);});
-    streams.add(stream);
-    stream.once('close', () => streams.delete(stream));
-    callback(null, stream);
-  });
-  zip.end();
   try {
+    // Check every entry before opening the target. Setup failures must not leave
+    // an unobserved pipeline running after the caller cleans its staging folder.
+    const entries = files.map(item => {
+      const entry = safePackagePath(item.path);
+      const stat = statSync(item.file);
+      if (!stat.isFile()) throw new Error('项目包原件不是文件');
+      return { ...item, path: entry, size: stat.size };
+    });
+    checkCancelled(options.signal);
+    destination = createWriteStream(target, { flags: 'wx' });
+    output = pipeline(zip.outputStream, destination, { signal: options.signal });
+    zip.addBuffer(manifest, 'manifest.json');
+    for (const item of entries) zip.addReadStreamLazy(item.path, {
+      compress: !item.path.startsWith('assets/'),
+      size: item.size
+    }, callback => {
+      if (stopping || options.signal?.aborted) {
+        callback(new Error('项目包导出已取消'), null as any);
+        return;
+      }
+      const stream = createReadStream(item.file);
+      stream.on('error', error => {
+        if (!stopping) (zip.outputStream as Readable).destroy(error);
+      });
+      streams.add(stream);
+      stream.once('close', () => streams.delete(stream));
+      callback(null, stream);
+    });
+    zip.end();
     await output;
+  } catch (error) {
+    stopping = true;
+    if (output) {
+      (zip.outputStream as Readable).destroy(error as Error);
+      await output.catch(() => {});
+    } else {
+      (zip.outputStream as Readable).destroy();
+      destination?.destroy();
+    }
+    throw error;
   } finally {
+    stopping = true;
     options.signal?.removeEventListener('abort', cancel);
     await Promise.all([...streams].map(stream => new Promise<void>(resolve => {
       if (stream.closed) {

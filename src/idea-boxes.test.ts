@@ -7,11 +7,16 @@ import path from 'node:path';
 import * as p from './project';
 import * as l from './library';
 import { createRevision, restoreRevision, listRevisions } from './revisions';
-import { exportPackage, importPackage } from './project-package';
-import { writePackageZip } from './package-zip';
+import { exportPackage as exportPackageJob, importPackage as importPackageJob } from './project-package';
+import { writePackageZip as writePackageZipJob } from './package-zip';
+import { testFileJobs } from './test-support/file-jobs';
 import { validateDocument, projectDocument } from './shared/document';
 import { emptyPayload, type IdeaInput } from './shared/models';
 const folders: string[] = [];
+const jobs = testFileJobs();
+const exportPackage = jobs.wrap(exportPackageJob, 4);
+const importPackage = jobs.wrap(importPackageJob, 2);
+const writePackageZip = jobs.wrap(writePackageZipJob, 3);
 function fixture() {
   const root = mkdtempSync(path.join(tmpdir(), 'watercut-boxes-'));
   folders.push(root);
@@ -41,15 +46,20 @@ function idea(text: string, kind: IdeaInput['kind'] = 'note'): IdeaInput {
 function stripBoxes(file: string, version: number) {
   const db = new DatabaseSync(file);
   try {
+    db.exec('BEGIN IMMEDIATE');
     for (const row of db.prepare("SELECT name FROM sqlite_master WHERE type='trigger' AND name LIKE 'change_idea_box_%'").all() as {
       name: string;
     }[]) db.exec(`DROP TRIGGER ${row.name}`);
-    db.exec(`DROP TABLE idea_box_items;DROP TABLE idea_boxes;PRAGMA user_version=${version};`);
+    db.exec(`DROP TABLE idea_box_items;DROP TABLE idea_boxes;PRAGMA user_version=${version};COMMIT;`);
+  } catch (error) {
+    if (db.isTransaction) db.exec('ROLLBACK');
+    throw error;
   } finally {
     db.close();
   }
 }
-afterEach(() => {
+afterEach(async () => {
+  await jobs.stop();
   for (const folder of folders.splice(0)) {
     if (path.dirname(folder) !== path.resolve(tmpdir()) || !path.basename(folder).startsWith('watercut-boxes-')) throw Error('Unsafe cleanup');
     rmSync(folder, {

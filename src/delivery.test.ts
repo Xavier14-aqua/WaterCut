@@ -9,13 +9,18 @@ import * as p from './project';
 import * as l from './library';
 import { hydrateProject } from './workspace';
 import { createRevision, listRevisions, restoreRevision, deleteRevision } from './revisions';
-import { exportPackage, importPackage } from './project-package';
-import { openPackageZip, readManifest, safePackagePath, writePackageZip, PACKAGE_LIMITS } from './package-zip';
+import { exportPackage as exportPackageJob, importPackage as importPackageJob } from './project-package';
+import { openPackageZip, readManifest, safePackagePath, writePackageZip as writePackageZipJob, PACKAGE_LIMITS } from './package-zip';
+import { testFileJobs } from './test-support/file-jobs';
 import { projectDocument } from './shared/document';
 import { emptyPayload } from './shared/models';
 import { normalizeMediaInfo } from './shared/media';
 import { exportRows, shotListCSV, storyboardHTML, textParts } from './shared/print';
 const roots: string[] = [];
+const jobs = testFileJobs();
+const exportPackage = jobs.wrap(exportPackageJob, 4);
+const importPackage = jobs.wrap(importPackageJob, 2);
+const writePackageZip = jobs.wrap(writePackageZipJob, 3);
 function fixture() {
   const root = mkdtempSync(path.join(tmpdir(), 'watercut-delivery-'));
   roots.push(root);
@@ -30,7 +35,8 @@ function fixture() {
     imports
   };
 }
-afterEach(() => {
+afterEach(async () => {
+  await jobs.stop();
   for (const root of roots.splice(0)) {
     if (path.dirname(path.resolve(root)) !== path.resolve(tmpdir()) || !path.basename(root).startsWith('watercut-delivery-')) throw new Error('Invalid test cleanup');
     rmSync(root, {
@@ -98,7 +104,7 @@ test('v8 project upgrades with a consistent backup and keeps its identity', () =
     project = p.createProject(f.projects, '旧项目'),
     file = path.join(project.directory, 'project.sqlite');
   const db = new DatabaseSync(file);
-  db.exec('DROP TABLE revision_media_refs;DROP TABLE revisions;DROP TABLE asset_metadata;DROP TABLE project_origin;PRAGMA user_version=8;');
+  db.exec('BEGIN IMMEDIATE;DROP TABLE revision_media_refs;DROP TABLE revisions;DROP TABLE asset_metadata;DROP TABLE project_origin;PRAGMA user_version=8;COMMIT;');
   db.close();
   expect(p.readProject(project.directory).id).toBe(project.id);
   expect(existsSync(file + '.before-v11.bak')).toBe(true);
@@ -114,7 +120,7 @@ test('v1 library upgrades without losing assets and backs up before v4', async (
   writeFileSync(file, 'image');
   const asset = await l.importLibraryAsset(f.library, file);
   const db = new DatabaseSync(path.join(f.library, 'library.sqlite'));
-  db.exec('DROP TABLE asset_metadata;PRAGMA user_version=1;');
+  db.exec('BEGIN IMMEDIATE;DROP TABLE asset_metadata;PRAGMA user_version=1;COMMIT;');
   db.close();
   expect(l.getLibraryAsset(f.library, asset.id).id).toBe(asset.id);
   expect(readdirSync(f.library).some(n => n.includes('.before-v4.'))).toBe(true);

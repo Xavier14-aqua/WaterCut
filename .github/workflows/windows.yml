@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -17,6 +18,13 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
+      - name: Upload unit test timings
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: WaterCut-unit-tests
+          path: out/review-unit/report.json
+          if-no-files-found: warn
       - run: npm run make
       - run: npm run smoke -- --packaged
       - run: npm run smoke -- --ideas --packaged
