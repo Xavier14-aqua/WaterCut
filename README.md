@@ -1,6 +1,6 @@
 # WaterCut
 
-v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机与首轮云端均通过 141 项测试、212 项原生断言和分发审计。** [下载程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44908426222/artifacts/14708313161)，详见 [BGM 修复记录](./docs/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
+v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [下载最新程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
 
 v1.4.2 的数据库初始化耗时、导出清理和 Electron 启动路径修复继续保留；历史验收见 [v1.4.2 记录](./docs/RELEASE_NOTES-v1.4.2.md)。
 
