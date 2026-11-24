@@ -31,6 +31,12 @@ export const profiles = [
     report: 'review-professional',
     legacy: ['--stage4a'],
   },
+  {
+    id: 'interface',
+    file: 'interface.cjs',
+    report: 'review-interface',
+    legacy: [],
+  },
 ];
 
 export function selectProfile(args) {

@@ -14,6 +14,7 @@ const outputFlag = args.find((arg) => arg.startsWith('--out='));
 if (outputFlag) env.WATERCUT_SMOKE_OUT = outputFlag.slice('--out='.length);
 // Use Electron's supported entry; a fresh npm ci may install the runtime lazily.
 const electron = createRequire(import.meta.url)('electron');
+const started = Date.now();
 const child = spawn(
   electron,
   [path.join(root, 'scripts/smoke', profile.file), ...args],
@@ -26,7 +27,11 @@ child.on('error', (error) => {
 child.on('exit', (code) => {
   process.exitCode = code ?? 1;
   const reportFile = path.join(root, 'out', profile.report, 'report.json');
-  if (!fs.existsSync(reportFile)) return;
+  if (!fs.existsSync(reportFile) || fs.statSync(reportFile).mtimeMs < started) {
+    console.error('No fresh smoke report was produced for:', profile.id);
+    if (code === 0) process.exitCode = 1;
+    return;
+  }
   const report = JSON.parse(fs.readFileSync(reportFile, 'utf8'));
   const temporary = path.resolve(report.temporary ?? '');
   if (code !== 0) {

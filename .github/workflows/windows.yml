@@ -26,6 +26,7 @@ jobs:
           path: out/review-unit/report.json
           if-no-files-found: warn
       - run: npm run make
+      - run: npm run smoke -- --scenario=interface --packaged
       - run: npm run smoke -- --scenario=core --packaged
       - run: npm run smoke -- --scenario=inspiration --packaged
       - run: npm run smoke -- --scenario=delivery --packaged
@@ -53,6 +54,15 @@ jobs:
             out/review-*/failure*.json
             out/review-*/failure*.png
             out/review-professional/playback*.json
+          if-no-files-found: warn
+      - name: Upload interface screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: WaterCut-interface-review
+          path: |
+            out/review-interface/*.png
+            out/review-interface/report.json
           if-no-files-found: warn
       - uses: actions/upload-artifact@v7
         with:

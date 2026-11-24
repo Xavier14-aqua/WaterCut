@@ -23,8 +23,11 @@ npm run make
 | `--scenario=editor` | 总库范围、颜色、脚本分组、主画面 | `out/review-editor` |
 | `--scenario=organization` | 两类库的收纳、筛选、持久化 | `out/review-organization` |
 | `--scenario=professional` | 精华、BGM、清单、AI 确认、剪映交接 | `out/review-professional` |
+| `--scenario=interface` | 六个参考页面、详情、总库和存储在 1440 / 1280 / 1000 下的布局、对比与焦点 | `out/review-interface` |
 
 例如：`npm run smoke -- --scenario=editor --packaged`。旧参数 `--ideas`、`--stage3`、`--patch131`、`--boxes`、`--stage4a` 继续作为兼容别名；新脚本按功能命名。
+
+界面验收使用官方生成示例和两个临时项目，捕获 27 张程序截图。截图前等待图片解码与有限的 CSS 过渡完成，并核对当前流程、横向溢出、可见操作、代表性文字对比和键盘焦点。失败现场保留供排查；启动器只接受本次运行新写出的报告，避免把旧结果当成新验收。
 
 额外 BGM 检查使用 `--scenario=professional --bgm-only --packaged`，依次在独立进程中运行 `WATERCUT_BGM_SCENARIO` 为 `normal`、`suspend-during-load`、`paused-video-position` 的三种场景。完整专业流程及这三个额外场景均保留原有同步断言，失败时保存有界状态轨迹。
 
