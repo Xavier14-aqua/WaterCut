@@ -17,20 +17,20 @@ const config: ForgeConfig = {
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
       // If you are familiar with Vite configuration, it will look really familiar.
       build: [
-        { entry: 'src/probe-worker.ts', config: 'vite.main.config.mts', target: 'main' },
+        { entry: 'src/workers/probe-worker.ts', config: 'vite.main.config.mts', target: 'main' },
         {
-          entry: 'src/data-worker.ts',
+          entry: 'src/workers/data-worker.ts',
           config: 'vite.main.config.mts',
           target: 'main',
         },
         {
           // `entry` is just an alias for `build.lib.entry` in the corresponding file of `config`.
-          entry: 'src/main.ts',
+          entry: 'src/main/main.ts',
           config: 'vite.main.config.mts',
           target: 'main',
         },
         {
-          entry: 'src/preload.ts',
+          entry: 'src/preload/preload.ts',
           config: 'vite.preload.config.mts',
           target: 'preload',
         },
