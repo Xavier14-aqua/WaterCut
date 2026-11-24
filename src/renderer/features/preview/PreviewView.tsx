@@ -5,6 +5,7 @@ import { mediaUrl } from '../../platform/media-url';
 import { AudioTransport } from './engine/audio-transport';
 import { correctPlayingVideo } from './engine/video-sync';
 import { BGMPanel } from './BGMPanel';
+import { FrameGuide } from '../../ui/BlueprintArt';
 type Resize = {
   id: string;
   side: 'left' | 'right';
@@ -365,7 +366,9 @@ export function PreviewView({
     <section className="preview-view">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">ROUGH CUT</p>
+          <p className="eyebrow">
+            ROUGH CUT <span>// 04_TIMELINE</span>
+          </p>
           <h1>先看见整条故事</h1>
         </div>
         <span className="muted">
@@ -377,6 +380,7 @@ export function PreviewView({
       ) : (
         <>
           <div className="preview-screen" key={clip.shot.id}>
+            <FrameGuide className="preview-guide" />
             {playableVideo ? (
               <video
                 key={clip.asset!.id}

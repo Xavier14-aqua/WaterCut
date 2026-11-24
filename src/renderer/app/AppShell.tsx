@@ -9,9 +9,11 @@ import { DeliveryDialog } from './views/DeliveryDialog';
 import { StorageDialog } from './views/StorageDialog';
 import { IdeaEditorDialog } from './views/IdeaEditorDialog';
 import { IncubationDialog } from './views/IncubationDialog';
+import { Icon } from '../ui/Icon';
 
 export function AppShell({ model }: { model: AppModel }) {
   const {
+    busy,
     changeMode,
     flush,
     message,
@@ -23,33 +25,40 @@ export function AppShell({ model }: { model: AppModel }) {
   } = model;
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-mode={mode}>
       <nav className="rail" aria-label="主导航">
         <strong className="rail-brand">
           W<span>WaterCut</span>
         </strong>
         <button
           className={mode === 'home' ? 'active' : ''}
+          aria-current={mode === 'home' ? 'page' : undefined}
           onClick={() => void changeMode('home')}
         >
-          ▦<span>项目</span>
+          <Icon name="projects" />
+          <span>项目</span>
         </button>
         <button
           className={mode === 'library' ? 'active' : ''}
+          aria-current={mode === 'library' ? 'page' : undefined}
           onClick={() => void changeMode('library')}
         >
-          ◈<span>总库</span>
+          <Icon name="library" />
+          <span>总库</span>
         </button>
         {project && (
           <button
             className={mode === 'project' ? 'active' : ''}
+            aria-current={mode === 'project' ? 'page' : undefined}
             onClick={() => void changeMode('project')}
           >
-            ▤<span>工作室</span>
+            <Icon name="studio" />
+            <span>工作室</span>
           </button>
         )}
         <button className="rail-settings" onClick={() => setShowSettings(true)}>
-          ⚙<span>存储</span>
+          <Icon name="settings" />
+          <span>存储</span>
         </button>
         <small>v{appVersion}</small>
       </nav>
@@ -59,6 +68,17 @@ export function AppShell({ model }: { model: AppModel }) {
         <GlobalLibrary model={model} />
         <StudioWorkspace model={model} />
         <footer className="app-status" role="status">
+          <span className="status-code" aria-hidden="true">
+            STATUS //{' '}
+            {busy
+              ? 'WORKING'
+              : message.includes('失败')
+                ? 'ERROR'
+                : message === '已保存'
+                  ? 'SAVED'
+                  : 'READY'}{' '}
+            /
+          </span>
           <span>{message}</span>
           {message.includes('保存失败') && (
             <button

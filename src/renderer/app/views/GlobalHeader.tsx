@@ -46,6 +46,7 @@ export function GlobalHeader({ model }: { model: AppModel }) {
                 key={key}
                 disabled={busy}
                 className={view === key ? 'active' : ''}
+                aria-current={view === key ? 'step' : undefined}
                 onClick={() => void changeView(key)}
               >
                 {label}
@@ -74,6 +75,11 @@ export function GlobalHeader({ model }: { model: AppModel }) {
                 ? '保存中…'
                 : '本地保存'}
       </span>
+      {!activeProject && (
+        <span className="header-stamp" aria-hidden="true">
+          W
+        </span>
+      )}
     </header>
   );
 }

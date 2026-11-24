@@ -1,0 +1,165 @@
+.idea-board {
+  overflow: hidden;
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  height: max(430px, calc(100vh - 320px));
+  margin-top: 22px;
+}
+.idea-board .react-flow__node {
+  padding: 0 !important;
+  overflow: visible;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+}
+.idea-node {
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+  background: var(--panel);
+  border-radius: 5px;
+  width: 215px;
+  min-height: 78px;
+  border-top: 4px solid var(--accent);
+}
+.idea-node > small {
+  display: block;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0;
+  padding: 8px 12px 0;
+}
+.idea-node > span {
+  display: block;
+  font-size: 14px;
+  padding: 5px 12px 13px;
+}
+.idea-node.scene {
+  background: var(--panel);
+  border-color: var(--accent);
+  border-radius: 5px;
+}
+.idea-node img {
+  width: 100%;
+  max-height: 110px;
+  object-fit: cover;
+}
+.idea-board .react-flow__node.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.idea-board .react-flow__edge-path {
+  stroke: var(--accent);
+  stroke-width: 1.7;
+}
+.idea-board .react-flow__handle {
+  background: var(--coral);
+  border: 2px solid var(--paper);
+  width: 11px;
+  height: 11px;
+}
+.idea-board .react-flow__controls {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: none;
+  border-color: var(--ink);
+  border-radius: 6px;
+}
+.idea-board .react-flow__controls .react-flow__controls-button {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom-color: var(--hairline);
+}
+.idea-board .react-flow__controls svg {
+  width: 16px;
+  height: 16px;
+  max-width: none;
+  max-height: none;
+  fill: currentColor;
+}
+.board-edge-list {
+  margin: 18px 0;
+  display: grid;
+  gap: 7px;
+  grid-template-columns: minmax(0, 1fr);
+}
+.board-edge-list > strong {
+  font-size: 12px;
+}
+.board-edge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  min-width: 0;
+}
+.board-edge-item.selected {
+  border-color: var(--accent);
+}
+.board-edge-item span {
+  max-width: 33%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.board-edge-item input {
+  flex: 1;
+  font-size: 11px;
+  padding: 6px;
+  min-width: 0;
+}
+.board-edge-item button {
+  padding: 5px;
+  font-size: 10px;
+}
+.idea-node.mood {
+  width: 225px;
+  min-height: 110px;
+  background: var(--panel);
+  border-color: var(--coral);
+}
+.board-region-label {
+  padding: 12px 16px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.board-orbit {
+  position: absolute;
+  inset: 1% 5%;
+  width: 90%;
+  height: 94%;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.idea-board .react-flow {
+  background: transparent;
+}
+.idea-board .react-flow__node-region {
+  background: transparent;
+  border: 1px dashed var(--hairline);
+  border-radius: 8px;
+  box-shadow: none;
+}
+.idea-node > .palette {
+  height: 0;
+  overflow: hidden;
+}
+.idea-board .react-flow__attribution {
+  background: var(--paper);
+  color: var(--muted);
+}

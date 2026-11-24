@@ -9,6 +9,7 @@ import { IdeaInspector } from '../features/inspiration';
 import { AssetInspector } from '../features/library';
 import { ShotInspector } from '../features/storyboard';
 import { useInspectorResources } from './inspector/useInspectorResources';
+import { BlueprintArt } from '../ui/BlueprintArt';
 
 type InspectorProps = {
   selection: Selection | null;
@@ -71,12 +72,13 @@ export function Inspector(props: InspectorProps) {
   } = useInspectorResources({ selection, project, library, onNotice });
   if (!selection)
     return (
-      <aside className="inspector">
+      <aside className="inspector inspector-empty">
         <p className="eyebrow">INSPECTOR</p>
         <h2>细节在这里</h2>
         <p className="muted">
           选中卡片、素材或镜头，查看来源、编辑内容与裁剪范围。
         </p>
+        <BlueprintArt variant="target" className="inspector-target" />
       </aside>
     );
 

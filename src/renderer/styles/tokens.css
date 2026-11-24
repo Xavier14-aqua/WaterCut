@@ -1,0 +1,32 @@
+:root {
+  color-scheme: light;
+  --font-ui:
+    'Microsoft YaHei UI', 'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --paper: #f4f5ef;
+  --panel: #f8f9f3;
+  --raised: #e8ebe2;
+  --ink: #141a17;
+  --muted: #545e53;
+  --accent: #073bdf;
+  --accent-hover: #002bb8;
+  --on-accent: #fff;
+  --coral: #df705d;
+  --danger: #aa3c30;
+  --border: #737c70;
+  --divider: #66809f;
+  --hairline: #cbd1c5;
+  --scrollbar: #a9b1a4;
+  --canvas-dot: #97a296;
+  --screen: #080d10;
+  --selection: #dfe8ff;
+  --focus-tint: #073bdf24;
+  --warning-tint: #fae8df;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}

@@ -50,6 +50,7 @@ export function ResourceCards({
             <article
               key={idea.id}
               className={`resource-card ${selected.includes(idea.id) ? 'selected' : ''}`}
+              data-kind={idea.kind}
               draggable
               onDragStart={(e) =>
                 startResourceDrag(e, {

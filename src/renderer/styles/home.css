@@ -1,0 +1,181 @@
+.home-page {
+  overflow: auto;
+  flex: 1;
+  position: relative;
+  padding: 0 6vw 40px;
+  background: var(--paper);
+}
+.home-intro {
+  position: relative;
+  isolation: isolate;
+  max-width: none;
+  min-height: 350px;
+  padding: 58px 0 32px;
+  border-bottom: 1px dashed var(--hairline);
+  margin-bottom: 22px;
+}
+.home-intro h1 {
+  font-size: 42px;
+  font-weight: 750;
+  line-height: 1.32;
+  letter-spacing: -0.025em;
+  margin-bottom: 14px;
+}
+.home-intro p {
+  max-width: 570px;
+}
+.home-intro .toolbar input {
+  width: 250px;
+  background: var(--paper);
+}
+.project-grid {
+  display: grid;
+  margin-bottom: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 28px;
+  margin-top: 26px;
+}
+.project-tile {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  padding: 12px 14px 14px;
+  min-width: 0;
+}
+.project-tile h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 12px 0 0;
+  overflow-wrap: anywhere;
+}
+.project-tile .path {
+  min-height: 36px;
+  margin: 5px 0 12px;
+  color: var(--ink);
+}
+.project-tile button {
+  font-size: 14px;
+}
+.recent-path {
+  display: block;
+  margin: 10px 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 11px;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.home-intro .toolbar {
+  position: relative;
+  z-index: 1;
+  margin: 12px 0 7px;
+}
+.home-intro .toolbar > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.home-intro .toolbar .ui-icon {
+  width: 17px;
+  height: 17px;
+}
+.home-page > .section-heading .toolbar {
+  margin: 0;
+}
+.home-intro .eyebrow {
+  font-size: 13px;
+}
+.home-intro .reference-star {
+  color: var(--accent);
+}
+.home-orbit {
+  position: absolute;
+  right: -35px;
+  bottom: 0;
+  width: 64%;
+  height: 100%;
+  opacity: 0.18;
+  z-index: -1;
+  pointer-events: none;
+}
+.home-intro .text-button {
+  font-size: 14px;
+}
+.collection-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 8px;
+}
+.project-cover {
+  position: relative;
+  height: 148px;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+}
+.project-cover > .blueprint-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.82;
+}
+.cover-title {
+  position: relative;
+  max-width: 85%;
+  padding: 6px 9px;
+  background: var(--paper);
+  font-size: 22px;
+  text-align: center;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.cover-point {
+  position: absolute;
+  top: 48%;
+  right: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+.project-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.project-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--ink);
+  color: var(--paper);
+}
+.project-open .ui-icon {
+  width: 14px;
+  height: 14px;
+}
+.project-archive {
+  border-style: dashed;
+}
+.project-tile::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--border), var(--border)) left top/1px 7px no-repeat,
+    linear-gradient(var(--border), var(--border)) left top/7px 1px no-repeat,
+    linear-gradient(var(--border), var(--border)) right top/1px 7px no-repeat,
+    linear-gradient(var(--border), var(--border)) right top/7px 1px no-repeat,
+    linear-gradient(var(--border), var(--border)) left bottom/1px 7px no-repeat,
+    linear-gradient(var(--border), var(--border)) right bottom/1px 7px no-repeat;
+}

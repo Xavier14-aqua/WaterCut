@@ -1,0 +1,209 @@
+.shots-grid {
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+}
+.shot-tile {
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+}
+.shot-tile.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.shot-tile.needs-review {
+  border-top: 3px solid var(--border);
+}
+.shot-tile-header {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  color: var(--ink);
+  background: transparent;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--ink);
+  gap: 5px;
+}
+.shot-tile-header strong {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  margin-right: auto;
+  font:
+    700 21px Georgia,
+    serif;
+  color: var(--ink);
+}
+.shot-tile-header small {
+  font-size: 11px;
+}
+.shot-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  height: 145px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
+  padding: 10px;
+}
+.shot-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.shot-picture > span {
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 10px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-size: 11px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.shot-picture small {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 2px 8px;
+}
+.shot-tile-body {
+  padding: 12px;
+}
+.shot-tile-body textarea {
+  resize: vertical;
+  min-height: 74px;
+  font-size: 14px;
+  color: var(--ink);
+  background: transparent;
+  border-color: transparent;
+  padding: 2px 0;
+}
+.shot-tile-body textarea:focus {
+  border-color: var(--border);
+  padding-left: 6px;
+}
+.source-badge {
+  font-size: 9px;
+  color: var(--ink);
+  display: block;
+  padding-top: 9px;
+}
+.shot-tile-footer {
+  display: flex;
+  padding: 8px 10px;
+  gap: 8px;
+}
+.shot-tile-footer button {
+  font-size: 12px;
+}
+.shot-tile-footer .danger-text {
+  margin-left: auto;
+  color: var(--danger);
+}
+.shots-table {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.shots-table .shot-tile {
+  display: grid;
+  align-items: center;
+  padding: 12px;
+  grid-template-columns: 58px 116px minmax(0, 1fr) 32px;
+  gap: 13px;
+  min-height: 142px;
+}
+.shots-table .shot-tile-header {
+  flex-direction: column;
+  border: 0;
+  padding: 0;
+  gap: 2px;
+}
+.shots-table .shot-tile-header strong {
+  margin: 0;
+  font: 700 23px var(--font-ui);
+}
+.shots-table .shot-picture {
+  height: 94px;
+  padding: 0;
+  border: 1px solid var(--divider);
+  align-self: center;
+}
+.shots-table .shot-tile-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  gap: 12px;
+  align-items: start;
+}
+.shots-table .shot-tile-body textarea {
+  min-height: 64px;
+  font-size: 14px;
+}
+.shots-table .source-badge,
+.shots-table .warning {
+  grid-column: 1/-1;
+  padding: 0;
+}
+.shots-table .shot-tile-footer {
+  flex-direction: column;
+  padding: 4px;
+}
+.shots-table .shot-tile-footer button {
+  margin: 0;
+  padding: 3px;
+}
+.shot-list-filters {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.shot-list-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 130px;
+  flex: 1;
+  font-size: 12px;
+  color: var(--ink);
+}
+.shot-list-filters label.checkbox-label {
+  flex-direction: row;
+  align-items: center;
+  flex: none;
+  min-height: 38px;
+}
+.shot-list-filters > small {
+  flex-basis: 100%;
+  line-height: 1.6;
+}
+.shot-tile-header span {
+  margin-left: auto;
+  font-size: 11px;
+}
+.storyboard-view > div > h3 {
+  position: relative;
+  border-top: 1px solid var(--divider);
+  padding-top: 20px;
+  font-size: 17px;
+  margin: 22px 0 14px;
+}

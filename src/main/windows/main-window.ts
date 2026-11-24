@@ -13,7 +13,7 @@ export function createWindow(context: ApplicationContext) {
     minWidth: 1000,
     minHeight: 680,
     show: !app.commandLine.hasSwitch('watercut-smoke'),
-    backgroundColor: '#101c22',
+    backgroundColor: '#f4f5ef',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,

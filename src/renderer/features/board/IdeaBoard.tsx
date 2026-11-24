@@ -23,6 +23,7 @@ import { kindLabel } from '../resources';
 import { readResourceDrag } from '../../platform/resource-drag';
 import { mediaUrl } from '../../platform/media-url';
 import { boardRegions } from '../../../shared/board';
+import { BlueprintArt } from '../../ui/BlueprintArt';
 const handlePositions: Array<{
   id: BoardHandle;
   position: Position;
@@ -203,10 +204,10 @@ export function IdeaBoard({
               }
             : undefined,
         labelBgStyle: {
-          fill: '#173139',
+          fill: 'var(--paper)',
         },
         labelStyle: {
-          fill: '#dcecf0',
+          fill: 'var(--ink)',
         },
       })),
     );
@@ -280,6 +281,7 @@ export function IdeaBoard({
           if (resource) onDropResource?.(resource, point.x, point.y);
         }}
       >
+        <BlueprintArt className="board-orbit" />
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -309,7 +311,7 @@ export function IdeaBoard({
           nodesConnectable={!busy}
           nodesDraggable={!busy}
         >
-          <Background />
+          <Background color="var(--canvas-dot)" gap={22} size={1} />
           <Controls />
         </ReactFlow>
       </div>

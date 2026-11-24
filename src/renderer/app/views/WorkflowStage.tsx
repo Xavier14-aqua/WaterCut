@@ -4,6 +4,7 @@ import { StoryboardView } from '../../features/storyboard';
 import { PreviewView } from '../../features/preview';
 import { AIDrawer } from '../../features/ai';
 import type { AppModel } from '../useAppController';
+import { BlueprintArt } from '../../ui/BlueprintArt';
 
 export function WorkflowStage({ model }: { model: AppModel }) {
   const {
@@ -27,15 +28,19 @@ export function WorkflowStage({ model }: { model: AppModel }) {
   } = model;
   if (!project) return null;
   return (
-    <main className="workspace-main">
+    <main className="workspace-main" data-stage={view}>
+      {view === 'script' && <BlueprintArt className="workflow-orbit" />}
       {view === 'board' && (
         <section className="board-view">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">IDEA BOARD</p>
+              <p className="eyebrow">
+                IDEA BOARD <span>// 01_CANVAS</span>
+              </p>
               <h1>先让想法连起来</h1>
             </div>
             <button
+              className="secondary"
               disabled={busy || !selectedIdeas.length}
               onClick={prepareOrder}
             >

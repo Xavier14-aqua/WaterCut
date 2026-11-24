@@ -102,7 +102,12 @@ export function ScriptView({
   return (
     <section className="script-view">
       <div className="section-heading">
-        <h1>把故事写顺</h1>
+        <div>
+          <p className="eyebrow">
+            SCRIPT <span>// 02_DRAFT</span>
+          </p>
+          <h1>把故事写顺</h1>
+        </div>
         <div className="segmented">
           <button
             className={mode === 'document' ? 'active' : ''}

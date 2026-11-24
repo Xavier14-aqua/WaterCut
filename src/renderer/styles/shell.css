@@ -1,0 +1,192 @@
+.app-shell {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  height: 100vh;
+  overflow: hidden;
+}
+.rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--paper);
+  border-right: 1px solid var(--divider);
+  padding: 22px 7px 14px;
+  gap: 14px;
+}
+.rail-brand {
+  font-family: Georgia, serif;
+  text-align: center;
+  line-height: 0.9;
+  color: var(--ink);
+  font-size: 38px;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+.rail-brand span {
+  display: block;
+  font: 8px system-ui;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  margin-top: 8px;
+}
+.rail button {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 21px;
+  color: var(--ink);
+  position: relative;
+  border: 1px solid transparent;
+  min-height: 62px;
+  width: 60px;
+  padding: 9px 4px;
+  gap: 5px;
+}
+.rail button span {
+  font-size: 12px;
+}
+.rail button.active {
+  background: var(--paper);
+  color: var(--accent);
+  border: 1px solid var(--divider);
+  box-shadow: inset 0 0 0 1px var(--selection);
+}
+.rail .rail-settings {
+  margin-top: auto;
+}
+.rail small {
+  font-size: 11px;
+  color: var(--ink);
+  font-family: var(--font-mono);
+}
+.app-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.global-header {
+  --header-inset: 22px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 72px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
+  padding: 0 var(--header-inset);
+  gap: 18px;
+}
+.header-title {
+  flex: 1;
+  min-width: 100px;
+  font-size: 22px;
+}
+.header-title input {
+  width: 100%;
+  border-color: transparent;
+  padding-left: 0;
+  font-size: 23px;
+  font-weight: 700;
+  background: transparent;
+  max-width: 440px;
+}
+.workflow {
+  display: flex;
+  gap: 5px;
+}
+.workflow button {
+  background: transparent;
+  font-size: 15px;
+  color: var(--ink);
+  padding: 8px 14px;
+  min-height: 38px;
+}
+.workflow .active {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.save-state {
+  white-space: nowrap;
+  color: var(--ink);
+  font-size: 12px;
+}
+.save-state:before {
+  content: '●';
+  margin-right: 6px;
+  color: var(--coral);
+  font-size: 8px;
+}
+.save-state.error {
+  color: var(--danger);
+}
+.app-status {
+  flex: none;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  background: var(--paper);
+  border-top: 1px solid var(--divider);
+  min-height: 32px;
+  font-size: 12px;
+  color: var(--ink);
+  padding: 5px 18px;
+  gap: 8px;
+}
+.app-status > span {
+  flex: 1;
+}
+.import-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 260px;
+  font-size: 10px;
+}
+.import-progress progress {
+  height: 6px;
+  accent-color: var(--accent);
+  width: 130px;
+}
+.rail button .ui-icon {
+  width: 24px;
+  height: 24px;
+}
+.rail button.active::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--coral);
+}
+.rail button:hover {
+  background: var(--selection);
+}
+.workflow button:hover {
+  background: var(--selection);
+}
+.workflow .active:hover {
+  background: var(--accent-hover);
+}
+.header-stamp {
+  font:
+    700 34px Georgia,
+    serif;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  width: 58px;
+  border-inline: 1px dashed var(--border);
+  margin-right: calc(-1 * var(--header-inset));
+  margin-left: 2px;
+}
+.app-status .status-code {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}

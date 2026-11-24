@@ -9,6 +9,7 @@ import { filterShotList } from '../../../shared/creative';
 import { mediaUrl } from '../../platform/media-url';
 import { readResourceDrag } from '../../platform/resource-drag';
 import { effectiveDurationMs } from '../../../shared/duration';
+import { FrameGuide } from '../../ui/BlueprintArt';
 export const statusLabel = {
   idea: '想法',
   written: '文案已定',
@@ -62,7 +63,10 @@ export function StoryboardView({
     <section className="storyboard-view">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">{checklist ? 'SHOT LIST' : 'STORYBOARD'}</p>
+          <p className="eyebrow">
+            {checklist ? 'SHOT LIST' : 'STORYBOARD'}{' '}
+            <span>{checklist ? '// 05_PRODUCTION' : '// 03_FRAMES'}</span>
+          </p>
           <h1>{checklist ? '下一次拍摄，从这里开始' : '把画面排成故事'}</h1>
         </div>
         {checklist ? (
@@ -243,6 +247,7 @@ export function StoryboardView({
                         />
                       ) : (
                         <span>
+                          <FrameGuide cross />
                           {asset?.missing
                             ? '素材缺失'
                             : asset?.kind === 'video'

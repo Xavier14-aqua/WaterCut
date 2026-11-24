@@ -1,0 +1,315 @@
+* {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) var(--paper);
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+[hidden] {
+  display: none !important;
+}
+.blueprint-art {
+  display: block;
+  stroke: currentColor;
+  color: var(--muted);
+  stroke-width: 1;
+  pointer-events: none;
+}
+.blueprint-art circle,
+.blueprint-art ellipse,
+.blueprint-art path,
+.blueprint-art rect {
+  vector-effect: non-scaling-stroke;
+}
+.frame-guide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--border);
+  pointer-events: none;
+  z-index: -1;
+}
+.frame-guide path {
+  vector-effect: non-scaling-stroke;
+}
+.frame-diagonals {
+  opacity: 0.4;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  font-family: inherit;
+  font-size: 14px;
+}
+button {
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  padding: 7px 12px;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease;
+}
+button:hover {
+  background: var(--accent-hover);
+  filter: none;
+}
+button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+button.secondary {
+  border-color: var(--border);
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+}
+button.quiet {
+  padding: 5px 8px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--ink);
+  border-color: transparent;
+}
+button.quiet:hover {
+  background: var(--raised);
+  color: var(--accent);
+}
+button.danger {
+  background: var(--danger);
+  color: #fff;
+}
+button.danger-text {
+  background: transparent;
+  color: var(--danger);
+}
+.text-button {
+  padding: 10px 0;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+}
+.muted,
+small {
+  color: var(--muted);
+}
+small {
+  line-height: 1.55;
+  font-size: 12px;
+  color: var(--muted);
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  margin-bottom: 12px;
+  font-size: 28px;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+}
+h2 {
+  font-size: 17px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 14px;
+  margin: 20px 0 10px;
+}
+p {
+  color: var(--ink);
+  line-height: 1.65;
+}
+input,
+textarea,
+select {
+  min-width: 0;
+  outline: none;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--ink);
+  padding: 8px 10px;
+  caret-color: var(--accent);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--focus-tint);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+input[type='checkbox'] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+input[type='range'] {
+  accent-color: var(--accent);
+  padding: 0;
+  box-shadow: none;
+}
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 78px;
+  line-height: 1.7;
+}
+select {
+  max-width: 100%;
+}
+label {
+  color: var(--ink);
+  font-size: 13px;
+}
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+.eyebrow {
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+.path {
+  overflow-wrap: anywhere;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.section-heading h1,
+.section-heading h2 {
+  margin-bottom: 0;
+}
+.segmented {
+  display: flex;
+  padding: 3px;
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  gap: 3px;
+}
+.segmented button {
+  flex: 1;
+  background: transparent;
+  border-radius: 5px;
+  color: var(--ink);
+  font-size: 14px;
+  min-height: 30px;
+  padding: 5px 10px;
+}
+.segmented button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 10px;
+}
+.full-width {
+  width: 100%;
+  margin: 12px 0;
+}
+.empty-state {
+  padding: 55px 22px;
+  border: 1px dashed var(--border);
+  text-align: center;
+  line-height: 1.8;
+  margin: 20px 0;
+  color: var(--muted);
+  border-color: var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.warning {
+  color: var(--danger);
+}
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 7px;
+}
+summary {
+  color: var(--ink);
+  font-size: 12px;
+  cursor: pointer;
+}
+.text-button:hover {
+  background: transparent;
+  color: var(--accent);
+}
+.eyebrow > span {
+  color: var(--ink);
+  font-weight: 400;
+  margin-left: 5px;
+}
+.ui-icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+::selection {
+  background: var(--selection);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+button.secondary:hover {
+  background: var(--selection);
+  border-color: var(--accent);
+}

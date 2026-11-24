@@ -1,0 +1,168 @@
+@media (max-width: 1150px) {
+  .color-wheel-layout {
+    grid-template-columns: 1fr;
+  }
+  .color-wheel {
+    margin-inline: auto;
+  }
+  .script-move-actions {
+    gap: 2px;
+  }
+  .script-move-actions button {
+    font-size: 11px;
+  }
+}
+@media (max-width: 1250px) {
+  .workspace {
+    grid-template-columns: 225px minmax(0, 1fr) 255px;
+  }
+  .workspace-main {
+    padding: 22px 18px;
+  }
+  .global-header {
+    --header-inset: 18px;
+    padding: 0 var(--header-inset);
+    gap: 10px;
+  }
+  .workflow button {
+    padding: 8px 11px;
+  }
+  .inspector {
+    padding: 18px 13px;
+  }
+  .shots-grid {
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  }
+  .transport {
+    gap: 6px;
+  }
+  .transport button {
+    padding: 7px;
+  }
+  .global-library-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .incubate-bar {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1050px) {
+  .workspace {
+    grid-template-columns: 205px minmax(0, 1fr) 230px;
+  }
+  .rail {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .app-shell {
+    grid-template-columns: 65px minmax(0, 1fr);
+  }
+  .header-title input {
+    font-size: 17px;
+  }
+  .workflow button {
+    padding: 7px 9px;
+    font-size: 13px;
+  }
+  .workspace-main h1 {
+    font-size: 20px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .shots-table .shot-tile {
+    grid-template-columns: 60px minmax(0, 1fr) 35px;
+  }
+  .shots-table .shot-picture {
+    display: none;
+  }
+  .global-library-layout {
+    grid-template-columns: minmax(0, 1fr) 255px;
+  }
+  .library-main {
+    padding: 24px 20px;
+  }
+  .global-header {
+    height: 62px;
+  }
+  .save-state {
+    font-size: 11px;
+  }
+  .home-page {
+    padding-inline: 35px;
+  }
+  .home-intro {
+    padding-top: 38px;
+    min-height: 330px;
+  }
+  .home-orbit {
+    width: 70%;
+    right: -25px;
+    opacity: 0.14;
+  }
+  .collection-code {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  .rail,
+  .global-header,
+  .resources-sidebar,
+  .inspector,
+  .ai-drawer,
+  .app-status,
+  .shot-tile-footer,
+  .toolbar {
+    display: none !important;
+  }
+  .app-shell,
+  .app-content,
+  .workspace {
+    display: block;
+    height: auto;
+    overflow: visible;
+  }
+  .workspace-main {
+    overflow: visible;
+    background: white;
+    color: black;
+  }
+  .shot-tile {
+    break-inside: avoid;
+    background: white;
+    color: black;
+  }
+  .shot-tile textarea {
+    color: black;
+  }
+}
+@media (max-width: 1150px) {
+  .bgm-row {
+    flex-wrap: wrap;
+  }
+  .bgm-row > div {
+    flex-basis: 100%;
+  }
+  .shot-list-filters label {
+    min-width: 110px;
+  }
+  .ai-suggestions .toolbar label {
+    flex-basis: 100%;
+  }
+  .mix-controls {
+    gap: 12px;
+  }
+  .proposal .form-grid,
+  .bgm-editor .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

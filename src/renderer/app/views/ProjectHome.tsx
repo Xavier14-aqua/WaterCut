@@ -1,4 +1,6 @@
 import type { AppModel } from '../useAppController';
+import { BlueprintArt } from '../../ui/BlueprintArt';
+import { Icon } from '../../ui/Icon';
 
 export function ProjectHome({ model }: { model: AppModel }) {
   const {
@@ -19,7 +21,13 @@ export function ProjectHome({ model }: { model: AppModel }) {
     mode === 'home' && (
       <main className="home-page">
         <div className="home-intro">
-          <p className="eyebrow">FROM A SPARK TO A STORY</p>
+          <BlueprintArt className="home-orbit" />
+          <p className="eyebrow">
+            FROM A SPARK TO A STORY <span>// 001_GENESIS</span>
+            <span className="reference-star" aria-hidden="true">
+              ✦
+            </span>
+          </p>
           <h1>
             给下一个故事，
             <br />
@@ -45,6 +53,7 @@ export function ProjectHome({ model }: { model: AppModel }) {
                 })
               }
             >
+              <Icon name="plus" />
               新建项目
             </button>
             <button
@@ -94,7 +103,10 @@ export function ProjectHome({ model }: { model: AppModel }) {
           </button>
         </div>
         <div className="section-heading">
-          <h2>项目大厅</h2>
+          <h2>
+            项目大厅{' '}
+            <span className="collection-code">// INDEX: ALL_PROJECTS</span>
+          </h2>
           <div className="toolbar">
             <label>
               <input
@@ -116,43 +128,60 @@ export function ProjectHome({ model }: { model: AppModel }) {
         <div className="project-grid">
           {library?.projects
             .filter((p) => (showArchived ? p.archived : !p.archived))
-            .map((item) => (
+            .map((item, index) => (
               <article key={item.id} className="project-tile">
-                <span className="project-icon">▤</span>
+                <div className="project-cover" aria-hidden="true">
+                  <BlueprintArt
+                    variant={
+                      index % 3 === 1
+                        ? 'tunnel'
+                        : index % 3 === 2
+                          ? 'film'
+                          : 'orbit'
+                    }
+                  />
+                  {index % 3 === 0 && (
+                    <strong className="cover-title">{item.name}</strong>
+                  )}
+                  <i className="cover-point" />
+                </div>
                 <h3>{item.name}</h3>
                 <small>
                   {item.available ? '本地项目' : '项目位置离线'} ·{' '}
                   {new Date(item.lastSeen).toLocaleDateString('zh-CN')}
                 </small>
                 <p className="path">{item.directory}</p>
-                <button
-                  disabled={busy || !item.available}
-                  onClick={() =>
-                    void run(async () => {
-                      const p = await window.watercut.readProject(
-                        item.directory,
-                      );
-                      setMode('project');
-                      return p;
-                    })
-                  }
-                >
-                  进入工作室
-                </button>
-                <button
-                  className="quiet"
-                  disabled={busy || !item.available}
-                  onClick={() =>
-                    void run(() =>
-                      window.watercut.archiveProject(
-                        item.directory,
-                        !item.archived,
-                      ),
-                    )
-                  }
-                >
-                  {item.archived ? '恢复归档' : '归档'}
-                </button>
+                <div className="project-actions">
+                  <button
+                    className="project-open"
+                    disabled={busy || !item.available}
+                    onClick={() =>
+                      void run(async () => {
+                        const p = await window.watercut.readProject(
+                          item.directory,
+                        );
+                        setMode('project');
+                        return p;
+                      })
+                    }
+                  >
+                    进入工作室 <Icon name="arrow" />
+                  </button>
+                  <button
+                    className="project-archive secondary"
+                    disabled={busy || !item.available}
+                    onClick={() =>
+                      void run(() =>
+                        window.watercut.archiveProject(
+                          item.directory,
+                          !item.archived,
+                        ),
+                      )
+                    }
+                  >
+                    {item.archived ? '恢复归档' : '归档'}
+                  </button>
+                </div>
               </article>
             ))}
         </div>
