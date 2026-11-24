@@ -1,6 +1,7 @@
+import type { WaterCutAPI } from './contracts/api';
 import { contextBridge, ipcRenderer } from 'electron';
 const localEchoes=(input:unknown)=>ipcRenderer.invoke('library:echoes',input);
-contextBridge.exposeInMainWorld('watercut', {
+const api: WaterCutAPI = {
   localEchoes,
   listAIProposals:(directory:string)=>ipcRenderer.invoke('ai:proposals',directory),
   deleteAIProposal:(directory:string,id:string)=>ipcRenderer.invoke('ai:proposal-delete',directory,id),
@@ -150,4 +151,6 @@ contextBridge.exposeInMainWorld('watercut', {
   removeCandidate: (directory: string, shotId: string, assetId: string) => ipcRenderer.invoke('asset:candidate-remove', directory, shotId, assetId),
   linkAudio: (directory: string, shotId: string, assetId: string) => ipcRenderer.invoke('asset:link-audio', directory, shotId, assetId),
   updateTrim: (directory: string, shotId: string, inMs: number, outMs: number | null) => ipcRenderer.invoke('shot:trim', directory, shotId, inMs, outMs)
-});
+};
+contextBridge.exposeInMainWorld('watercut', api);
+
