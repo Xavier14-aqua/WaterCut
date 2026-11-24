@@ -43,15 +43,16 @@ jobs:
           WATERCUT_BGM_SCENARIO: paused-video-position
         run: npm run smoke -- --scenario=professional --bgm-only --packaged
       - run: npm run audit:dist
-      - name: Upload playback diagnostics
+      - name: Upload native diagnostics
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: WaterCut-playback-diagnostics
+          name: WaterCut-native-diagnostics
           path: |
-            out/review-professional/report*.json
+            out/review-*/report*.json
+            out/review-*/failure*.json
+            out/review-*/failure*.png
             out/review-professional/playback*.json
-            out/review-professional/failure.png
           if-no-files-found: warn
       - uses: actions/upload-artifact@v7
         with:

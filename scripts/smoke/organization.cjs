@@ -94,6 +94,15 @@ async function openBox(wc, id) {
   );
   await evaluate(wc, `document.querySelector('[data-box-id="${id}"]').click()`);
 }
+async function drag(wc, fromExpression, toExpression, label) {
+  // Project refresh can unmount the browser after a database read has completed.
+  // Find both live endpoints and dispatch one gesture in the same renderer task.
+  await waitFor(
+    wc,
+    `(()=>{const from=${fromExpression},to=${toExpression};if(!from||!to||to.matches(':disabled'))return false;const dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));from.dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:dt}));return true;})()`,
+    'drag endpoints: ' + label,
+  );
+}
 async function capture(wc, name) {
   fs.writeFileSync(path.join(output, name), (await wc.capturePage()).toPNG());
 }
@@ -206,9 +215,11 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'boxed overview displays only cards that are still unfiled',
       );
-      await evaluate(
+      await drag(
         wc,
-        `(()=>{const from=document.querySelector('.library-main .resource-card'),to=document.querySelector('[data-box-id="${boxIds[1]}"]'),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));from.dispatchEvent(new DragEvent('dragend',{bubbles:true,dataTransfer:dt}));})()`,
+        "document.querySelector('.library-main .resource-card')",
+        `document.querySelector('[data-box-id="${boxIds[1]}"]')`,
+        'global scene into box',
       );
       await waitFor(
         wc,
@@ -405,9 +416,11 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'project cards support the same mixed-type batch collection',
       );
-      await evaluate(
+      await drag(
         wc,
-        `(()=>{const from=document.querySelector('.project-library-browser .resource-card'),to=document.querySelector('[data-box-id="${projectBox}"]'),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));})()`,
+        "document.querySelector('.project-library-browser .resource-card')",
+        `document.querySelector('[data-box-id="${projectBox}"]')`,
+        'project scene into box',
       );
       await waitFor(
         wc,
@@ -421,9 +434,10 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'project drag collection does not alter global memberships',
       );
-      await evaluate(
+      await waitFor(
         wc,
-        `(()=>{const to=document.querySelector('[data-box-id="${projectBox}"]'),dt=new DataTransfer();dt.setData('application/x-watercut',JSON.stringify({scope:'project',scopeId:window.__b.id,kind:'idea',id:window.__b.ideas[0].id}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));})()`,
+        `(()=>{const to=document.querySelector('[data-box-id="${projectBox}"]');if(!to||to.matches(':disabled'))return false;const dt=new DataTransfer();dt.setData('application/x-watercut',JSON.stringify({scope:'project',scopeId:window.__b.id,kind:'idea',id:window.__b.ideas[0].id}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));return true;})()`,
+        'foreign project drop target',
       );
       await delay(150);
       assert(
@@ -439,9 +453,11 @@ app.on('web-contents-created', (_event, wc) => {
         "document.querySelectorAll('.project-library-browser .resource-card').length===3",
         'project box contents',
       );
-      await evaluate(
+      await drag(
         wc,
-        `(()=>{const from=[...document.querySelectorAll('.project-library-browser .resource-card')].find(e=>e.querySelector('strong').textContent==='项目 note'),to=document.querySelector('.unfiled-heading'),dt=new DataTransfer();from.dispatchEvent(new DragEvent('dragstart',{bubbles:true,dataTransfer:dt}));to.dispatchEvent(new DragEvent('drop',{bubbles:true,dataTransfer:dt}));})()`,
+        "[...document.querySelectorAll('.project-library-browser .resource-card')].find(e=>e.querySelector('strong').textContent==='项目 note')",
+        "document.querySelector('.unfiled-heading')",
+        'project card out of box',
       );
       await waitFor(
         wc,
@@ -562,6 +578,17 @@ app.on('web-contents-created', (_event, wc) => {
     } catch (error) {
       try {
         await capture(wc, 'failure.png');
+        fs.writeFileSync(
+          path.join(output, 'failure-state.json'),
+          JSON.stringify(
+            await evaluate(
+              wc,
+              `({status:document.querySelector('.app-status')?.textContent,projectBrowser:document.querySelector('.project-library-browser')?.textContent,boxes:[...document.querySelectorAll('[data-box-id]')].map(e=>({id:e.dataset.boxId,disabled:e.disabled})),cards:document.querySelectorAll('.project-library-browser .resource-card').length})`,
+            ),
+            null,
+            2,
+          ),
+        );
       } catch {}
       await finish(1, error);
     }
