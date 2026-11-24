@@ -12,11 +12,9 @@ import type {
   ShotListFilter,
   StorageSettings,
 } from '../../shared/models';
-import {
-  LibraryBrowser,
-  IdeaForm,
-  ResourceCards,
-} from '../features/library/Resources';
+import { LibraryBrowser } from '../features/library/LibraryBrowser';
+import { IdeaForm } from '../features/inspiration/IdeaForm';
+import { ResourceCards } from '../features/resources/ResourceCards';
 import { Inspector, type Selection } from './Inspector';
 import { UIErrorBoundary } from '../ui/UIErrorBoundary';
 import { ScriptView } from '../features/script/ScriptView';

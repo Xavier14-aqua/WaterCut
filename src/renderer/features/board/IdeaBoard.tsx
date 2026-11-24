@@ -19,7 +19,9 @@ import {
 import '@xyflow/react/dist/style.css';
 import type { BoardHandle, Project } from '../../../modules/project/index';
 import type { ResourceDrag } from '../../../shared/models';
-import { kindLabel, readResourceDrag, mediaUrl } from '../library/Resources';
+import { kindLabel } from '../resources/kinds';
+import { readResourceDrag } from '../../platform/resource-drag';
+import { mediaUrl } from '../../platform/media-url';
 import { boardRegions } from '../../../shared/board';
 const handlePositions: Array<{
   id: BoardHandle;

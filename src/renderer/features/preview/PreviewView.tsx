@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Project, Shot } from '../../../shared/models';
 import { buildPreviewSequence } from '../../../shared/duration';
-import { mediaUrl } from '../library/Resources';
+import { mediaUrl } from '../../platform/media-url';
 import { AudioTransport } from './engine/audio-transport';
 import { correctPlayingVideo } from './engine/video-sync';
 import { BGMPanel } from './BGMPanel';

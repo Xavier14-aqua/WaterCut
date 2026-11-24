@@ -11,12 +11,10 @@ import type {
   Shot,
   Usage,
 } from '../../shared/models';
-import {
-  IdeaForm,
-  MediaPreview,
-  mediaUrl,
-  kindLabel,
-} from '../features/library/Resources';
+import { IdeaForm } from '../features/inspiration/IdeaForm';
+import { MediaPreview } from '../features/resources/MediaPreview';
+import { mediaUrl } from '../platform/media-url';
+import { kindLabel } from '../features/resources/kinds';
 import { statusLabel } from '../features/storyboard/StoryboardView';
 import { MediaSelectPanel } from '../features/library/MediaSelectPanel';
 import { UsageList } from '../features/library/UsageList';

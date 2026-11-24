@@ -6,7 +6,8 @@ import type {
   ShotListFilter,
 } from '../../../shared/models';
 import { filterShotList } from '../../../shared/creative';
-import { mediaUrl, readResourceDrag } from '../library/Resources';
+import { mediaUrl } from '../../platform/media-url';
+import { readResourceDrag } from '../../platform/resource-drag';
 import { effectiveDurationMs } from '../../../shared/duration';
 export const statusLabel = {
   idea: '想法',

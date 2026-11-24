@@ -5,7 +5,8 @@ import {
   paletteMatches,
   type ColorFamily,
 } from '../../../shared/colors';
-import { ResourceCards, kindLabel } from './Resources';
+import { ResourceCards } from '../resources/ResourceCards';
+import { kindLabel } from '../resources/kinds';
 import {
   IdeaBoxOrganizer,
   IdeaLayoutSwitch,

@@ -5,7 +5,7 @@ import type {
   LibraryAsset,
 } from '../../../shared/models';
 import type { AIProposal, ProposalKind } from '../../../shared/ai-proposals';
-import { startResourceDrag } from '../library/Resources';
+import { startResourceDrag } from '../../platform/resource-drag';
 const states = {
   pending: '待确认',
   applied: '已采纳',

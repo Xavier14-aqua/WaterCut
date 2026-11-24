@@ -1,0 +1,50 @@
+[
+  {
+    "name": "mediaUrl",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/platform/media-url.ts",
+    "bodySha256": "f6e499ed1d14788980f76d3adeb7d4c4e91de1527aa9f281ab2b17d377cf9623"
+  },
+  {
+    "name": "startResourceDrag",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/platform/resource-drag.ts",
+    "bodySha256": "e37fdcc259ef63d4beb4632770e797e5f6db8a772ce8176da8a7915efb103dff"
+  },
+  {
+    "name": "readResourceDrag",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/platform/resource-drag.ts",
+    "bodySha256": "492cc5edcef45a198fea06c5f7ec62519bc21add8b7a2268035aaddf703f4e22"
+  },
+  {
+    "name": "kindLabel",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/resources/kinds.ts",
+    "bodySha256": "935497d8ed0ba6baa9ae558a56325f7e3a13c048bafb7e97ef2b21f8bb822686"
+  },
+  {
+    "name": "MediaPreview",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/resources/MediaPreview.tsx",
+    "bodySha256": "c23f405a778b4687b2e000afa6337f2d8c86e800b48a2eef87510f7a9c6fc717"
+  },
+  {
+    "name": "ResourceCards",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/resources/ResourceCards.tsx",
+    "bodySha256": "02843d5385362d2eefbb06c8acbe99743b1a1fe51a6b28b29935541e99bafdb1"
+  },
+  {
+    "name": "LibraryBrowser",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/library/LibraryBrowser.tsx",
+    "bodySha256": "d163a655e30abd8a165ce631ac7b52f68f3a1680d3a0ee6b017ad25f73edcecf"
+  },
+  {
+    "name": "IdeaForm",
+    "from": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/inspiration/IdeaForm.tsx",
+    "bodySha256": "1e32620c4643e6f8129897be7f511d245bcbcdeaed62e54fcd0cd9f201b6a00d"
+  }
+]
