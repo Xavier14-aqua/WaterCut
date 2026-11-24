@@ -1,4 +1,4 @@
-import { IdeaForm } from '../../features/inspiration/IdeaForm';
+import { IdeaForm } from '../../features/inspiration';
 import type { AppModel } from '../useAppController';
 
 export function IdeaEditorDialog({ model }: { model: AppModel }) {

@@ -157,7 +157,7 @@
   },
   {
     "from": "src/idea-boxes.ts",
-    "to": "src/modules/organization/idea-boxes.ts",
+    "to": "src/modules/organization/index.ts",
     "importEdits": 2,
     "originalSha256": "fab28f5ffafd1b9b2e60a1287e401f6bac0a24ccfe06b7ada8b24c28fc75b48d"
   },

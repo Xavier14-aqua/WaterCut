@@ -5,13 +5,13 @@ import {
   paletteMatches,
   type ColorFamily,
 } from '../../../shared/colors';
-import { ResourceCards } from '../resources/ResourceCards';
-import { kindLabel } from '../resources/kinds';
+import { ResourceCards } from '../resources';
+import { kindLabel } from '../resources';
 import {
   IdeaBoxOrganizer,
   IdeaLayoutSwitch,
   useIdeaBoxView,
-} from '../inspiration/IdeaBoxOrganizer';
+} from '../inspiration';
 export function ProjectLibraryBrowser({
   projects,
   project: loadedProject,

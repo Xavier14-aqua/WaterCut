@@ -237,7 +237,7 @@ export function convertScriptBlocks(
         .prepare('SELECT COALESCE(MAX(position),-1)+1 AS n FROM shots')
         .get() as any
     ).n;
-    for (const id of [...new Set(ids)]) {
+    for (const id of new Set(ids)) {
       const block = db
         .prepare('SELECT * FROM script_blocks WHERE id=?')
         .get(id) as any;

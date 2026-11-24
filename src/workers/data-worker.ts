@@ -8,11 +8,11 @@ import { parentPort } from 'node:worker_threads';
 import * as project from '../modules/project/index';
 import * as library from '../modules/library/index';
 import * as workspace from '../modules/workspace/index';
-import * as revisions from '../modules/delivery/revisions';
-import * as packages from '../modules/delivery/project-package';
-import * as media from '../modules/media/media';
-import * as proposals from '../modules/ai/proposals';
-import * as handoff from '../modules/delivery/jianying-handoff';
+import * as revisions from '../modules/delivery';
+import * as packages from '../modules/delivery';
+import * as media from '../modules/media';
+import * as proposals from '../modules/ai';
+import * as handoff from '../modules/delivery';
 const modules: Record<DataModule, Record<string, unknown>> = {
   project,
   library,

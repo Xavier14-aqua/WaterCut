@@ -1,7 +1,7 @@
-import { LibraryBrowser } from '../../features/library/LibraryBrowser';
+import { LibraryBrowser } from '../../features/library';
 import { Inspector } from '../Inspector';
 import { UIErrorBoundary } from '../../ui/UIErrorBoundary';
-import { ProjectLibraryBrowser } from '../../features/library/ProjectLibraryBrowser';
+import { ProjectLibraryBrowser } from '../../features/library';
 import type { AppModel } from '../useAppController';
 
 export function GlobalLibrary({ model }: { model: AppModel }) {

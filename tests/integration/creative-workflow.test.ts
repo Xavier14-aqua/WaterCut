@@ -8,7 +8,6 @@ import {
   readdirSync,
   rmSync,
   writeFileSync,
-  readFileSync,
 } from 'node:fs';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
@@ -22,7 +21,6 @@ import {
 } from '../../src/shared/models';
 import {
   buildPreviewSequence,
-  effectiveDurationMs,
   suggestedIdeaOrder,
 } from '../../src/shared/duration';
 import {

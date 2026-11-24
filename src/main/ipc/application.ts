@@ -1,10 +1,10 @@
 import { BrowserWindow, ipcMain } from 'electron';
 import { z } from 'zod';
-import { logUIError } from '../platform/error-log';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerApplicationIPC(context: ApplicationContext) {
-  const { closeGuards, logUIError, data } = context;
+  const { closeGuards, logUIError } = context;
   ipcMain.on('app:close-ready', (event, requestId: unknown, ok: unknown) => {
     const window = BrowserWindow.fromWebContents(event.sender);
     if (window && Number.isSafeInteger(requestId) && typeof ok === 'boolean')

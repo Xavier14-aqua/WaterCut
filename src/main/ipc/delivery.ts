@@ -10,12 +10,7 @@ import { assertExternalDataRoot } from '../platform/storage-settings';
 import { writeStoryboardPDF } from '../platform/pdf-export';
 import { exportRows, shotListCSV } from '../../shared/print';
 import { z } from 'zod';
-import type { Project } from '../../shared/models';
-import {
-  activeLibraryRoot,
-  activeProjectsRoot,
-} from '../platform/runtime-storage';
-import { thumbnail } from '../platform/thumbnails';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerDeliveryIPC(context: ApplicationContext) {
@@ -27,7 +22,6 @@ export function registerDeliveryIPC(context: ApplicationContext) {
     projectResult,
     activeProjectsRoot,
     knownProjects,
-    thumbnail,
   } = context;
   ipcMain.handle('revision:list', async (_event, directory) =>
     data.call('revisions', 'listRevisions', [await allowedProject(directory)]),

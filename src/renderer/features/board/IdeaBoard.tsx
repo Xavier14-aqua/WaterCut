@@ -17,9 +17,9 @@ import {
   type OnEdgesChange,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import type { BoardHandle, Project } from '../../../modules/project/index';
+import type { BoardHandle, Project } from '../../../shared/models';
 import type { ResourceDrag } from '../../../shared/models';
-import { kindLabel } from '../resources/kinds';
+import { kindLabel } from '../resources';
 import { readResourceDrag } from '../../platform/resource-drag';
 import { mediaUrl } from '../../platform/media-url';
 import { boardRegions } from '../../../shared/board';

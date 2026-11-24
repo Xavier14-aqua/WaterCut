@@ -1,4 +1,4 @@
-import { DeliveryPanel } from '../../features/delivery/DeliveryPanel';
+import { DeliveryPanel } from '../../features/delivery';
 import type { AppModel } from '../useAppController';
 
 export function DeliveryDialog({ model }: { model: AppModel }) {

@@ -78,5 +78,8 @@ export function moveIdeasToBox(
         'INSERT INTO idea_box_items VALUES (?,?) ON CONFLICT(idea_id) DO UPDATE SET box_id=excluded.box_id',
       )
     : db.prepare('DELETE FROM idea_box_items WHERE idea_id=?');
-  for (const id of ids) boxId ? statement.run(id, boxId) : statement.run(id);
+  for (const id of ids) {
+    if (boxId) statement.run(id, boxId);
+    else statement.run(id);
+  }
 }

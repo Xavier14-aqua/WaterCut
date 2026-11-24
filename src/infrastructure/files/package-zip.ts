@@ -22,6 +22,7 @@ export function safePackagePath(name: string): string {
   if (
     !name ||
     name.length > 240 ||
+    // eslint-disable-next-line no-control-regex -- Reject control characters in archive paths and destination names.
     /[\\:\x00-\x1f\x7f]/.test(name) ||
     name.startsWith('/')
   )

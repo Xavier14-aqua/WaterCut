@@ -8,7 +8,7 @@ import path from 'node:path';
 
 import { colorFamily } from '../../shared/colors';
 
-import * as boxes from '../organization/idea-boxes';
+import * as boxes from '../organization';
 
 export type Row = Record<string, any>;
 

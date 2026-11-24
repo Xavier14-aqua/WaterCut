@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 import { removeJobDirectory } from '../../../infrastructure/jobs/file-jobs';
 
-import * as boxes from '../../organization/idea-boxes';
+import * as boxes from '../../organization';
 
 import type { Project } from '../../../shared/models';
 

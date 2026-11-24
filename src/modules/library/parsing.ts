@@ -8,7 +8,7 @@ import { tagsOf } from '../../shared/schemas';
 
 import type { LibraryAsset, LibraryIdea } from '../../shared/models';
 
-import { Row, libraryId } from './database';
+import { Row } from './database';
 
 import { safeLibraryPath } from './storage-paths';
 

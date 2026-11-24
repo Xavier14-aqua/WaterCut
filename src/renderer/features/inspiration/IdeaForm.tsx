@@ -16,7 +16,7 @@ import { dateTimeLocalValue, dateTimeLocalToISO } from '../../../shared/dates';
 
 import { PaletteEditor } from './PaletteEditor';
 
-import { kindLabel } from '../resources/kinds';
+import { kindLabel } from '../resources';
 
 export function IdeaForm({
   value,

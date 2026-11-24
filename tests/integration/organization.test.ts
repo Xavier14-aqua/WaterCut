@@ -147,7 +147,7 @@ test('all card kinds can be boxed together, moved, unfiled and reopened without 
   });
   const [first, second] = project.ideaBoxes,
     ids = project.ideas.map((i) => i.id),
-    before = project.ideas.map(({ boxId, ...rest }) => rest),
+    before = project.ideas.map(({ boxId: _boxId, ...rest }) => rest),
     revision = project.revision;
   project = p.moveIdeasToBox(project.directory, ids, first.id);
   expect(project.revision).toBeGreaterThan(revision);
@@ -160,7 +160,9 @@ test('all card kinds can be boxed together, moved, unfiled and reopened without 
     null,
     first.id,
   ]);
-  expect(project.ideas.map(({ boxId, ...rest }) => rest)).toEqual(before);
+  expect(project.ideas.map(({ boxId: _boxId, ...rest }) => rest)).toEqual(
+    before,
+  );
 });
 test('rename and box removal retain every card and release their memberships', () => {
   const f = fixture();

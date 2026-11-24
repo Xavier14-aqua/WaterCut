@@ -2,11 +2,7 @@ import type { DataMethod } from '../../contracts/worker';
 import { dialog, ipcMain } from 'electron';
 import path from 'node:path';
 import { z } from 'zod';
-import type { Project } from '../../shared/models';
-import {
-  activeProjectsRoot,
-  activeLibraryRoot,
-} from '../platform/runtime-storage';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerProjectIPC(context: ApplicationContext) {

@@ -1,7 +1,7 @@
 import { app, BrowserWindow, dialog } from 'electron';
 import path from 'node:path';
 import { WindowCloseGuard } from './window-close';
-import { logUIError } from '../platform/error-log';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function createWindow(context: ApplicationContext) {

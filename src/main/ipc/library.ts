@@ -1,9 +1,7 @@
 import { dialog, ipcMain } from 'electron';
 import path from 'node:path';
 import { z } from 'zod';
-import type { LibraryAsset } from '../../shared/models';
-import { activeLibraryRoot } from '../platform/runtime-storage';
-import { thumbnail } from '../platform/thumbnails';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerLibraryIPC(context: ApplicationContext) {

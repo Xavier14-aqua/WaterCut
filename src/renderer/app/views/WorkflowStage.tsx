@@ -1,8 +1,8 @@
-import { IdeaBoard } from '../../features/board/IdeaBoard';
-import { ScriptView } from '../../features/script/ScriptView';
-import { StoryboardView } from '../../features/storyboard/StoryboardView';
-import { PreviewView } from '../../features/preview/PreviewView';
-import { AIDrawer } from '../../features/ai/AIDrawer';
+import { IdeaBoard } from '../../features/board';
+import { ScriptView } from '../../features/script';
+import { StoryboardView } from '../../features/storyboard';
+import { PreviewView } from '../../features/preview';
+import { AIDrawer } from '../../features/ai';
 import type { AppModel } from '../useAppController';
 
 export function WorkflowStage({ model }: { model: AppModel }) {

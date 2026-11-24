@@ -41,7 +41,7 @@ export function testFileJobs() {
     },
     async stop() {
       controller.abort();
-      while (pending.size) await Promise.allSettled([...pending]);
+      while (pending.size) await Promise.allSettled(pending);
     },
   };
 }

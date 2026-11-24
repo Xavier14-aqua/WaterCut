@@ -21,7 +21,7 @@ export function AppShell({ model }: { model: AppModel }) {
     setMessage,
     setShowSettings,
   } = model;
-  const activeProject = mode === 'project' && project;
+
   return (
     <div className="app-shell">
       <nav className="rail" aria-label="主导航">

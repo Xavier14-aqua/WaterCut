@@ -2,8 +2,7 @@ import { app, ipcMain, safeStorage } from 'electron';
 import { mkdirSync, renameSync, writeFileSync } from 'node:fs';
 import { openAIProvider } from '../platform/ai-provider';
 import { z } from 'zod';
-import type { Project } from '../../shared/models';
-import { readAISettings, aiFile } from '../platform/ai-settings';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerAiIPC(context: ApplicationContext) {

@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import { randomUUID } from 'node:crypto';
 
-import * as boxes from '../organization/idea-boxes';
+import * as boxes from '../organization';
 
 import {
   CURRENT_VERSION,

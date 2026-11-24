@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import type {
-  Asset,
-  Idea,
   IdeaInput,
   LibraryAsset,
   LibraryIdea,
@@ -11,13 +9,13 @@ import type {
   Shot,
   Usage,
 } from '../../shared/models';
-import { IdeaForm } from '../features/inspiration/IdeaForm';
-import { MediaPreview } from '../features/resources/MediaPreview';
+import { IdeaForm } from '../features/inspiration';
+import { MediaPreview } from '../features/resources';
 import { mediaUrl } from '../platform/media-url';
-import { kindLabel } from '../features/resources/kinds';
-import { statusLabel } from '../features/storyboard/StoryboardView';
-import { MediaSelectPanel } from '../features/library/MediaSelectPanel';
-import { UsageList } from '../features/library/UsageList';
+import { kindLabel } from '../features/resources';
+import { statusLabel } from '../features/storyboard';
+import { MediaSelectPanel } from '../features/library';
+import { UsageList } from '../features/library';
 export type Selection = {
   scope: 'library' | 'project';
   kind: 'idea' | 'asset' | 'shot';

@@ -1,5 +1,3 @@
-import path from 'node:path';
-
 import { validateDocument } from '../../../shared/document';
 
 import { safePackagePath } from '../../../infrastructure/files/package-zip';

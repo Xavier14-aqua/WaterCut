@@ -1,6 +1,6 @@
 import type { LibraryAsset } from '../../../shared/models';
 
-import { Row, libraryId, openLibrary } from '../database';
+import { Row, openLibrary } from '../database';
 
 import { parseAsset } from '../parsing';
 

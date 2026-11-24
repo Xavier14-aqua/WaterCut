@@ -8,11 +8,11 @@ import {
   IdeaBoxOrganizer,
   IdeaLayoutSwitch,
   useIdeaBoxView,
-} from '../inspiration/IdeaBoxOrganizer';
+} from '../inspiration';
 
-import { kindLabel } from '../resources/kinds';
+import { kindLabel } from '../resources';
 
-import { ResourceCards } from '../resources/ResourceCards';
+import { ResourceCards } from '../resources';
 
 export function LibraryBrowser({
   refresh,

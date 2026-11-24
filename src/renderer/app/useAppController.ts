@@ -2,20 +2,17 @@ import { SaveCoordinator } from './save/SaveCoordinator';
 import { createProjectEditors } from './editing/project-editors';
 import { useEffect, useRef, useState } from 'react';
 import type {
-  IdeaInput,
   ImportProgress,
   LibraryPage,
   Project,
   ResourceDrag,
-  ScriptBlock,
-  Shot,
   ShotListFilter,
   StorageSettings,
 } from '../../shared/models';
 import { type Selection } from './Inspector';
 import { suggestedIdeaOrder } from '../../shared/duration';
 import { View } from './navigation';
-import { SaveTask } from './save/types';
+
 import { friendly } from './errors';
 
 // Coordinates navigation and shared project/library state. Saving and editors have separate owners.

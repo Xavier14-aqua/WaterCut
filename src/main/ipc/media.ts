@@ -2,8 +2,7 @@ import { dialog, ipcMain } from 'electron';
 import path from 'node:path';
 import { realpathSync } from 'node:fs';
 import { z } from 'zod';
-import { activeLibraryRoot } from '../platform/runtime-storage';
-import { thumbnail } from '../platform/thumbnails';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerMediaIPC(context: ApplicationContext) {

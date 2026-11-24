@@ -1,4 +1,4 @@
-import * as boxes from '../../organization/idea-boxes';
+import * as boxes from '../../organization';
 
 import { openLibrary, transact } from '../database';
 

@@ -4,7 +4,7 @@ import {
   assertExternalDataRoot,
 } from '../platform/storage-settings';
 import { z } from 'zod';
-import { storage } from '../platform/runtime-storage';
+
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerSettingsIPC(context: ApplicationContext) {

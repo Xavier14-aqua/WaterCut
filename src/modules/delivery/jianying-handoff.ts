@@ -46,6 +46,7 @@ export async function exportJianying(
   const timeline = buildTimelineDocument(project, settings.placeholders);
   jianyingDocuments(timeline, path.resolve(parent)); // Fail unsupported rates before copying.
   const target = path.resolve(parent),
+    // eslint-disable-next-line no-control-regex -- Reject control characters in archive paths and destination names.
     name = `${project.name.replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').slice(0, 70)}-${randomUUID().slice(0, 8)}.jianying`,
     final = path.join(target, name);
   assertSpace(

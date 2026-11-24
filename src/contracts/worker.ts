@@ -3,11 +3,11 @@ interface Implementations {
   project: typeof import('../modules/project');
   library: typeof import('../modules/library');
   workspace: typeof import('../modules/workspace');
-  revisions: typeof import('../modules/delivery/revisions');
-  packages: typeof import('../modules/delivery/project-package');
-  media: typeof import('../modules/media/media');
-  proposals: typeof import('../modules/ai/proposals');
-  handoff: typeof import('../modules/delivery/jianying-handoff');
+  revisions: typeof import('../modules/delivery');
+  packages: typeof import('../modules/delivery');
+  media: typeof import('../modules/media');
+  proposals: typeof import('../modules/ai');
+  handoff: typeof import('../modules/delivery');
 }
 
 export const workerMethods = {

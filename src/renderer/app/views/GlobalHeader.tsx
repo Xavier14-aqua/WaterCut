@@ -7,7 +7,6 @@ export function GlobalHeader({ model }: { model: AppModel }) {
     changeView,
     message,
     mode,
-    name,
     project,
     run,
     setShowDelivery,

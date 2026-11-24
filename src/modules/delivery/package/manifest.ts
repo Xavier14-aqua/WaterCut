@@ -1,5 +1,3 @@
-import path from 'node:path';
-
 import { z } from 'zod';
 
 import { PACKAGE_LIMITS } from '../../../infrastructure/files/package-zip';

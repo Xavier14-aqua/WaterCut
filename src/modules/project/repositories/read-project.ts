@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 
 import path from 'node:path';
 
-import * as boxes from '../../organization/idea-boxes';
+import * as boxes from '../../organization';
 
 import { defaultTimelineSettings } from '../../../shared/creative';
 

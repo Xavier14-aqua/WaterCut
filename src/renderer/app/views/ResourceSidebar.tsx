@@ -1,5 +1,5 @@
-import { LibraryBrowser } from '../../features/library/LibraryBrowser';
-import { ResourceCards } from '../../features/resources/ResourceCards';
+import { LibraryBrowser } from '../../features/library';
+import { ResourceCards } from '../../features/resources';
 import type { AppModel } from '../useAppController';
 
 export function ResourceSidebar({ model }: { model: AppModel }) {

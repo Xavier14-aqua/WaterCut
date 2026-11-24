@@ -41,11 +41,7 @@ import {
   storyboardHTML,
 } from '../../src/shared/print';
 import { normalizeMediaInfo } from '../../src/shared/media';
-import {
-  emptyPayload,
-  type Project,
-  type IdeaInput,
-} from '../../src/shared/models';
+import { emptyPayload, type IdeaInput } from '../../src/shared/models';
 const roots: string[] = [];
 const jobs = testFileJobs();
 const exportPackage = jobs.wrap(exportPackageJob, 4),
@@ -779,13 +775,11 @@ test('AI provider enforces schemas, request cancellation and errors without savi
       },
     ],
   };
-  const fetch = vi
-    .spyOn(globalThis, 'fetch')
-    .mockResolvedValue(
-      Response.json({
-        output: [{ content: [{ type: 'output_text', text: '{"issues":[]}' }] }],
-      }),
-    );
+  const fetch = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    Response.json({
+      output: [{ content: [{ type: 'output_text', text: '{"issues":[]}' }] }],
+    }),
+  );
   expect(
     await generateSuggestions('review', input, 'mock-model', 'test-key'),
   ).toEqual({ issues: [] });

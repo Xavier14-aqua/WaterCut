@@ -8,7 +8,7 @@ import { uuid } from '../../../shared/schemas';
 
 import { colorFamilies } from '../../../shared/colors';
 
-import * as boxes from '../../organization/idea-boxes';
+import * as boxes from '../../organization';
 
 import type { AssetSelect } from '../../../shared/models';
 
