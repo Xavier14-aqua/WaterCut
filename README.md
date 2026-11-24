@@ -1,6 +1,6 @@
 # WaterCut
 
-v1.4.5 按六张参考图更新项目首页与五个创作流程：米白工作纸、钴蓝操作、细线框与几何制图。保持原有功能和本地数据格式，继续提供免安装 ZIP。视觉规范见 [DESIGN.md](./DESIGN.md)，当前验收状态见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。
+v1.4.5 按六张参考图更新项目首页与五个创作流程：米白工作纸、钴蓝操作、细线框与几何制图。**本机与独立云端均通过 149 项测试、286 项原生断言和分发审计。** [下载 v1.4.5 程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/45357131224/artifacts/14902997630)。保持原有功能和本地数据格式，继续提供免安装 ZIP。视觉规范见 [DESIGN.md](./DESIGN.md)，完整验收见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。
 
 v1.4.4 完成运行边界、功能模块、保存协调与数据事务重构。**本机与独立云端均通过 149 项测试、212 项原生断言和分发审计。** [历史 v1.4.4 程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/45333299324/artifacts/14893070778)。[架构与学习入口](./docs/architecture/README.md) 提供目录职责、功能定位和完整调用链；历史记录见 [v1.4.4 清单](./docs/releases/RELEASE_CHECKLIST-v1.4.4.md)。
 
@@ -91,7 +91,7 @@ npm run audit:dist
 
 源码、测试、配置、许可证和文档进入 Git；`node_modules/`、`.vite/`、`out/`、私人项目与全局库不进入仓库。应用采用 MIT 许可证，ZIP 附带运行依赖及 Electron/Chromium 的许可文本。当前为未签名预览版，Windows 可能显示来源提示。
 
-阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。历史阶段 4A 包位于 `out/stage4a`；本机 v1.4.5 新包使用独立输出目录 `out/interface-v1.4.5`，历史 v1.4.4 包保留在 `out/architecture-v1.4.4`，具体校验值见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
+阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。历史阶段 4A 包位于 `out/stage4a`；本机 v1.4.5 最终包位于 `out/interface-v1.4.5`，历史 v1.4.4 包保留在 `out/architecture-v1.4.4`，具体校验值见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
 
 - [技术路线图](./docs/product/技术落地路线图-v1.md)
 - [阶段 1、2 的实现与验收](./docs/acceptance/阶段1-2实现与验收.md)
