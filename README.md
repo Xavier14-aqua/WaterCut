@@ -2,7 +2,7 @@
 
 v1.4.4 整理运行边界、功能模块、保存协调与数据事务，继续使用免安装 ZIP。[架构与学习入口](./docs/architecture/README.md) 提供目录职责、功能定位和完整调用链；当前验收状态见 [v1.4.4 清单](./docs/releases/RELEASE_CHECKLIST.md)。
 
-v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [下载最新程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/releases/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
+v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [历史 v1.4.3 程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/releases/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
 
 v1.4.2 的数据库初始化耗时、导出清理和 Electron 启动路径修复继续保留；历史验收见 [v1.4.2 记录](./docs/releases/RELEASE_NOTES-v1.4.2.md)。
 
@@ -69,27 +69,27 @@ AI 使用用户自己的 OpenAI API Key 和模型 ID，需要网络，可能产�
 
 ```powershell
 npm ci
-npm run typecheck
+npm run check
 npm test
 npm start
 ```
 
 ```powershell
 npm run make
-npm run smoke -- --packaged
-npm run smoke -- --ideas --packaged
-npm run smoke -- --stage3 --packaged
-npm run smoke -- --patch131 --packaged
-npm run smoke -- --boxes --packaged
-npm run smoke -- --stage4a --packaged
+npm run smoke -- --scenario=core --packaged
+npm run smoke -- --scenario=inspiration --packaged
+npm run smoke -- --scenario=delivery --packaged
+npm run smoke -- --scenario=editor --packaged
+npm run smoke -- --scenario=organization --packaged
+npm run smoke -- --scenario=professional --packaged
 npm run audit:dist
 ```
 
-`package` 生成 `out/WaterCut-win32-x64/`；`make` 生成 `out/make/zip/win32/x64/WaterCut-win32-x64-1.4.4.zip`。六组 smoke 在隐藏窗口中加载实际 `app.asar`，使用临时用户配置和自制素材；报告位于 `out/review-stage12/`、`out/review-idea-close/`、`out/review-stage3/`、`out/review-patch131/`、`out/review-idea-boxes/`、`out/review-stage4a/`。`audit:dist` 校验 ZIP 与已测试程序一致、许可和 WASM 完整、无私人数据，并生成 SHA256SUMS.txt。构建附带源码树 / 锁文件摘要与 Git 提交信息；尚无提交时如实记录为空。
+`package` 生成 `out/WaterCut-win32-x64/`；`make` 生成 `out/make/zip/win32/x64/WaterCut-win32-x64-1.4.4.zip`。六组 smoke 在隐藏窗口中加载实际 `app.asar`，使用临时用户配置和自制素材；报告位于 `out/review-core/`、`out/review-inspiration/`、`out/review-delivery/`、`out/review-editor/`、`out/review-organization/`、`out/review-professional/`。额外 BGM 场景和旧参数别名见 [开发与验证](./docs/development/README.md)。`audit:dist` 校验 ZIP 与已测试程序一致、许可和 WASM 完整、无私人数据，并生成 SHA256SUMS.txt。构建附带源码树 / 锁文件摘要与 Git 提交信息；尚无提交时如实记录为空。
 
 源码、测试、配置、许可证和文档进入 Git；`node_modules/`、`.vite/`、`out/`、私人项目与全局库不进入仓库。应用采用 MIT 许可证，ZIP 附带运行依赖及 Electron/Chromium 的许可文本。当前为未签名预览版，Windows 可能显示来源提示。
 
-阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。本次隔离包位于 out/stage4a，不覆盖运行中的旧版；使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
+阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。历史阶段 4A 包位于 `out/stage4a`；本次 v1.4.4 在独立工作目录构建与验收，通过后放入原项目的新输出目录，具体位置见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
 
 - [技术路线图](./docs/product/技术落地路线图-v1.md)
 - [阶段 1、2 的实现与验收](./docs/acceptance/阶段1-2实现与验收.md)
