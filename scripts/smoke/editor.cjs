@@ -754,6 +754,21 @@ app.on('web-contents-created', (_event, wc) => {
     } catch (error) {
       try {
         await capture(wc, 'failure.png');
+        const state = await evaluate(
+          wc,
+          `(async()=>({
+          activeView:document.querySelector('.workflow button.active')?.textContent,
+          project:document.querySelector('.header-title input')?.value,
+          busy:document.querySelector('.header-title input')?.disabled,
+          status:document.querySelector('.app-status')?.textContent,
+          visibleHeadings:[...document.querySelectorAll('.script-section-heading input')].map(e=>e.value),
+          storedHeadings:window.__dir?(await window.watercut.readProject(window.__dir)).scriptBlocks.filter(b=>b.kind==='heading').map(b=>b.text):[]
+        }))()`,
+        );
+        fs.writeFileSync(
+          path.join(output, 'failure-state.json'),
+          JSON.stringify(state, null, 2),
+        );
       } catch {}
       await finish(1, error);
     }

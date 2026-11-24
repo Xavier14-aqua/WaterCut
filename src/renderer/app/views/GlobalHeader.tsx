@@ -44,6 +44,7 @@ export function GlobalHeader({ model }: { model: AppModel }) {
             ([key, label]) => (
               <button
                 key={key}
+                disabled={busy}
                 className={view === key ? 'active' : ''}
                 onClick={() => void changeView(key)}
               >

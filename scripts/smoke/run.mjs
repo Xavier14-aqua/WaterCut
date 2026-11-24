@@ -29,6 +29,10 @@ child.on('exit', (code) => {
   if (!fs.existsSync(reportFile)) return;
   const report = JSON.parse(fs.readFileSync(reportFile, 'utf8'));
   const temporary = path.resolve(report.temporary ?? '');
+  if (code !== 0) {
+    console.error('Failed smoke data retained for diagnosis:', temporary);
+    return;
+  }
   // Only remove the explicitly identified synthetic test directory, after exit.
   if (
     path.dirname(temporary) === path.resolve(os.tmpdir()) &&
