@@ -46,5 +46,461 @@
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/inspiration/IdeaForm.tsx",
     "bodySha256": "1e32620c4643e6f8129897be7f511d245bcbcdeaed62e54fcd0cd9f201b6a00d"
+  },
+  {
+    "name": "CURRENT_VERSION",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "641bc05555b41a4e99d327d441d28947e86f1410e55aad4b3054c5e663470c10"
+  },
+  {
+    "name": "additions",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "b969ae3e5bc2f076f4eeff6834d1f204718c41911dacb718cb7b3ec665621d4d"
+  },
+  {
+    "name": "additionsV4",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "6894963a97205d7425c5e69ec88ec85f21321e5fec4c5d1b97b3d960538ff468"
+  },
+  {
+    "name": "additionsV5",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "4373410a3af0b1f45ce4d84cbf0bce6537a9538dd39122104b592da453bb5091"
+  },
+  {
+    "name": "additionsV6",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "b0f34f762f19a6e0789aa668bfd72de8ee38ae524fc38c5e0f580738db44b0ca"
+  },
+  {
+    "name": "additionsV7",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "630aac40895f96f1e56ae367890429cf3aa10b42f76122755fb3793ee4cfdeb0"
+  },
+  {
+    "name": "additionsV8",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "d946daa94eb30316f41fd5737cf662a5daae90c338aa07881ab6e454a3a474f2"
+  },
+  {
+    "name": "additionsV9",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "f5cf436ff2db9912a66ec6ffa94c4c8e446ed58f100a93a594fef7eb50de3e87"
+  },
+  {
+    "name": "additionsV11",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "fc84eecf039105c99941d7d6c4d3927a947261e7cb8ac67bb159b2cbcb2b78db"
+  },
+  {
+    "name": "installChangeTriggers",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "3cc6bd185d3d951c9cba07677876e40cf5cafb6b05869c9dfd17acb7b5dfae65"
+  },
+  {
+    "name": "installV11",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/migrations/schema.ts",
+    "bodySha256": "d9bed15a9ca36ae0fa3e450461d611894fed82b80ac5fe39d2bb1fa9f785d3d6"
+  },
+  {
+    "name": "databaseFile",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/database.ts",
+    "bodySha256": "b51582a38b23c911a8ec8a12cae5fe2b06f5b41a0a85b051c8d08edc6abca800"
+  },
+  {
+    "name": "localAssetPath",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/database.ts",
+    "bodySha256": "754e71cbe8ee6db8e089000a3db8e479504b2993480df9336c8b1e62a58ebb8d"
+  },
+  {
+    "name": "openDatabase",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/database.ts",
+    "bodySha256": "d6c5e5a521ccb3d9713235ad1e0ba8ea9eb21ac6707d24bb76e75309a23c0f33"
+  },
+  {
+    "name": "nameSchema",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/validation.ts",
+    "bodySha256": "523e53c090d89531a8500f573abced41fcf218755f261bf2ca0cc29182a5bc2e"
+  },
+  {
+    "name": "shotSchema",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/validation.ts",
+    "bodySha256": "24fbbd67e5d2fb8872351039afd01476247db9f4eba3aeabf327364fcb7e3593"
+  },
+  {
+    "name": "readProject",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/repositories/read-project.ts",
+    "bodySha256": "085918e67dc4ba3ee32e555afda9043a0ba7f6fdaf1993f952648704b6aa74b0"
+  },
+  {
+    "name": "mutateProject",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/transaction.ts",
+    "bodySha256": "ed67b97e549fe46f16bae8d81b0273f455db77ceb08699f1465977f3191895cb"
+  },
+  {
+    "name": "attachAssetRow",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/repositories/asset-rows.ts",
+    "bodySha256": "392e3f2d39a2ba8f016741ecca39767d45f3a41d910dd49fdcb38448f13ec655"
+  },
+  {
+    "name": "reorderRows",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/repositories/order.ts",
+    "bodySha256": "f8b2eb46126db134e249f4ee93cc687cb4e77f8cae0c72a52149f2225c2f105b"
+  },
+  {
+    "name": "createProject",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/lifecycle.ts",
+    "bodySha256": "4c48eee02d368bc74a2f223bbe6ee20e581fdb86477e3a4c70ba3711e4fc7a0d"
+  },
+  {
+    "name": "renameProject",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/lifecycle.ts",
+    "bodySha256": "7a292861ec94e6f09c00654c5933a463bf2980c19fc30893f7ae6410c7462841"
+  },
+  {
+    "name": "forkProjectIdentity",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/lifecycle.ts",
+    "bodySha256": "69721bf4c05cce846a23bf13d84a0f560f68fb6d1c7554ac6e0c9510a03200f5"
+  },
+  {
+    "name": "archiveProject",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/lifecycle.ts",
+    "bodySha256": "dbb1d0d86855c8e6915734d8e88f8d6704af83f8ee51786bda58b8dfff2e5c75"
+  },
+  {
+    "name": "addIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "128c7c20be80aaac6911bf1eedee921896b49499aba5d115aac2cf734e61a3ad"
+  },
+  {
+    "name": "updateIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "3f0222c863a8f60613dffb4ac5d7bf0d17f27c97ec23300ea5c53e0a1e465e35"
+  },
+  {
+    "name": "deleteIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "d8c0e3d786723d5303ab63d3bea77b6dbae05c279f276854b4823fe40485aecc"
+  },
+  {
+    "name": "moveIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "94f596144f319e33cd2800372cc05fae3c4ae69ff64c3c4119806a8f4cc3ab73"
+  },
+  {
+    "name": "connectIdeas",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "3d45059e7521a02953e3af9c090a99ae6c3eeb943e98061b8c8804fc1c2dbae7"
+  },
+  {
+    "name": "disconnectIdeas",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "5eb6e7fa1e67b522a7de897012d1a8c3ad93ff94e8a0269c33dc3c82c7ac1f3c"
+  },
+  {
+    "name": "attachIdeaAsset",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "c8bdb32bd90d526bdaeb1e98bad7eea4bcfcd62ef53528f19845b7db3bfcf71a"
+  },
+  {
+    "name": "createIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "0ebb7ffd458f5bd13d0351b7b36aa2439452bf9bfd256ce4fc29a3cd0a6b7dc8"
+  },
+  {
+    "name": "attachLibraryIdeas",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "afec530af41ebef7ff7e654275ee31e24768ffcaa339ef3ed0ce396b65a2d32f"
+  },
+  {
+    "name": "refreshLibraryIdea",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "a27a4ea08f4a7b87a8d52d3aa20d060f00607b0c0d166fb211e4114e5f859c76"
+  },
+  {
+    "name": "updateEdgeLabel",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/ideas.ts",
+    "bodySha256": "4dd84279532b16e0b64bc1611ea2b28c2b7fe2011186f7712753820ffa5f9748"
+  },
+  {
+    "name": "mediaTypes",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "362d1b7a7a7b80b22e6c9e732820ca4acabebc56467ebe5e8867a65c6e9e493d"
+  },
+  {
+    "name": "cleanupPartialAssets",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "aa4f9307c3c4e9d625bce15d1b22c5f77531a3f53da61a896147d449e03fe90b"
+  },
+  {
+    "name": "hashFile",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "5959846726c1023488c33dcf4a9b982b0c52ddd9f3d6d1536710b62898211931"
+  },
+  {
+    "name": "importAsset",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "2a700ade8d3ffb843f8b47d66af5f26ded39d356b4dd034c67879864644417c7"
+  },
+  {
+    "name": "relinkAsset",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "f9307d4a0a3445450cbab71a3a395dfdb183ca01b1d10cd919076cb1a08e46cc"
+  },
+  {
+    "name": "updateAssetTags",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "f36b9129d3d26c3ea1e083c0d6a5bb58c511605ef1af7ef53de21a4629320b37"
+  },
+  {
+    "name": "deleteAsset",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "0e9358034d4da8f443cfc3c88a98ea50b5bec1d0b07801d7e9f1a363b3e97d0c"
+  },
+  {
+    "name": "updateAssetDuration",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "2b0d18f5e959610a26f6eaa8207190821efaf40ec88b8655053035050d4f49dc"
+  },
+  {
+    "name": "attachLibraryAssets",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/assets.ts",
+    "bodySha256": "38594ff52dd0d28f717c6c64448da85b5b898bfec929f8858ac2c50e5baddb05"
+  },
+  {
+    "name": "appendDraftShots",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "245b8da366150af388323aa3635210cb7c46522ccd7fdc6c2fba820e4f8368c3"
+  },
+  {
+    "name": "linkAsset",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "2bb586ec87f6537f8d4558eb1bd2c887badc186f4ff6575912d612f8d82a68b1"
+  },
+  {
+    "name": "addCandidate",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "d52e28351450abea3207ba45263e52fa07ba0bd121edd5c66d7c217329166f37"
+  },
+  {
+    "name": "removeCandidate",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "c24ccbd1406d9dd0e8805841d0c120c24c436d24aa2d63b3ea88a8ddd24143a6"
+  },
+  {
+    "name": "linkAudio",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "70a327f675651d89e118c0642efccb79b441243b17acfd48d9813d18f6aa57cf"
+  },
+  {
+    "name": "deleteShot",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "94a02f4187a1b6c0906c47aabe80d2c324f1e31096edf1f5a955c188f870e483"
+  },
+  {
+    "name": "moveShot",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "d8376cfb9efaa6df6d8af83cd61197168d2d61304302a78ac80626f1119017c3"
+  },
+  {
+    "name": "updateTrim",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "30a0b5c9608b3db920fb28b8410842ae53212821c2c7ed5358c369dd4d885dac"
+  },
+  {
+    "name": "addShot",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "a8ecffd0060e3b15437b98b660467a8958bb6acd3b1de37e025a6fdd5b03b6ee"
+  },
+  {
+    "name": "updateShot",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "52d92cef87bb0bd3610ce16c3c9dde3d380a7f56cf41c5035a75c53b8a652bd6"
+  },
+  {
+    "name": "updateShotMetadata",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "7afe1e577109f8b2762cd5502259479c3d77e3c9aa2d115df80b26def2cef0a3"
+  },
+  {
+    "name": "reorderShots",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "b5e37ace532bc58f16553c95a53b60dfa6d5836ac1f096eb4178841a39a4fe73"
+  },
+  {
+    "name": "addShotSource",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "009d49989a8f5a02b8dfd7c51e49600e7855839261dc1065a7667c5848053ec9"
+  },
+  {
+    "name": "removeShotSource",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "a8e35a0f86fa6d4b2f17822e9117c7bd82792a75538639d67cbd17ec0fe7e9a9"
+  },
+  {
+    "name": "clearShotPrimary",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "92953e0b727c835628a2ea573e8817ae20da7b710c4479f57ab9d2786b839808"
+  },
+  {
+    "name": "bindLibrarySelect",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/shots.ts",
+    "bodySha256": "10b454fb9b5993580d6b09f263f6344750ad199320890e57f0677d608bd46ae4"
+  },
+  {
+    "name": "reorderScriptBlocks",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "ffd90ff01cda0fa30e4b0b81ee16ab8c9894f63b1a8fde4413a835d782231014"
+  },
+  {
+    "name": "createScriptSection",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "89b0ec7fa445f258649eb97bf28dffe1ddbdc0971fe6db006de3a4f414ceffdb"
+  },
+  {
+    "name": "addScriptParagraph",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "f4a71f0a956f7bc67a3b100a24ce54531d048543cddafd06681deb2ca2e505c3"
+  },
+  {
+    "name": "createShotsFromIdeas",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "55e8b5e710bc274866060e20b114911ba965d51fe0939b707643c473832ef51b"
+  },
+  {
+    "name": "saveScriptBlock",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "7ca57ac916c373186fd6f7c3c8e9b4088851ce323711216f19b8535875afca15"
+  },
+  {
+    "name": "convertScriptBlocks",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "22eaeb159a84ee1268e7f7df133283afa759c9a13b525da40e0da09c7796f385"
+  },
+  {
+    "name": "deleteScriptBlock",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "fcc5355187e3447b51747677f900c95324736738ba04fa5db975768b64a029a6"
+  },
+  {
+    "name": "splitScriptBlock",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "f0b06de4b13cfab13fb020a5065fc71e3546f75720a29bb348295f0d5337d604"
+  },
+  {
+    "name": "mergeScriptBlocks",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/script.ts",
+    "bodySha256": "0cc82018f2412293b4ed98f9c6a3981d19a81477edd6e9814ac397ea83c445dc"
+  },
+  {
+    "name": "saveIdeaBox",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/organization.ts",
+    "bodySha256": "86b23038650b5f457043b2faec29d65ef5a3a63685a67e55792f3f7ed3dc06fc"
+  },
+  {
+    "name": "deleteIdeaBox",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/organization.ts",
+    "bodySha256": "ddc2cefdba5a1aff71bff9034839042d27e73f5677abf488e550ba1e88c93823"
+  },
+  {
+    "name": "moveIdeasToBox",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/organization.ts",
+    "bodySha256": "632bd414996c4d6434fc26f10d7a18cbd47344f700b0d13c79a33c64902a90dd"
+  },
+  {
+    "name": "saveAudioClip",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/audio.ts",
+    "bodySha256": "aefc43404dfe7a75b240a683a118b5ebed14a018f6d181b5e766f23e60bcd9c2"
+  },
+  {
+    "name": "deleteAudioClip",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/audio.ts",
+    "bodySha256": "a4b4783a1420f25ace8b8f6712a1d5c7924df03d4387a0f39ec4da56fddf8ccc"
+  },
+  {
+    "name": "saveTimelineSettings",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/audio.ts",
+    "bodySha256": "52d6ed37d5badcfac113adc2ce0d90545df1b99e5c7f67e062cad8565521b85b"
+  },
+  {
+    "name": "markCatalogSynced",
+    "from": "src/modules/project/index.ts",
+    "to": "src/modules/project/services/catalog.ts",
+    "bodySha256": "aa0e3906167f2dbce032892cc64aa2d1999921ed3ff71e426e830762e498f2c8"
   }
 ]
