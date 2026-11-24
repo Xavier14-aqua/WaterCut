@@ -7,5 +7,6 @@
 *.html text eol=lf
 *.md text eol=lf
 *.json text eol=lf
+THIRD_PARTY_NOTICES.txt text eol=lf
 # Retain the existing Windows template bytes; format tools do not touch them.
 src/modules/delivery/templates/*.json text eol=crlf

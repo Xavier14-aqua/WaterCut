@@ -37,7 +37,7 @@ for (const [location, data] of packages) {
     '='.repeat(72),
     `${metadata.name} ${metadata.version} (${data.license || metadata.license})`,
     '',
-    readFileSync(source, 'utf8').trim(),
+    readFileSync(source, 'utf8').replace(/\r\n/g, '\n').trim(),
     '',
   );
 }
@@ -50,7 +50,9 @@ notices.push(
   readFileSync(
     path.join(root, 'licenses/pyJianYingDraft-APACHE-2.0.txt'),
     'utf8',
-  ).trim(),
+  )
+    .replace(/\r\n/g, '\n')
+    .trim(),
   '',
 );
 notices.push(
