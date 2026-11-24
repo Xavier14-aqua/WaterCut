@@ -1,0 +1,94 @@
+{
+  "literalChannels": [
+    "app:close-ready",
+    "app:request-close",
+    "app:ui-error",
+    "settings:get",
+    "settings:choose-root",
+    "project:root",
+    "project:create",
+    "project:open",
+    "project:read",
+    "revision:list",
+    "revision:create",
+    "revision:delete",
+    "revision:restore",
+    "project:export-package",
+    "project:import-package",
+    "media:probe-project",
+    "media:probe-library",
+    "export:storyboard-pdf",
+    "project:attach-assets",
+    "project:attach-ideas",
+    "project:refresh-idea",
+    "project:promote",
+    "project:example",
+    "library:read",
+    "library:save-idea",
+    "library:box-save",
+    "library:box-delete",
+    "library:box-move",
+    "library:get-idea",
+    "library:get-asset",
+    "library:related",
+    "library:usage",
+    "select:list",
+    "select:save",
+    "select:hide",
+    "select:bind",
+    "library:hide",
+    "library:asset-update",
+    "library:connect",
+    "library:disconnect",
+    "library:reconcile",
+    "media:palette",
+    "library:import",
+    "library:relink",
+    "asset:import",
+    "asset:relink",
+    "asset:cancel",
+    "ai:settings",
+    "ai:save-settings",
+    "ai:clear-key",
+    "ai:generate",
+    "ai:proposals",
+    "library:echoes",
+    "ai:proposal-delete",
+    "ai:proposal-apply",
+    "ai:cancel",
+    "ai:suggest",
+    "export:jianying",
+    "export:shot-list"
+  ],
+  "groups": [
+    {
+      "file": "src/main/ipc/application.ts",
+      "register": "registerApplicationIPC"
+    },
+    {
+      "file": "src/main/ipc/settings.ts",
+      "register": "registerSettingsIPC"
+    },
+    {
+      "file": "src/main/ipc/project.ts",
+      "register": "registerProjectIPC"
+    },
+    {
+      "file": "src/main/ipc/delivery.ts",
+      "register": "registerDeliveryIPC"
+    },
+    {
+      "file": "src/main/ipc/media.ts",
+      "register": "registerMediaIPC"
+    },
+    {
+      "file": "src/main/ipc/library.ts",
+      "register": "registerLibraryIPC"
+    },
+    {
+      "file": "src/main/ipc/ai.ts",
+      "register": "registerAiIPC"
+    }
+  ],
+  "dynamicProjectLoopPreserved": true
+}
