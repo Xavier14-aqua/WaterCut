@@ -33,8 +33,11 @@ export class WindowCloseGuard {
     if (this.unavailable) void this.prompt();
     else {
       this.armTimer();
-      try { this.options.requestSave(this.requestId); }
-      catch { this.markUnavailable(); }
+      try {
+        this.options.requestSave(this.requestId);
+      } catch {
+        this.markUnavailable();
+      }
     }
     return false;
   }
@@ -53,7 +56,9 @@ export class WindowCloseGuard {
     if (this.requestId !== null) void this.prompt();
   }
 
-  markResponsive() { this.unavailable = false; }
+  markResponsive() {
+    this.unavailable = false;
+  }
 
   dispose() {
     this.disposed = true;
@@ -68,7 +73,10 @@ export class WindowCloseGuard {
 
   private armTimer() {
     this.clearTimer();
-    this.timer = setTimeout(() => void this.prompt(), this.options.timeoutMs ?? 5000);
+    this.timer = setTimeout(
+      () => void this.prompt(),
+      this.options.timeoutMs ?? 5000,
+    );
   }
 
   private async prompt() {

@@ -5,8 +5,16 @@ afterEach(() => vi.useRealTimers());
 
 function fixture() {
   vi.useFakeTimers();
-  const requestSave = vi.fn(), confirmExit = vi.fn(async () => false), close = vi.fn(), forceClose = vi.fn();
-  const guard = new WindowCloseGuard({ requestSave, confirmExit, close, forceClose });
+  const requestSave = vi.fn(),
+    confirmExit = vi.fn(async () => false),
+    close = vi.fn(),
+    forceClose = vi.fn();
+  const guard = new WindowCloseGuard({
+    requestSave,
+    confirmExit,
+    close,
+    forceClose,
+  });
   return { guard, requestSave, confirmExit, close, forceClose };
 }
 
@@ -67,7 +75,12 @@ test('late replies from a cancelled request cannot close a newer request', () =>
 test('repeated close clicks cannot open duplicate dialogs', async () => {
   const f = fixture();
   let answer!: (value: boolean) => void;
-  f.confirmExit.mockImplementation(() => new Promise(resolve => { answer = resolve; }));
+  f.confirmExit.mockImplementation(
+    () =>
+      new Promise((resolve) => {
+        answer = resolve;
+      }),
+  );
   f.guard.allowClose();
   f.guard.allowClose();
   f.guard.allowClose();
@@ -81,7 +94,12 @@ test('repeated close clicks cannot open duplicate dialogs', async () => {
 test('completed saves invalidate an outstanding force-exit dialog', async () => {
   const f = fixture();
   let answer!: (value: boolean) => void;
-  f.confirmExit.mockImplementation(() => new Promise(resolve => { answer = resolve; }));
+  f.confirmExit.mockImplementation(
+    () =>
+      new Promise((resolve) => {
+        answer = resolve;
+      }),
+  );
   f.guard.allowClose();
   f.guard.allowClose();
   f.guard.acknowledge(1, true);

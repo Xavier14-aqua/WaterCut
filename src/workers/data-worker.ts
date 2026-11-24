@@ -10,52 +10,56 @@ import * as handoff from '../modules/delivery/jianying-handoff';
 const modules: Record<string, Record<string, unknown>> = {
   project,
   library,
-  workspace, revisions, packages, media,proposals,handoff
+  workspace,
+  revisions,
+  packages,
+  media,
+  proposals,
+  handoff,
 };
 const controllers = new Map<string, AbortController>();
 let queue: Promise<unknown> = Promise.resolve();
-parentPort!.on('message', message => {
+parentPort!.on('message', (message) => {
   if (message.cancel) {
     controllers.get(message.cancel)?.abort();
     return;
   }
-  const {
-    id,
-    module,
-    method,
-    args,
-    job
-  } = message;
+  const { id, module, method, args, job } = message;
   const controller = job ? new AbortController() : undefined;
-  if (controller) controllers.set(id,controller);
-  queue = queue.catch(()=>undefined).then(async()=>{try {
-    const fn = modules[module]?.[method];
-    if (typeof fn !== 'function') throw new Error('未知数据操作');
-    const values = [...args];
-    if (job) {
-      values.push({
-        signal: controller!.signal,
-        onProgress: (copied: number, total: number) => parentPort!.postMessage({
+  if (controller) controllers.set(id, controller);
+  queue = queue
+    .catch(() => undefined)
+    .then(async () => {
+      try {
+        const fn = modules[module]?.[method];
+        if (typeof fn !== 'function') throw new Error('未知数据操作');
+        const values = [...args];
+        if (job) {
+          values.push({
+            signal: controller!.signal,
+            onProgress: (copied: number, total: number) =>
+              parentPort!.postMessage({
+                id,
+                progress: {
+                  copied,
+                  total,
+                  jobId: id,
+                },
+              }),
+          });
+        }
+        const result = await fn(...values);
+        parentPort!.postMessage({
           id,
-          progress: {
-            copied,
-            total,
-            jobId: id
-          }
-        })
-      });
-    }
-    const result = await fn(...values);
-    parentPort!.postMessage({
-      id,
-      result
+          result,
+        });
+      } catch (error) {
+        parentPort!.postMessage({
+          id,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      } finally {
+        controllers.delete(id);
+      }
     });
-  } catch (error) {
-    parentPort!.postMessage({
-      id,
-      error: error instanceof Error ? error.message : String(error)
-    });
-  } finally {
-    controllers.delete(id);
-  }});
 });

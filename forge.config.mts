@@ -6,18 +6,25 @@ const config: ForgeConfig = {
   outDir: process.env.WATERCUT_BUILD_OUT || 'out',
   packagerConfig: {
     asar: true,
-    extraResource: ['LICENSE', 'THIRD_PARTY_NOTICES.txt', '.build-resources/MediaInfoModule.wasm', '.build-resources/build-info.json'],
+    extraResource: [
+      'LICENSE',
+      'THIRD_PARTY_NOTICES.txt',
+      '.build-resources/MediaInfoModule.wasm',
+      '.build-resources/build-info.json',
+    ],
   },
   rebuildConfig: {},
-  makers: [
-    new MakerZIP({}, ['win32']),
-  ],
+  makers: [new MakerZIP({}, ['win32'])],
   plugins: [
     new VitePlugin({
       // `build` can specify multiple entry builds, which can be Main process, Preload scripts, Worker process, etc.
       // If you are familiar with Vite configuration, it will look really familiar.
       build: [
-        { entry: 'src/workers/probe-worker.ts', config: 'vite.main.config.mts', target: 'main' },
+        {
+          entry: 'src/workers/probe-worker.ts',
+          config: 'vite.main.config.mts',
+          target: 'main',
+        },
         {
           entry: 'src/workers/data-worker.ts',
           config: 'vite.main.config.mts',

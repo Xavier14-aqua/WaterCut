@@ -4,46 +4,234 @@ import path from 'node:path';
 import { z } from 'zod';
 import { openDatabase, readProject, localAssetPath } from '../project/index';
 import { resolveProjectAsset, hydrateProject } from '../workspace/index';
-import { projectDocument, validateDocument, type ProjectDocument } from '../../shared/document';
+import {
+  projectDocument,
+  validateDocument,
+  type ProjectDocument,
+} from '../../shared/document';
 import type { Revision } from '../../shared/models';
-import { hashFile, containedFile, checkCancelled, type JobOptions } from '../../infrastructure/jobs/file-jobs';
+import {
+  hashFile,
+  containedFile,
+  checkCancelled,
+  type JobOptions,
+} from '../../infrastructure/jobs/file-jobs';
 import type { DatabaseSync } from 'node:sqlite';
 export function writeDocument(db: DatabaseSync, input: unknown) {
   const doc = validateDocument(input);
   // Keep revisions/origin intact; restoration changes the editing state only.
-  for (const table of ['audio_clips','idea_box_items', 'idea_boxes', 'shot_sources', 'script_blocks', 'idea_media', 'board_edges', 'shot_audio', 'shot_candidates', 'shot_assets', 'asset_metadata', 'ideas', 'assets', 'shots']) db.exec(`DELETE FROM ${table}`);
-  const settings=doc.timelineSettings;
-  db.prepare('UPDATE timeline_settings SET width=?,height=?,fps_num=?,fps_den=?,video_gain=?,bgm_gain=? WHERE id=1').run(settings.width,settings.height,settings.fpsNum,settings.fpsDen,settings.videoGain,settings.bgmGain);
-  for (const box of doc.ideaBoxes) db.prepare('INSERT INTO idea_boxes VALUES (?,?,?)').run(box.id, box.name, box.position);
+  for (const table of [
+    'audio_clips',
+    'idea_box_items',
+    'idea_boxes',
+    'shot_sources',
+    'script_blocks',
+    'idea_media',
+    'board_edges',
+    'shot_audio',
+    'shot_candidates',
+    'shot_assets',
+    'asset_metadata',
+    'ideas',
+    'assets',
+    'shots',
+  ])
+    db.exec(`DELETE FROM ${table}`);
+  const settings = doc.timelineSettings;
+  db.prepare(
+    'UPDATE timeline_settings SET width=?,height=?,fps_num=?,fps_den=?,video_gain=?,bgm_gain=? WHERE id=1',
+  ).run(
+    settings.width,
+    settings.height,
+    settings.fpsNum,
+    settings.fpsDen,
+    settings.videoGain,
+    settings.bgmGain,
+  );
+  for (const box of doc.ideaBoxes)
+    db.prepare('INSERT INTO idea_boxes VALUES (?,?,?)').run(
+      box.id,
+      box.name,
+      box.position,
+    );
   for (const a of doc.assets) {
-    if (a.storageKind === 'local' && a.relativePath) localAssetPath(path.resolve('validation.watercut'), a.relativePath);
-    db.prepare('INSERT INTO assets(id,name,kind,relative_path,size,tags,storage_kind,source_library_id,source_asset_id,sha256,duration_ms,starred,imported_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)').run(a.id, a.name, a.kind, a.relativePath, a.size, a.tags, a.storageKind, a.sourceLibraryId, a.sourceAssetId, a.sha256, a.durationMs, a.starred ? 1 : 0, a.importedAt);
-    if (a.metadata) db.prepare('INSERT INTO asset_metadata VALUES (?,?)').run(a.id, JSON.stringify(a.metadata));
+    if (a.storageKind === 'local' && a.relativePath)
+      localAssetPath(path.resolve('validation.watercut'), a.relativePath);
+    db.prepare(
+      'INSERT INTO assets(id,name,kind,relative_path,size,tags,storage_kind,source_library_id,source_asset_id,sha256,duration_ms,starred,imported_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    ).run(
+      a.id,
+      a.name,
+      a.kind,
+      a.relativePath,
+      a.size,
+      a.tags,
+      a.storageKind,
+      a.sourceLibraryId,
+      a.sourceAssetId,
+      a.sha256,
+      a.durationMs,
+      a.starred ? 1 : 0,
+      a.importedAt,
+    );
+    if (a.metadata)
+      db.prepare('INSERT INTO asset_metadata VALUES (?,?)').run(
+        a.id,
+        JSON.stringify(a.metadata),
+      );
   }
   for (const i of doc.ideas) {
-    db.prepare('INSERT INTO ideas(id,text,tags,notes,source_asset_id,x,y,kind,payload_json,recorded_at,occurred_at,source_library_id,source_idea_id,source_version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)').run(i.id, i.text, i.tags, i.notes, i.sourceAssetId, i.x, i.y, i.kind, JSON.stringify(i.payload), i.recordedAt, i.occurredAt, i.sourceLibraryId, i.sourceIdeaId, i.sourceVersion);
-    if (i.boxId) db.prepare('INSERT INTO idea_box_items VALUES (?,?)').run(i.id, i.boxId);
-    for (const m of i.media) db.prepare('INSERT INTO idea_media VALUES (?,?,?,?,?,?)').run(i.id, m.assetId, m.role, m.position, m.inMs, m.outMs);
+    db.prepare(
+      'INSERT INTO ideas(id,text,tags,notes,source_asset_id,x,y,kind,payload_json,recorded_at,occurred_at,source_library_id,source_idea_id,source_version) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    ).run(
+      i.id,
+      i.text,
+      i.tags,
+      i.notes,
+      i.sourceAssetId,
+      i.x,
+      i.y,
+      i.kind,
+      JSON.stringify(i.payload),
+      i.recordedAt,
+      i.occurredAt,
+      i.sourceLibraryId,
+      i.sourceIdeaId,
+      i.sourceVersion,
+    );
+    if (i.boxId)
+      db.prepare('INSERT INTO idea_box_items VALUES (?,?)').run(i.id, i.boxId);
+    for (const m of i.media)
+      db.prepare('INSERT INTO idea_media VALUES (?,?,?,?,?,?)').run(
+        i.id,
+        m.assetId,
+        m.role,
+        m.position,
+        m.inMs,
+        m.outMs,
+      );
   }
-  for (const e of doc.boardEdges) db.prepare('INSERT INTO board_edges(id,source,target,source_handle,target_handle,label,relation_kind) VALUES (?,?,?,?,?,?,?)').run(e.id, e.source, e.target, e.sourceHandle, e.targetHandle, e.label, e.kind);
-  for (const s of doc.shots) db.prepare('INSERT INTO shots(id,position,description,duration_ms,action_dialogue,scene,time_of_day,shot_size,movement,status,needs_review,review_note,props,production_state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)').run(s.id, s.position, s.description, s.durationMs, s.actionDialogue, s.scene, s.timeOfDay, s.shotSize, s.movement, s.status, s.needsReview ? 1 : 0, s.reviewNote,s.props,s.productionState);
+  for (const e of doc.boardEdges)
+    db.prepare(
+      'INSERT INTO board_edges(id,source,target,source_handle,target_handle,label,relation_kind) VALUES (?,?,?,?,?,?,?)',
+    ).run(
+      e.id,
+      e.source,
+      e.target,
+      e.sourceHandle,
+      e.targetHandle,
+      e.label,
+      e.kind,
+    );
+  for (const s of doc.shots)
+    db.prepare(
+      'INSERT INTO shots(id,position,description,duration_ms,action_dialogue,scene,time_of_day,shot_size,movement,status,needs_review,review_note,props,production_state) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    ).run(
+      s.id,
+      s.position,
+      s.description,
+      s.durationMs,
+      s.actionDialogue,
+      s.scene,
+      s.timeOfDay,
+      s.shotSize,
+      s.movement,
+      s.status,
+      s.needsReview ? 1 : 0,
+      s.reviewNote,
+      s.props,
+      s.productionState,
+    );
   db.exec('DELETE FROM script_blocks'); // Remove blocks generated by shot_script.
-  for (const b of doc.scriptBlocks) db.prepare('INSERT INTO script_blocks VALUES (?,?,?,?,?)').run(b.id, b.position, b.kind, b.shotId ? null : b.text, b.shotId);
-  for (const b of doc.shotCandidates) db.prepare('INSERT INTO shot_candidates VALUES (?,?)').run(b.shotId, b.assetId);
-  for (const b of doc.shotAssets) db.prepare('INSERT INTO shot_assets(shot_id,asset_id,in_ms,out_ms,source_select_id,source_select_version,source_select_name) VALUES (?,?,?,?,?,?,?)').run(b.shotId, b.assetId, b.inMs, b.outMs,b.sourceSelectId??null,b.sourceSelectVersion??null,b.sourceSelectName??null);
-  for(const c of doc.audioClips)db.prepare('INSERT INTO audio_clips VALUES (?,?,?,?,?,?,?,?)').run(c.id,c.assetId,c.timelineStartMs,c.inMs,c.outMs,c.gain,c.fadeInMs,c.fadeOutMs);
-  for (const b of doc.shotAudio) db.prepare('INSERT INTO shot_audio VALUES (?,?)').run(b.shotId, b.assetId);
-  for (const s of doc.shotSources) db.prepare('INSERT INTO shot_sources VALUES (?,?,?,?)').run(randomUUID(), s.shotId, s.ideaId, s.excerpt);
-  db.prepare('UPDATE project SET name=?,archived=?,revision=revision+1').run(doc.name, doc.archived ? 1 : 0);
-  if (db.prepare('PRAGMA foreign_key_check').all().length) throw new Error('恢复后的项目引用检查失败');
+  for (const b of doc.scriptBlocks)
+    db.prepare('INSERT INTO script_blocks VALUES (?,?,?,?,?)').run(
+      b.id,
+      b.position,
+      b.kind,
+      b.shotId ? null : b.text,
+      b.shotId,
+    );
+  for (const b of doc.shotCandidates)
+    db.prepare('INSERT INTO shot_candidates VALUES (?,?)').run(
+      b.shotId,
+      b.assetId,
+    );
+  for (const b of doc.shotAssets)
+    db.prepare(
+      'INSERT INTO shot_assets(shot_id,asset_id,in_ms,out_ms,source_select_id,source_select_version,source_select_name) VALUES (?,?,?,?,?,?,?)',
+    ).run(
+      b.shotId,
+      b.assetId,
+      b.inMs,
+      b.outMs,
+      b.sourceSelectId ?? null,
+      b.sourceSelectVersion ?? null,
+      b.sourceSelectName ?? null,
+    );
+  for (const c of doc.audioClips)
+    db.prepare('INSERT INTO audio_clips VALUES (?,?,?,?,?,?,?,?)').run(
+      c.id,
+      c.assetId,
+      c.timelineStartMs,
+      c.inMs,
+      c.outMs,
+      c.gain,
+      c.fadeInMs,
+      c.fadeOutMs,
+    );
+  for (const b of doc.shotAudio)
+    db.prepare('INSERT INTO shot_audio VALUES (?,?)').run(b.shotId, b.assetId);
+  for (const s of doc.shotSources)
+    db.prepare('INSERT INTO shot_sources VALUES (?,?,?,?)').run(
+      randomUUID(),
+      s.shotId,
+      s.ideaId,
+      s.excerpt,
+    );
+  db.prepare('UPDATE project SET name=?,archived=?,revision=revision+1').run(
+    doc.name,
+    doc.archived ? 1 : 0,
+  );
+  if (db.prepare('PRAGMA foreign_key_check').all().length)
+    throw new Error('恢复后的项目引用检查失败');
 }
-export function insertRevision(db: DatabaseSync, revision: Revision, doc: ProjectDocument) {
+export function insertRevision(
+  db: DatabaseSync,
+  revision: Revision,
+  doc: ProjectDocument,
+) {
   const data = validateDocument(doc);
   const payload = JSON.stringify(data),
-    existing = (db.prepare('SELECT coalesce(sum(length(CAST(payload_json AS BLOB))),0) AS n FROM revisions').get() as any).n;
-  if (Buffer.byteLength(payload) > 20 * 1024 ** 2 || existing + Buffer.byteLength(payload) > 96 * 1024 ** 2) throw new Error('快照内容超过单条 20 MB 或总计 96 MB 的限制，请先整理历史快照');
-  db.prepare('INSERT INTO revisions VALUES (?,?,?,?,?,?,?)').run(revision.id, revision.name, revision.createdAt, 1, revision.revision, payload, revision.automatic ? 1 : 0);
-  for (const a of data.assets) db.prepare('INSERT INTO revision_media_refs VALUES (?,?,?,?)').run(revision.id, a.id, a.sha256, JSON.stringify(a));
+    existing = (
+      db
+        .prepare(
+          'SELECT coalesce(sum(length(CAST(payload_json AS BLOB))),0) AS n FROM revisions',
+        )
+        .get() as any
+    ).n;
+  if (
+    Buffer.byteLength(payload) > 20 * 1024 ** 2 ||
+    existing + Buffer.byteLength(payload) > 96 * 1024 ** 2
+  )
+    throw new Error(
+      '快照内容超过单条 20 MB 或总计 96 MB 的限制，请先整理历史快照',
+    );
+  db.prepare('INSERT INTO revisions VALUES (?,?,?,?,?,?,?)').run(
+    revision.id,
+    revision.name,
+    revision.createdAt,
+    1,
+    revision.revision,
+    payload,
+    revision.automatic ? 1 : 0,
+  );
+  for (const a of data.assets)
+    db.prepare('INSERT INTO revision_media_refs VALUES (?,?,?,?)').run(
+      revision.id,
+      a.id,
+      a.sha256,
+      JSON.stringify(a),
+    );
 }
 async function capture(directory: string, root: string, options: JobOptions) {
   const project = hydrateProject(directory, root),
@@ -53,19 +241,28 @@ async function capture(directory: string, root: string, options: JobOptions) {
     checkCancelled(options.signal);
     const file = resolveProjectAsset(directory, asset, root);
     if (file && existsSync(file)) {
-      const actual = containedFile(asset.storageKind === 'library' ? root : directory, file);
+      const actual = containedFile(
+        asset.storageKind === 'library' ? root : directory,
+        file,
+      );
       const digest = await hashFile(actual, options.signal);
-      if (asset.sha256 && asset.sha256 !== digest) throw new Error(`素材内容已变化：${asset.name}`);
+      if (asset.sha256 && asset.sha256 !== digest)
+        throw new Error(`素材内容已变化：${asset.name}`);
       asset.sha256 = digest;
     }
     options.onProgress?.(++done, document.assets.length);
   }
   return {
     project,
-    document
+    document,
   };
 }
-function record(name: string, revision: number, assetCount: number, automatic = false): Revision {
+function record(
+  name: string,
+  revision: number,
+  assetCount: number,
+  automatic = false,
+): Revision {
   return {
     id: randomUUID(),
     name,
@@ -73,38 +270,57 @@ function record(name: string, revision: number, assetCount: number, automatic = 
     documentVersion: 1,
     revision,
     assetCount,
-    automatic
+    automatic,
   };
 }
 export function listRevisions(directory: string): Revision[] {
   const db = openDatabase(directory);
   try {
-    return (db.prepare('SELECT r.*, (SELECT count(*) FROM revision_media_refs m WHERE m.revision_id=r.id) AS assets FROM revisions r ORDER BY created_at DESC,rowid DESC').all() as any[]).map(r => ({
+    return (
+      db
+        .prepare(
+          'SELECT r.*, (SELECT count(*) FROM revision_media_refs m WHERE m.revision_id=r.id) AS assets FROM revisions r ORDER BY created_at DESC,rowid DESC',
+        )
+        .all() as any[]
+    ).map((r) => ({
       id: r.id,
       name: r.name,
       createdAt: r.created_at,
       documentVersion: r.document_version,
       revision: r.content_revision,
       assetCount: r.assets,
-      automatic: !!r.automatic
+      automatic: !!r.automatic,
     }));
   } finally {
     db.close();
   }
 }
-export async function createRevision(directory: string, root: string, name: unknown, options: JobOptions = {}): Promise<Revision[]> {
+export async function createRevision(
+  directory: string,
+  root: string,
+  name: unknown,
+  options: JobOptions = {},
+): Promise<Revision[]> {
   const label = z.string().trim().min(1).max(100).parse(name);
-  const {
-    project,
-    document
-  } = await capture(directory, root, options);
+  const { project, document } = await capture(directory, root, options);
   const db = openDatabase(directory);
   try {
     db.exec('BEGIN IMMEDIATE');
-    if ((db.prepare('SELECT revision FROM project').get() as any).revision !== project.revision) throw new Error('项目在创建快照时已变化，请重试');
-    if ((db.prepare('SELECT count(*) AS n FROM revisions').get() as any).n >= 500) throw new Error('单个项目最多保留 500 个快照，请先移除不需要的快照');
+    if (
+      (db.prepare('SELECT revision FROM project').get() as any).revision !==
+      project.revision
+    )
+      throw new Error('项目在创建快照时已变化，请重试');
+    if (
+      (db.prepare('SELECT count(*) AS n FROM revisions').get() as any).n >= 500
+    )
+      throw new Error('单个项目最多保留 500 个快照，请先移除不需要的快照');
     checkCancelled(options.signal);
-    insertRevision(db, record(label, project.revision, document.assets.length), document);
+    insertRevision(
+      db,
+      record(label, project.revision, document.assets.length),
+      document,
+    );
     db.exec('COMMIT');
   } catch (e) {
     if (db.isTransaction) db.exec('ROLLBACK');
@@ -114,12 +330,18 @@ export async function createRevision(directory: string, root: string, name: unkn
   }
   return listRevisions(directory);
 }
-export function readRevision(db: DatabaseSync, id: string): {
+export function readRevision(
+  db: DatabaseSync,
+  id: string,
+): {
   revision: Revision;
   document: ProjectDocument;
 } {
-  const row = db.prepare('SELECT * FROM revisions WHERE id=?').get(z.string().uuid().parse(id)) as any;
-  if (!row || row.document_version !== 1) throw new Error('快照不存在或由较新版本创建');
+  const row = db
+    .prepare('SELECT * FROM revisions WHERE id=?')
+    .get(z.string().uuid().parse(id)) as any;
+  if (!row || row.document_version !== 1)
+    throw new Error('快照不存在或由较新版本创建');
   const document = validateDocument(JSON.parse(row.payload_json));
   return {
     revision: {
@@ -129,24 +351,42 @@ export function readRevision(db: DatabaseSync, id: string): {
       documentVersion: 1,
       revision: row.content_revision,
       assetCount: document.assets.length,
-      automatic: !!row.automatic
+      automatic: !!row.automatic,
     },
-    document
+    document,
   };
 }
-export async function restoreRevision(directory: string, root: string, id: string, options: JobOptions = {}) {
-  const {
-      project,
-      document
-    } = await capture(directory, root, options),
+export async function restoreRevision(
+  directory: string,
+  root: string,
+  id: string,
+  options: JobOptions = {},
+) {
+  const { project, document } = await capture(directory, root, options),
     db = openDatabase(directory);
   try {
     db.exec('BEGIN IMMEDIATE');
     const target = readRevision(db, id);
-    if ((db.prepare('SELECT revision FROM project').get() as any).revision !== project.revision) throw new Error('项目在恢复时已变化，请重试');
-    if ((db.prepare('SELECT count(*) AS n FROM revisions').get() as any).n >= 500) throw new Error('恢复前需要留出一个自动快照位置，请先移除不需要的快照');
+    if (
+      (db.prepare('SELECT revision FROM project').get() as any).revision !==
+      project.revision
+    )
+      throw new Error('项目在恢复时已变化，请重试');
+    if (
+      (db.prepare('SELECT count(*) AS n FROM revisions').get() as any).n >= 500
+    )
+      throw new Error('恢复前需要留出一个自动快照位置，请先移除不需要的快照');
     checkCancelled(options.signal);
-    insertRevision(db, record(`恢复前 · ${target.revision.name}`.slice(0, 100), project.revision, document.assets.length, true), document);
+    insertRevision(
+      db,
+      record(
+        `恢复前 · ${target.revision.name}`.slice(0, 100),
+        project.revision,
+        document.assets.length,
+        true,
+      ),
+      document,
+    );
     writeDocument(db, target.document);
     db.exec('COMMIT');
   } catch (e) {
@@ -160,7 +400,9 @@ export async function restoreRevision(directory: string, root: string, id: strin
 export function deleteRevision(directory: string, id: string) {
   const db = openDatabase(directory);
   try {
-    db.prepare('DELETE FROM revisions WHERE id=?').run(z.string().uuid().parse(id));
+    db.prepare('DELETE FROM revisions WHERE id=?').run(
+      z.string().uuid().parse(id),
+    );
   } finally {
     db.close();
   }

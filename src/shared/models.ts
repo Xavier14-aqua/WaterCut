@@ -15,7 +15,7 @@ export const emptyPayload: IdeaPayload = {
   weather: '',
   environment: '',
   location: '',
-  props: ''
+  props: '',
 };
 export type IdeaContent = {
   kind: IdeaKind;
@@ -201,7 +201,10 @@ export type Project = {
   scriptBlocks: ScriptBlock[];
   shotSources: ShotSource[];
 };
-export type LibraryAsset = Omit<Asset, 'storageKind' | 'sourceLibraryId' | 'sourceAssetId'> & {
+export type LibraryAsset = Omit<
+  Asset,
+  'storageKind' | 'sourceLibraryId' | 'sourceAssetId'
+> & {
   libraryId: string;
   hidden: boolean;
   usageCount: number;
@@ -308,7 +311,42 @@ export type IdeaBoxInput = {
   id?: string;
   name: string;
 };
-export type AssetSelect = { id:string;libraryId:string;assetId:string;name:string;inMs:number;outMs:number;note:string;version:number;hidden:boolean;projectAssetId?:string;usageCount?:number;usageHint?:string };
-export type AudioClip = { id:string;assetId:string;timelineStartMs:number;inMs:number;outMs:number;gain:number;fadeInMs:number;fadeOutMs:number };
-export type TimelineSettings = { width:number;height:number;fpsNum:number;fpsDen:number;videoGain:number;bgmGain:number };
-export type ShotListFilter = { scene?:string;timeOfDay?:string;props?:string;productionState?:Shot['productionState'];onlyGaps?:boolean };
+export type AssetSelect = {
+  id: string;
+  libraryId: string;
+  assetId: string;
+  name: string;
+  inMs: number;
+  outMs: number;
+  note: string;
+  version: number;
+  hidden: boolean;
+  projectAssetId?: string;
+  usageCount?: number;
+  usageHint?: string;
+};
+export type AudioClip = {
+  id: string;
+  assetId: string;
+  timelineStartMs: number;
+  inMs: number;
+  outMs: number;
+  gain: number;
+  fadeInMs: number;
+  fadeOutMs: number;
+};
+export type TimelineSettings = {
+  width: number;
+  height: number;
+  fpsNum: number;
+  fpsDen: number;
+  videoGain: number;
+  bgmGain: number;
+};
+export type ShotListFilter = {
+  scene?: string;
+  timeOfDay?: string;
+  props?: string;
+  productionState?: Shot['productionState'];
+  onlyGaps?: boolean;
+};
