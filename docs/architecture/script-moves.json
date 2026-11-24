@@ -1,0 +1,12 @@
+{
+  "scripts/generate-notices.mjs": "scripts/build/notices.mjs",
+  "scripts/generate-build-resources.mjs": "scripts/build/resources.mjs",
+  "scripts/audit-distribution.mjs": "scripts/audit/distribution.mjs",
+  "scripts/smoke-stage12.cjs": "scripts/smoke/core.cjs",
+  "scripts/regression-idea-close.cjs": "scripts/smoke/inspiration.cjs",
+  "scripts/smoke-stage3.cjs": "scripts/smoke/delivery.cjs",
+  "scripts/smoke-patch131.cjs": "scripts/smoke/editor.cjs",
+  "scripts/smoke-idea-boxes.cjs": "scripts/smoke/organization.cjs",
+  "scripts/smoke-stage4a.cjs": "scripts/smoke/professional.cjs",
+  "scripts/preview-diagnostics.cjs": "scripts/smoke/playback-diagnostics.cjs"
+}

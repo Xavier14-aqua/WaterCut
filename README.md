@@ -1,18 +1,20 @@
 # WaterCut
 
-v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [下载最新程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
+v1.4.4 整理运行边界、功能模块、保存协调与数据事务，继续使用免安装 ZIP。[架构与学习入口](./docs/architecture/README.md) 提供目录职责、功能定位和完整调用链；当前验收状态见 [v1.4.4 清单](./docs/releases/RELEASE_CHECKLIST.md)。
 
-v1.4.2 的数据库初始化耗时、导出清理和 Electron 启动路径修复继续保留；历史验收见 [v1.4.2 记录](./docs/RELEASE_NOTES-v1.4.2.md)。
+v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [下载最新程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/releases/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
 
-v1.4.1 补齐剪映实机验收：**剪映专业版 11.8.0.14778（Windows）基础交接通过**，已实际打开最终包导出的草稿并原生导出 MP4。验证范围与边界见 [实机验收](./docs/剪映11.8实机验收.md) 与 [发布说明](./docs/RELEASE_NOTES-v1.4.1.md)。v1.4.0 引入的精华子片段、区间使用足迹、BGM 与原声混音、拍摄清单筛选及 AI 建议确认继续保留。
+v1.4.2 的数据库初始化耗时、导出清理和 Electron 启动路径修复继续保留；历史验收见 [v1.4.2 记录](./docs/releases/RELEASE_NOTES-v1.4.2.md)。
+
+v1.4.1 补齐剪映实机验收：**剪映专业版 11.8.0.14778（Windows）基础交接通过**，已实际打开最终包导出的草稿并原生导出 MP4。验证范围与边界见 [实机验收](./docs/acceptance/剪映11.8实机验收.md) 与 [发布说明](./docs/releases/RELEASE_NOTES-v1.4.1.md)。v1.4.0 引入的精华子片段、区间使用足迹、BGM 与原声混音、拍摄清单筛选及 AI 建议确认继续保留。
 
 总库视频详情可标记精华，工作室展开子片段拖到分镜即复制独立裁剪。粗剪下方可配置 BGM 的起点、入出点、音量与淡入淡出。清单按场景、昼夜、道具、拍摄准备及缺口筛选，CSV / PDF 使用当前筛选。版本与交付可导出复制原件的剪映草稿，缺镜头生成文字 PNG。
 
-本地优先的视频创作工作台，当前版本 **v1.4.3**。全局总库与项目库支持灵感收纳盒，支持拖拽 / 批量收纳、“全部平铺 / 收纳盒与未收纳”切换。保留色环与色系筛选、脚本分组、分镜来源、版本快照、独立项目包、离线媒体探测和 PDF 分镜表，继续提供 Windows x64 免安装 ZIP。
+本地优先的视频创作工作台，当前版本 **v1.4.4**。全局总库与项目库支持灵感收纳盒，支持拖拽 / 批量收纳、“全部平铺 / 收纳盒与未收纳”切换。保留色环与色系筛选、脚本分组、分镜来源、版本快照、独立项目包、离线媒体探测和 PDF 分镜表，继续提供 Windows x64 免安装 ZIP。
 
 ## 下载与开始
 
-完整解压 `WaterCut-win32-x64-1.4.3.zip` 后运行 `WaterCut.exe`。用户无需安装 Node.js 或系统 FFmpeg；不配置 AI Key 也能手工创作。首页可点击“用官方示例体验一条故事”，示例含程序生成的图片、情绪卡、场景记录和五个镜头，不包含开发者私人素材。
+完整解压 `WaterCut-win32-x64-1.4.4.zip` 后运行 `WaterCut.exe`。用户无需安装 Node.js 或系统 FFmpeg；不配置 AI Key 也能手工创作。首页可点击“用官方示例体验一条故事”，示例含程序生成的图片、情绪卡、场景记录和五个镜头，不包含开发者私人素材。
 
 1. 在“总库 → 全局总库”记录文字、情绪卡或场景；导入图片、视频、音频。情绪卡可用色环、饱和度、明度或颜色值编辑主色条，灵感按相近色系筛选。已确认的关联显示卡片标题，点击可查看。
 2. 勾选卡片“孵化为项目”，或新建项目后从资源栏引用全局内容。
@@ -83,18 +85,18 @@ npm run smoke -- --stage4a --packaged
 npm run audit:dist
 ```
 
-`package` 生成 `out/WaterCut-win32-x64/`；`make` 生成 `out/make/zip/win32/x64/WaterCut-win32-x64-1.4.3.zip`。六组 smoke 在隐藏窗口中加载实际 `app.asar`，使用临时用户配置和自制素材；报告位于 `out/review-stage12/`、`out/review-idea-close/`、`out/review-stage3/`、`out/review-patch131/`、`out/review-idea-boxes/`、`out/review-stage4a/`。`audit:dist` 校验 ZIP 与已测试程序一致、许可和 WASM 完整、无私人数据，并生成 SHA256SUMS.txt。构建附带源码树 / 锁文件摘要与 Git 提交信息；尚无提交时如实记录为空。
+`package` 生成 `out/WaterCut-win32-x64/`；`make` 生成 `out/make/zip/win32/x64/WaterCut-win32-x64-1.4.4.zip`。六组 smoke 在隐藏窗口中加载实际 `app.asar`，使用临时用户配置和自制素材；报告位于 `out/review-stage12/`、`out/review-idea-close/`、`out/review-stage3/`、`out/review-patch131/`、`out/review-idea-boxes/`、`out/review-stage4a/`。`audit:dist` 校验 ZIP 与已测试程序一致、许可和 WASM 完整、无私人数据，并生成 SHA256SUMS.txt。构建附带源码树 / 锁文件摘要与 Git 提交信息；尚无提交时如实记录为空。
 
 源码、测试、配置、许可证和文档进入 Git；`node_modules/`、`.vite/`、`out/`、私人项目与全局库不进入仓库。应用采用 MIT 许可证，ZIP 附带运行依赖及 Electron/Chromium 的许可文本。当前为未签名预览版，Windows 可能显示来源提示。
 
 阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。本次隔离包位于 out/stage4a，不覆盖运行中的旧版；使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
 
-- [技术路线图](./docs/技术落地路线图-v1.md)
-- [阶段 1、2 的实现与验收](./docs/阶段1-2实现与验收.md)
-- [阶段 3 的实现与验收](./docs/阶段3实现与验收.md)
-- [v1.3 发布说明](./docs/RELEASE_NOTES-v1.3.0.md)
-- [v1.3.1 修复说明与验收](./docs/RELEASE_NOTES-v1.3.1.md)
-- [v1.3.2 收纳盒说明与验收](./docs/RELEASE_NOTES-v1.3.2.md)
-- [v1.2.1 修复说明](./docs/RELEASE_NOTES-v1.2.1.md)
-- [发布清单](./docs/RELEASE_CHECKLIST.md)
-- [初版方案](./docs/初版方案.md)、[实现日志](./docs/实现日志.md)
+- [技术路线图](./docs/product/技术落地路线图-v1.md)
+- [阶段 1、2 的实现与验收](./docs/acceptance/阶段1-2实现与验收.md)
+- [阶段 3 的实现与验收](./docs/acceptance/阶段3实现与验收.md)
+- [v1.3 发布说明](./docs/releases/RELEASE_NOTES-v1.3.0.md)
+- [v1.3.1 修复说明与验收](./docs/releases/RELEASE_NOTES-v1.3.1.md)
+- [v1.3.2 收纳盒说明与验收](./docs/releases/RELEASE_NOTES-v1.3.2.md)
+- [v1.2.1 修复说明](./docs/releases/RELEASE_NOTES-v1.2.1.md)
+- [发布清单](./docs/releases/RELEASE_CHECKLIST-v1.4.3.md)
+- [初版方案](./docs/product/初版方案.md)、[实现日志](./docs/development/实现日志.md)

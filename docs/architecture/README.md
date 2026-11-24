@@ -22,4 +22,38 @@
 5. 文件任务取消后先等流和工作线程结束，再清理专属临时目录。
 6. 预览以 AudioContext 为共同时间基准；音乐准备时不反复定位暂停的视频。
 
-学习顺序：先读功能定位表，再看通信契约与入口，沿一个用户操作追踪服务、事务和对应测试。
+## 阅读入口
+
+- [功能定位表](./模块与功能定位.md)：查某个功能的界面、接口、业务、持久化和测试位置。
+- [学习路线](./学习路线.md)：从一个操作追踪完整调用链。
+- [迁移记录](./迁移记录.md)：基线、独立提交、文件对应关系与回退方式。
+- [开发与验证](../development/README.md)：统一命令、原生场景和报告位置。
+- [发布清单](../releases/RELEASE_CHECKLIST.md)：当前版本实际验收状态。
+
+## 调用关系
+
+```mermaid
+flowchart LR
+  UI[React 功能界面] --> Bridge[preload 受控桥接]
+  Bridge --> IPC[主进程业务接口]
+  IPC --> Client[主进程 DataClient]
+  Client --> Worker[数据工作线程]
+  Worker --> Services[业务服务与事务]
+  Services --> DB[项目 SQLite 与总库 SQLite]
+  IPC --> Platform[窗口 对话框 密钥 PDF]
+  Services --> Probe[媒体探测线程]
+  UI --> Audio[界面内预览音频时钟]
+```
+
+`main/main.ts` 只组装启动顺序；`workers/data-worker.ts` 负责串行调用和取消；业务与 SQL 位于 `modules`。界面预览的 Web Audio 运行在 renderer，不进入后台共享层。
+
+## 扩展规则
+
+1. 功能组件只从其他功能的 `index.ts` 读取公开能力。跨后台模块也使用各自 `index.ts`；模块内部可以直接引用同模块实现。
+2. 界面能力在 `contracts/api.ts` 定义；数据线程命令在 `contracts/worker.ts` 定义并同时形成运行时白名单。类型不能代替 Zod、项目目录授权和真实路径检查。
+3. 新增编辑操作先确定事务负责人，再实现 SQL。单个操作的读写函数共享该事务连接，不能在底层函数各自提交。
+4. 自动保存只交给一个 `SaveCoordinator`。表单先捕获用户选择，再等待保存；不要在异步等待后重新读取受控 DOM 的值。
+5. `npm run check` 检查格式、零警告、依赖方向、运行时循环、通信注册、源码不变量和类型；`npm test` 验证实际业务行为。
+6. 完整性清单保护本次重构的 SQL 值、模板和合成样例。后续有意修改业务 SQL 或格式时，应在独立功能提交中说明变更并更新对应测试和清单，不能用更新清单掩盖重构中的差异。
+
+全局样式集中在 `renderer/styles`，保留既有选择器及层叠顺序。共享 UI 放在 `renderer/ui`；有业务含义的资源卡片归入 `features/resources`。

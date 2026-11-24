@@ -1,7 +1,9 @@
 # 参与开发
 
-在 Windows 上安装 Node.js 24，然后运行 `npm ci`、`npm run typecheck`、`npm test` 和 `npm run make`。涉及项目数据库结构的修改须增加迁移测试，并确认旧项目能打开。提交问题时请写明 WaterCut 版本、Windows 版本、复现步骤、预期与实际结果；不要附带含私人素材或 API Key 的真实项目。
+先阅读 [架构与学习入口](./docs/architecture/README.md) 和 [功能定位表](./docs/architecture/模块与功能定位.md)，再按 [开发与验证说明](./docs/development/README.md) 安装锁定依赖并运行检查。
 
-`npm test` 与 Actions 共用 `vitest.config.mts`：最多 2 个 worker，普通单元测试 5 秒，数据库 / 迁移 / 文件任务 30 秒。耗时报告写入忽略目录 `out/review-unit/report.json`，CI 即使失败也上传此报告。不要靠跳过断言、重试或关闭 SQLite 持久化规避慢测；临时数据库的批量建表 / 降级应使用事务。测试中的异步导入导出使用 `testFileJobs` 传递当前测试的取消信号，`afterEach` 必须先取消并等待任务收尾，再删除临时目录。
+提交前执行 `npm run check`、`npm test`；涉及入口、文件路径或交付的改动，还应构建便携包并执行对应原生场景与分发审计。每批改动说明职责、行为影响及验证；格式整理和逻辑修改分开提交。
 
-提出功能改动前请查阅 [初版方案](./docs/初版方案.md)。当前发布目标和未完成项记录在 [发布清单](./docs/RELEASE_CHECKLIST.md)。
+数据库结构变化需要迁移测试及旧项目兼容验证。多表编辑共享事务，跨库同步保留恢复机制；异步任务先取消并等待收尾，再清理临时目录。不要用跳过断言、失败重试或关闭 SQLite 持久化掩盖问题。
+
+产品范围见 [初版方案](./docs/product/初版方案.md)，当前验收见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。反馈问题请附版本、Windows 版本、复现步骤及预期结果，不附私人素材或 API Key。

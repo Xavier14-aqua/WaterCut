@@ -3,7 +3,7 @@ const { app, BrowserWindow } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'watercut-ui-'));
 const userData = path.join(temporary, 'user');
 const settings = {
@@ -19,7 +19,7 @@ fs.writeFileSync(
 app.setPath('userData', userData);
 app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('watercut-smoke');
-const output = path.join(root, 'out', 'review-patch131');
+const output = path.join(root, 'out', 'review-editor');
 fs.mkdirSync(output, { recursive: true });
 const checks = [],
   errors = [];

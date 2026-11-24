@@ -1,3 +1,4 @@
+import type { Selection } from './selection';
 import { useEffect, useState } from 'react';
 import type {
   IdeaInput,
@@ -16,11 +17,7 @@ import { kindLabel } from '../features/resources';
 import { statusLabel } from '../features/storyboard';
 import { MediaSelectPanel } from '../features/library';
 import { UsageList } from '../features/library';
-export type Selection = {
-  scope: 'library' | 'project';
-  kind: 'idea' | 'asset' | 'shot';
-  id: string;
-};
+
 export function Inspector({
   selection,
   project,

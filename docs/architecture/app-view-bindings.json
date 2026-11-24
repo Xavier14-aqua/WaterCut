@@ -2,7 +2,6 @@
   "controller": "src/renderer/app/useAppController.ts",
   "shell": "src/renderer/app/AppShell.tsx",
   "bindings": [
-    "activeProject",
     "applyLibraryProject",
     "applyProject",
     "attach",
@@ -72,5 +71,6 @@
     "showSettings",
     "toggleGlobal",
     "view"
-  ]
+  ],
+  "derivedInViews": ["activeProject"]
 }

@@ -3,7 +3,7 @@ const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'watercut-ui-'));
 const userData = path.join(temporary, 'user');
 fs.mkdirSync(userData);
@@ -19,7 +19,7 @@ fs.writeFileSync(
 app.disableHardwareAcceleration();
 app.setPath('userData', userData);
 app.commandLine.appendSwitch('watercut-smoke');
-const output = path.join(root, 'out', 'review-stage12');
+const output = path.join(root, 'out', 'review-core');
 fs.mkdirSync(output, { recursive: true });
 const checks = [],
   errors = [];
@@ -253,7 +253,12 @@ app.on('web-contents-created', (_event, wc) => {
       await click(wc, '.workflow button', '粗剪');
       await waitFor(wc, "!!document.querySelector('.transport')", 'preview');
       await click(wc, '.transport button', '播放');
-      await delay(650);
+      // Wait for the observable clock instead of assuming audio starts within 650 ms.
+      await waitFor(
+        wc,
+        `Number(document.querySelector('[aria-label="预览进度"]').value)>200`,
+        'preview clock advance',
+      );
       await click(wc, '.transport button', '暂停');
       const cursor = await evaluate(
         wc,

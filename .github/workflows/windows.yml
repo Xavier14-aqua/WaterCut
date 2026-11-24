@@ -16,7 +16,7 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
+      - run: npm run check
       - run: npm test
       - name: Upload unit test timings
         if: always()
@@ -26,22 +26,22 @@ jobs:
           path: out/review-unit/report.json
           if-no-files-found: warn
       - run: npm run make
-      - run: npm run smoke -- --packaged
-      - run: npm run smoke -- --ideas --packaged
-      - run: npm run smoke -- --stage3 --packaged
-      - run: npm run smoke -- --patch131 --packaged
-      - run: npm run smoke -- --boxes --packaged
-      - run: npm run smoke -- --stage4a --packaged
+      - run: npm run smoke -- --scenario=core --packaged
+      - run: npm run smoke -- --scenario=inspiration --packaged
+      - run: npm run smoke -- --scenario=delivery --packaged
+      - run: npm run smoke -- --scenario=editor --packaged
+      - run: npm run smoke -- --scenario=organization --packaged
+      - run: npm run smoke -- --scenario=professional --packaged
       - name: Repeat BGM playback in a fresh renderer
-        run: npm run smoke -- --stage4a --bgm-only --packaged
+        run: npm run smoke -- --scenario=professional --bgm-only --packaged
       - name: Verify BGM suspension during loading
         env:
           WATERCUT_BGM_SCENARIO: suspend-during-load
-        run: npm run smoke -- --stage4a --bgm-only --packaged
+        run: npm run smoke -- --scenario=professional --bgm-only --packaged
       - name: Verify held video cannot cancel BGM loading
         env:
           WATERCUT_BGM_SCENARIO: paused-video-position
-        run: npm run smoke -- --stage4a --bgm-only --packaged
+        run: npm run smoke -- --scenario=professional --bgm-only --packaged
       - run: npm run audit:dist
       - name: Upload playback diagnostics
         if: always()
@@ -49,9 +49,9 @@ jobs:
         with:
           name: WaterCut-playback-diagnostics
           path: |
-            out/review-stage4a/report*.json
-            out/review-stage4a/playback*.json
-            out/review-stage4a/failure.png
+            out/review-professional/report*.json
+            out/review-professional/playback*.json
+            out/review-professional/failure.png
           if-no-files-found: warn
       - uses: actions/upload-artifact@v7
         with:

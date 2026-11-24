@@ -3,9 +3,8 @@ const { app, BrowserWindow, dialog } = require('electron');
 const fs = require('node:fs'),
   path = require('node:path'),
   os = require('node:os'),
-  { randomUUID, createHash } = require('node:crypto'),
-  { DatabaseSync } = require('node:sqlite');
-const root = path.resolve(__dirname, '..'),
+  { createHash } = require('node:crypto');
+const root = path.resolve(__dirname, '../..'),
   temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'watercut-ui-')),
   userData = path.join(temporary, 'user'),
   settings = {
@@ -22,7 +21,7 @@ app.setPath('userData', userData);
 app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('watercut-smoke');
 app.commandLine.appendSwitch('mute-audio');
-const output = path.join(root, 'out', 'review-stage4a');
+const output = path.join(root, 'out', 'review-professional');
 fs.mkdirSync(output, { recursive: true });
 const checks = [],
   errors = [];
@@ -34,7 +33,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const {
   installPreviewDiagnostics,
   previewDiagnostics,
-} = require('./preview-diagnostics.cjs');
+} = require('./playback-diagnostics.cjs');
 let lastPlayback = null;
 async function playbackState(wc) {
   lastPlayback = await evaluate(wc, `(${previewDiagnostics.toString()})()`);

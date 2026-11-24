@@ -1,6 +1,6 @@
 # v1.4.1 发布清单
 
-2026-11-19。保持 Windows x64 便携 ZIP；完整范围见 [4A 实现与验收](./阶段4A实现与验收.md)，本次补丁见 [v1.4.1 发布说明](./RELEASE_NOTES-v1.4.1.md) 与 [剪映实机验收](./剪映11.8实机验收.md)。旧版发布记录保存在 [v1.3.2 清单](./RELEASE_CHECKLIST-v1.3.2.md)。
+2026-11-19。保持 Windows x64 便携 ZIP；完整范围见 [4A 实现与验收](../acceptance/阶段4A实现与验收.md)，本次补丁见 [v1.4.1 发布说明](./RELEASE_NOTES-v1.4.1.md) 与 [剪映实机验收](../acceptance/剪映11.8实机验收.md)。旧版发布记录保存在 [v1.3.2 清单](./RELEASE_CHECKLIST-v1.3.2.md)。
 
 ## 本轮交付
 

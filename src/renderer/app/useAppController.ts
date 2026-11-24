@@ -9,7 +9,7 @@ import type {
   ShotListFilter,
   StorageSettings,
 } from '../../shared/models';
-import { type Selection } from './Inspector';
+import { type Selection } from './selection';
 import { suggestedIdeaOrder } from '../../shared/duration';
 import { View } from './navigation';
 

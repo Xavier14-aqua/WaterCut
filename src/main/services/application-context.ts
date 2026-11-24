@@ -115,6 +115,7 @@ export function createApplicationContext(data: DataClient) {
     sender: WebContents,
   ) {
     const dir = await allowedProject(directory);
+    // The fixed IPC mutation table chooses the method; each service validates its fields.
     await data.call('project', method, [dir, ...args] as DataArguments<
       'project',
       typeof method

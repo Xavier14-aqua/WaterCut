@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const { DatabaseSync } = require('node:sqlite');
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'watercut-ui-'));
 const settings = {
   configVersion: 1,
@@ -22,7 +22,7 @@ if (!process.argv.includes('--onscreen')) {
   app.disableHardwareAcceleration();
   app.commandLine.appendSwitch('watercut-smoke');
 }
-const output = path.join(root, 'out', 'review-idea-close');
+const output = path.join(root, 'out', 'review-inspiration');
 fs.mkdirSync(output, { recursive: true });
 const checks = [],
   errors = [],

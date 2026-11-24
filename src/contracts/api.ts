@@ -19,7 +19,8 @@ import type {
   IdeaBoxInput,
 } from '../shared/models';
 
-// Public, serializable interface exposed by preload. Runtime validation stays in IPC/services.
+// Public UI capabilities. RPC data is serializable; subscription callbacks stay at the bridge.
+// Runtime input validation stays in IPC handlers and business services.
 export interface WaterCutAPI {
   localEchoes(input: {
     text: string;

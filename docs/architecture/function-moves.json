@@ -3,828 +3,966 @@
     "name": "mediaUrl",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/platform/media-url.ts",
-    "bodySha256": "f6e499ed1d14788980f76d3adeb7d4c4e91de1527aa9f281ab2b17d377cf9623"
+    "bodySha256": "f6e499ed1d14788980f76d3adeb7d4c4e91de1527aa9f281ab2b17d377cf9623",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "startResourceDrag",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/platform/resource-drag.ts",
-    "bodySha256": "e37fdcc259ef63d4beb4632770e797e5f6db8a772ce8176da8a7915efb103dff"
+    "bodySha256": "e37fdcc259ef63d4beb4632770e797e5f6db8a772ce8176da8a7915efb103dff",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "readResourceDrag",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/platform/resource-drag.ts",
-    "bodySha256": "492cc5edcef45a198fea06c5f7ec62519bc21add8b7a2268035aaddf703f4e22"
+    "bodySha256": "492cc5edcef45a198fea06c5f7ec62519bc21add8b7a2268035aaddf703f4e22",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "kindLabel",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/resources/kinds.ts",
-    "bodySha256": "935497d8ed0ba6baa9ae558a56325f7e3a13c048bafb7e97ef2b21f8bb822686"
+    "bodySha256": "935497d8ed0ba6baa9ae558a56325f7e3a13c048bafb7e97ef2b21f8bb822686",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "MediaPreview",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/resources/MediaPreview.tsx",
-    "bodySha256": "c23f405a778b4687b2e000afa6337f2d8c86e800b48a2eef87510f7a9c6fc717"
+    "bodySha256": "c23f405a778b4687b2e000afa6337f2d8c86e800b48a2eef87510f7a9c6fc717",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "ResourceCards",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/resources/ResourceCards.tsx",
-    "bodySha256": "02843d5385362d2eefbb06c8acbe99743b1a1fe51a6b28b29935541e99bafdb1"
+    "bodySha256": "02843d5385362d2eefbb06c8acbe99743b1a1fe51a6b28b29935541e99bafdb1",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "LibraryBrowser",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/library/LibraryBrowser.tsx",
-    "bodySha256": "d163a655e30abd8a165ce631ac7b52f68f3a1680d3a0ee6b017ad25f73edcecf"
+    "bodySha256": "d163a655e30abd8a165ce631ac7b52f68f3a1680d3a0ee6b017ad25f73edcecf",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "IdeaForm",
     "from": "src/renderer/features/library/Resources.tsx",
     "to": "src/renderer/features/inspiration/IdeaForm.tsx",
-    "bodySha256": "1e32620c4643e6f8129897be7f511d245bcbcdeaed62e54fcd0cd9f201b6a00d"
+    "bodySha256": "1e32620c4643e6f8129897be7f511d245bcbcdeaed62e54fcd0cd9f201b6a00d",
+    "baselineFile": "src/components/Resources.tsx"
   },
   {
     "name": "CURRENT_VERSION",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "641bc05555b41a4e99d327d441d28947e86f1410e55aad4b3054c5e663470c10"
+    "bodySha256": "641bc05555b41a4e99d327d441d28947e86f1410e55aad4b3054c5e663470c10",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additions",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "b969ae3e5bc2f076f4eeff6834d1f204718c41911dacb718cb7b3ec665621d4d"
+    "bodySha256": "b969ae3e5bc2f076f4eeff6834d1f204718c41911dacb718cb7b3ec665621d4d",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV4",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "6894963a97205d7425c5e69ec88ec85f21321e5fec4c5d1b97b3d960538ff468"
+    "bodySha256": "6894963a97205d7425c5e69ec88ec85f21321e5fec4c5d1b97b3d960538ff468",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV5",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "4373410a3af0b1f45ce4d84cbf0bce6537a9538dd39122104b592da453bb5091"
+    "bodySha256": "4373410a3af0b1f45ce4d84cbf0bce6537a9538dd39122104b592da453bb5091",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV6",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "b0f34f762f19a6e0789aa668bfd72de8ee38ae524fc38c5e0f580738db44b0ca"
+    "bodySha256": "b0f34f762f19a6e0789aa668bfd72de8ee38ae524fc38c5e0f580738db44b0ca",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV7",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "630aac40895f96f1e56ae367890429cf3aa10b42f76122755fb3793ee4cfdeb0"
+    "bodySha256": "630aac40895f96f1e56ae367890429cf3aa10b42f76122755fb3793ee4cfdeb0",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV8",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "d946daa94eb30316f41fd5737cf662a5daae90c338aa07881ab6e454a3a474f2"
+    "bodySha256": "d946daa94eb30316f41fd5737cf662a5daae90c338aa07881ab6e454a3a474f2",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV9",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "f5cf436ff2db9912a66ec6ffa94c4c8e446ed58f100a93a594fef7eb50de3e87"
+    "bodySha256": "f5cf436ff2db9912a66ec6ffa94c4c8e446ed58f100a93a594fef7eb50de3e87",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "additionsV11",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "fc84eecf039105c99941d7d6c4d3927a947261e7cb8ac67bb159b2cbcb2b78db"
+    "bodySha256": "fc84eecf039105c99941d7d6c4d3927a947261e7cb8ac67bb159b2cbcb2b78db",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "installChangeTriggers",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "3cc6bd185d3d951c9cba07677876e40cf5cafb6b05869c9dfd17acb7b5dfae65"
+    "bodySha256": "3cc6bd185d3d951c9cba07677876e40cf5cafb6b05869c9dfd17acb7b5dfae65",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "installV11",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/migrations/schema.ts",
-    "bodySha256": "d9bed15a9ca36ae0fa3e450461d611894fed82b80ac5fe39d2bb1fa9f785d3d6"
+    "bodySha256": "d9bed15a9ca36ae0fa3e450461d611894fed82b80ac5fe39d2bb1fa9f785d3d6",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "databaseFile",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/database.ts",
-    "bodySha256": "b51582a38b23c911a8ec8a12cae5fe2b06f5b41a0a85b051c8d08edc6abca800"
+    "bodySha256": "b51582a38b23c911a8ec8a12cae5fe2b06f5b41a0a85b051c8d08edc6abca800",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "localAssetPath",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/database.ts",
-    "bodySha256": "754e71cbe8ee6db8e089000a3db8e479504b2993480df9336c8b1e62a58ebb8d"
+    "bodySha256": "754e71cbe8ee6db8e089000a3db8e479504b2993480df9336c8b1e62a58ebb8d",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "openDatabase",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/database.ts",
-    "bodySha256": "d6c5e5a521ccb3d9713235ad1e0ba8ea9eb21ac6707d24bb76e75309a23c0f33"
+    "bodySha256": "d6c5e5a521ccb3d9713235ad1e0ba8ea9eb21ac6707d24bb76e75309a23c0f33",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "nameSchema",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/validation.ts",
-    "bodySha256": "523e53c090d89531a8500f573abced41fcf218755f261bf2ca0cc29182a5bc2e"
+    "bodySha256": "523e53c090d89531a8500f573abced41fcf218755f261bf2ca0cc29182a5bc2e",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "shotSchema",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/validation.ts",
-    "bodySha256": "24fbbd67e5d2fb8872351039afd01476247db9f4eba3aeabf327364fcb7e3593"
+    "bodySha256": "24fbbd67e5d2fb8872351039afd01476247db9f4eba3aeabf327364fcb7e3593",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "readProject",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/repositories/read-project.ts",
-    "bodySha256": "085918e67dc4ba3ee32e555afda9043a0ba7f6fdaf1993f952648704b6aa74b0"
+    "bodySha256": "085918e67dc4ba3ee32e555afda9043a0ba7f6fdaf1993f952648704b6aa74b0",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "mutateProject",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/transaction.ts",
-    "bodySha256": "ed67b97e549fe46f16bae8d81b0273f455db77ceb08699f1465977f3191895cb"
+    "bodySha256": "ed67b97e549fe46f16bae8d81b0273f455db77ceb08699f1465977f3191895cb",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "attachAssetRow",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/repositories/asset-rows.ts",
-    "bodySha256": "392e3f2d39a2ba8f016741ecca39767d45f3a41d910dd49fdcb38448f13ec655"
+    "bodySha256": "392e3f2d39a2ba8f016741ecca39767d45f3a41d910dd49fdcb38448f13ec655",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "reorderRows",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/repositories/order.ts",
-    "bodySha256": "f8b2eb46126db134e249f4ee93cc687cb4e77f8cae0c72a52149f2225c2f105b"
+    "bodySha256": "f8b2eb46126db134e249f4ee93cc687cb4e77f8cae0c72a52149f2225c2f105b",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "createProject",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/lifecycle.ts",
-    "bodySha256": "4c48eee02d368bc74a2f223bbe6ee20e581fdb86477e3a4c70ba3711e4fc7a0d"
+    "bodySha256": "4c48eee02d368bc74a2f223bbe6ee20e581fdb86477e3a4c70ba3711e4fc7a0d",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "renameProject",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/lifecycle.ts",
-    "bodySha256": "7a292861ec94e6f09c00654c5933a463bf2980c19fc30893f7ae6410c7462841"
+    "bodySha256": "7a292861ec94e6f09c00654c5933a463bf2980c19fc30893f7ae6410c7462841",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "forkProjectIdentity",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/lifecycle.ts",
-    "bodySha256": "69721bf4c05cce846a23bf13d84a0f560f68fb6d1c7554ac6e0c9510a03200f5"
+    "bodySha256": "69721bf4c05cce846a23bf13d84a0f560f68fb6d1c7554ac6e0c9510a03200f5",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "archiveProject",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/lifecycle.ts",
-    "bodySha256": "dbb1d0d86855c8e6915734d8e88f8d6704af83f8ee51786bda58b8dfff2e5c75"
+    "bodySha256": "dbb1d0d86855c8e6915734d8e88f8d6704af83f8ee51786bda58b8dfff2e5c75",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "addIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "128c7c20be80aaac6911bf1eedee921896b49499aba5d115aac2cf734e61a3ad"
+    "bodySha256": "128c7c20be80aaac6911bf1eedee921896b49499aba5d115aac2cf734e61a3ad",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "3f0222c863a8f60613dffb4ac5d7bf0d17f27c97ec23300ea5c53e0a1e465e35"
+    "bodySha256": "3f0222c863a8f60613dffb4ac5d7bf0d17f27c97ec23300ea5c53e0a1e465e35",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "d8c0e3d786723d5303ab63d3bea77b6dbae05c279f276854b4823fe40485aecc"
+    "bodySha256": "d8c0e3d786723d5303ab63d3bea77b6dbae05c279f276854b4823fe40485aecc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "moveIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "94f596144f319e33cd2800372cc05fae3c4ae69ff64c3c4119806a8f4cc3ab73"
+    "bodySha256": "94f596144f319e33cd2800372cc05fae3c4ae69ff64c3c4119806a8f4cc3ab73",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "connectIdeas",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "3d45059e7521a02953e3af9c090a99ae6c3eeb943e98061b8c8804fc1c2dbae7"
+    "bodySha256": "3d45059e7521a02953e3af9c090a99ae6c3eeb943e98061b8c8804fc1c2dbae7",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "disconnectIdeas",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "5eb6e7fa1e67b522a7de897012d1a8c3ad93ff94e8a0269c33dc3c82c7ac1f3c"
+    "bodySha256": "5eb6e7fa1e67b522a7de897012d1a8c3ad93ff94e8a0269c33dc3c82c7ac1f3c",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "attachIdeaAsset",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "c8bdb32bd90d526bdaeb1e98bad7eea4bcfcd62ef53528f19845b7db3bfcf71a"
+    "bodySha256": "c8bdb32bd90d526bdaeb1e98bad7eea4bcfcd62ef53528f19845b7db3bfcf71a",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "createIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "0ebb7ffd458f5bd13d0351b7b36aa2439452bf9bfd256ce4fc29a3cd0a6b7dc8"
+    "bodySha256": "0ebb7ffd458f5bd13d0351b7b36aa2439452bf9bfd256ce4fc29a3cd0a6b7dc8",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "attachLibraryIdeas",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "afec530af41ebef7ff7e654275ee31e24768ffcaa339ef3ed0ce396b65a2d32f"
+    "bodySha256": "afec530af41ebef7ff7e654275ee31e24768ffcaa339ef3ed0ce396b65a2d32f",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "refreshLibraryIdea",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "a27a4ea08f4a7b87a8d52d3aa20d060f00607b0c0d166fb211e4114e5f859c76"
+    "bodySha256": "a27a4ea08f4a7b87a8d52d3aa20d060f00607b0c0d166fb211e4114e5f859c76",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateEdgeLabel",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/ideas.ts",
-    "bodySha256": "4dd84279532b16e0b64bc1611ea2b28c2b7fe2011186f7712753820ffa5f9748"
+    "bodySha256": "4dd84279532b16e0b64bc1611ea2b28c2b7fe2011186f7712753820ffa5f9748",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "mediaTypes",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "362d1b7a7a7b80b22e6c9e732820ca4acabebc56467ebe5e8867a65c6e9e493d"
+    "bodySha256": "362d1b7a7a7b80b22e6c9e732820ca4acabebc56467ebe5e8867a65c6e9e493d",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "cleanupPartialAssets",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "aa4f9307c3c4e9d625bce15d1b22c5f77531a3f53da61a896147d449e03fe90b"
+    "bodySha256": "aa4f9307c3c4e9d625bce15d1b22c5f77531a3f53da61a896147d449e03fe90b",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "hashFile",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "5959846726c1023488c33dcf4a9b982b0c52ddd9f3d6d1536710b62898211931"
+    "bodySha256": "5959846726c1023488c33dcf4a9b982b0c52ddd9f3d6d1536710b62898211931",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "importAsset",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "2a700ade8d3ffb843f8b47d66af5f26ded39d356b4dd034c67879864644417c7"
+    "bodySha256": "2a700ade8d3ffb843f8b47d66af5f26ded39d356b4dd034c67879864644417c7",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "relinkAsset",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "f9307d4a0a3445450cbab71a3a395dfdb183ca01b1d10cd919076cb1a08e46cc"
+    "bodySha256": "f9307d4a0a3445450cbab71a3a395dfdb183ca01b1d10cd919076cb1a08e46cc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateAssetTags",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "f36b9129d3d26c3ea1e083c0d6a5bb58c511605ef1af7ef53de21a4629320b37"
+    "bodySha256": "f36b9129d3d26c3ea1e083c0d6a5bb58c511605ef1af7ef53de21a4629320b37",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteAsset",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "0e9358034d4da8f443cfc3c88a98ea50b5bec1d0b07801d7e9f1a363b3e97d0c"
+    "bodySha256": "0e9358034d4da8f443cfc3c88a98ea50b5bec1d0b07801d7e9f1a363b3e97d0c",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateAssetDuration",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "2b0d18f5e959610a26f6eaa8207190821efaf40ec88b8655053035050d4f49dc"
+    "bodySha256": "2b0d18f5e959610a26f6eaa8207190821efaf40ec88b8655053035050d4f49dc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "attachLibraryAssets",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/assets.ts",
-    "bodySha256": "38594ff52dd0d28f717c6c64448da85b5b898bfec929f8858ac2c50e5baddb05"
+    "bodySha256": "38594ff52dd0d28f717c6c64448da85b5b898bfec929f8858ac2c50e5baddb05",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "appendDraftShots",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "245b8da366150af388323aa3635210cb7c46522ccd7fdc6c2fba820e4f8368c3"
+    "bodySha256": "245b8da366150af388323aa3635210cb7c46522ccd7fdc6c2fba820e4f8368c3",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "linkAsset",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "2bb586ec87f6537f8d4558eb1bd2c887badc186f4ff6575912d612f8d82a68b1"
+    "bodySha256": "2bb586ec87f6537f8d4558eb1bd2c887badc186f4ff6575912d612f8d82a68b1",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "addCandidate",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "d52e28351450abea3207ba45263e52fa07ba0bd121edd5c66d7c217329166f37"
+    "bodySha256": "d52e28351450abea3207ba45263e52fa07ba0bd121edd5c66d7c217329166f37",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "removeCandidate",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "c24ccbd1406d9dd0e8805841d0c120c24c436d24aa2d63b3ea88a8ddd24143a6"
+    "bodySha256": "c24ccbd1406d9dd0e8805841d0c120c24c436d24aa2d63b3ea88a8ddd24143a6",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "linkAudio",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "70a327f675651d89e118c0642efccb79b441243b17acfd48d9813d18f6aa57cf"
+    "bodySha256": "70a327f675651d89e118c0642efccb79b441243b17acfd48d9813d18f6aa57cf",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteShot",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "94a02f4187a1b6c0906c47aabe80d2c324f1e31096edf1f5a955c188f870e483"
+    "bodySha256": "94a02f4187a1b6c0906c47aabe80d2c324f1e31096edf1f5a955c188f870e483",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "moveShot",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "d8376cfb9efaa6df6d8af83cd61197168d2d61304302a78ac80626f1119017c3"
+    "bodySha256": "d8376cfb9efaa6df6d8af83cd61197168d2d61304302a78ac80626f1119017c3",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateTrim",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "30a0b5c9608b3db920fb28b8410842ae53212821c2c7ed5358c369dd4d885dac"
+    "bodySha256": "30a0b5c9608b3db920fb28b8410842ae53212821c2c7ed5358c369dd4d885dac",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "addShot",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "a8ecffd0060e3b15437b98b660467a8958bb6acd3b1de37e025a6fdd5b03b6ee"
+    "bodySha256": "a8ecffd0060e3b15437b98b660467a8958bb6acd3b1de37e025a6fdd5b03b6ee",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateShot",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "52d92cef87bb0bd3610ce16c3c9dde3d380a7f56cf41c5035a75c53b8a652bd6"
+    "bodySha256": "52d92cef87bb0bd3610ce16c3c9dde3d380a7f56cf41c5035a75c53b8a652bd6",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "updateShotMetadata",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "7afe1e577109f8b2762cd5502259479c3d77e3c9aa2d115df80b26def2cef0a3"
+    "bodySha256": "7afe1e577109f8b2762cd5502259479c3d77e3c9aa2d115df80b26def2cef0a3",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "reorderShots",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "b5e37ace532bc58f16553c95a53b60dfa6d5836ac1f096eb4178841a39a4fe73"
+    "bodySha256": "b5e37ace532bc58f16553c95a53b60dfa6d5836ac1f096eb4178841a39a4fe73",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "addShotSource",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "009d49989a8f5a02b8dfd7c51e49600e7855839261dc1065a7667c5848053ec9"
+    "bodySha256": "009d49989a8f5a02b8dfd7c51e49600e7855839261dc1065a7667c5848053ec9",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "removeShotSource",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "a8e35a0f86fa6d4b2f17822e9117c7bd82792a75538639d67cbd17ec0fe7e9a9"
+    "bodySha256": "a8e35a0f86fa6d4b2f17822e9117c7bd82792a75538639d67cbd17ec0fe7e9a9",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "clearShotPrimary",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "92953e0b727c835628a2ea573e8817ae20da7b710c4479f57ab9d2786b839808"
+    "bodySha256": "92953e0b727c835628a2ea573e8817ae20da7b710c4479f57ab9d2786b839808",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "bindLibrarySelect",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/shots.ts",
-    "bodySha256": "10b454fb9b5993580d6b09f263f6344750ad199320890e57f0677d608bd46ae4"
+    "bodySha256": "10b454fb9b5993580d6b09f263f6344750ad199320890e57f0677d608bd46ae4",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "reorderScriptBlocks",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "ffd90ff01cda0fa30e4b0b81ee16ab8c9894f63b1a8fde4413a835d782231014"
+    "bodySha256": "ffd90ff01cda0fa30e4b0b81ee16ab8c9894f63b1a8fde4413a835d782231014",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "createScriptSection",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "89b0ec7fa445f258649eb97bf28dffe1ddbdc0971fe6db006de3a4f414ceffdb"
+    "bodySha256": "89b0ec7fa445f258649eb97bf28dffe1ddbdc0971fe6db006de3a4f414ceffdb",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "addScriptParagraph",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "f4a71f0a956f7bc67a3b100a24ce54531d048543cddafd06681deb2ca2e505c3"
+    "bodySha256": "f4a71f0a956f7bc67a3b100a24ce54531d048543cddafd06681deb2ca2e505c3",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "createShotsFromIdeas",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "55e8b5e710bc274866060e20b114911ba965d51fe0939b707643c473832ef51b"
+    "bodySha256": "55e8b5e710bc274866060e20b114911ba965d51fe0939b707643c473832ef51b",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "saveScriptBlock",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "7ca57ac916c373186fd6f7c3c8e9b4088851ce323711216f19b8535875afca15"
+    "bodySha256": "7ca57ac916c373186fd6f7c3c8e9b4088851ce323711216f19b8535875afca15",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "convertScriptBlocks",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "22eaeb159a84ee1268e7f7df133283afa759c9a13b525da40e0da09c7796f385"
+    "bodySha256": "22eaeb159a84ee1268e7f7df133283afa759c9a13b525da40e0da09c7796f385",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteScriptBlock",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "fcc5355187e3447b51747677f900c95324736738ba04fa5db975768b64a029a6"
+    "bodySha256": "fcc5355187e3447b51747677f900c95324736738ba04fa5db975768b64a029a6",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "splitScriptBlock",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "f0b06de4b13cfab13fb020a5065fc71e3546f75720a29bb348295f0d5337d604"
+    "bodySha256": "f0b06de4b13cfab13fb020a5065fc71e3546f75720a29bb348295f0d5337d604",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "mergeScriptBlocks",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/script.ts",
-    "bodySha256": "0cc82018f2412293b4ed98f9c6a3981d19a81477edd6e9814ac397ea83c445dc"
+    "bodySha256": "0cc82018f2412293b4ed98f9c6a3981d19a81477edd6e9814ac397ea83c445dc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "saveIdeaBox",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/organization.ts",
-    "bodySha256": "86b23038650b5f457043b2faec29d65ef5a3a63685a67e55792f3f7ed3dc06fc"
+    "bodySha256": "86b23038650b5f457043b2faec29d65ef5a3a63685a67e55792f3f7ed3dc06fc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteIdeaBox",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/organization.ts",
-    "bodySha256": "ddc2cefdba5a1aff71bff9034839042d27e73f5677abf488e550ba1e88c93823"
+    "bodySha256": "ddc2cefdba5a1aff71bff9034839042d27e73f5677abf488e550ba1e88c93823",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "moveIdeasToBox",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/organization.ts",
-    "bodySha256": "632bd414996c4d6434fc26f10d7a18cbd47344f700b0d13c79a33c64902a90dd"
+    "bodySha256": "632bd414996c4d6434fc26f10d7a18cbd47344f700b0d13c79a33c64902a90dd",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "saveAudioClip",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/audio.ts",
-    "bodySha256": "aefc43404dfe7a75b240a683a118b5ebed14a018f6d181b5e766f23e60bcd9c2"
+    "bodySha256": "aefc43404dfe7a75b240a683a118b5ebed14a018f6d181b5e766f23e60bcd9c2",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "deleteAudioClip",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/audio.ts",
-    "bodySha256": "a4b4783a1420f25ace8b8f6712a1d5c7924df03d4387a0f39ec4da56fddf8ccc"
+    "bodySha256": "a4b4783a1420f25ace8b8f6712a1d5c7924df03d4387a0f39ec4da56fddf8ccc",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "saveTimelineSettings",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/audio.ts",
-    "bodySha256": "52d6ed37d5badcfac113adc2ce0d90545df1b99e5c7f67e062cad8565521b85b"
+    "bodySha256": "52d6ed37d5badcfac113adc2ce0d90545df1b99e5c7f67e062cad8565521b85b",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "markCatalogSynced",
     "from": "src/modules/project/index.ts",
     "to": "src/modules/project/services/catalog.ts",
-    "bodySha256": "aa0e3906167f2dbce032892cc64aa2d1999921ed3ff71e426e830762e498f2c8"
+    "bodySha256": "aa0e3906167f2dbce032892cc64aa2d1999921ed3ff71e426e830762e498f2c8",
+    "baselineFile": "src/project.ts"
   },
   {
     "name": "Row",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/database.ts",
-    "bodySha256": "83618ddd6e473bfaf3a56141ba1489c688598d890411147b573709ac40672ae0"
+    "bodySha256": "83618ddd6e473bfaf3a56141ba1489c688598d890411147b573709ac40672ae0",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "openLibrary",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/database.ts",
-    "bodySha256": "598ec21bfe5ff6684fd12b8b66284e7de6eb0441668f162cae6669214a8fff36"
+    "bodySha256": "598ec21bfe5ff6684fd12b8b66284e7de6eb0441668f162cae6669214a8fff36",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "transact",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/database.ts",
-    "bodySha256": "d4fa7f3d4cf99ab661e2d045e32877dbc9256d260bc8d524156ce91c5955826a"
+    "bodySha256": "d4fa7f3d4cf99ab661e2d045e32877dbc9256d260bc8d524156ce91c5955826a",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "libraryId",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/database.ts",
-    "bodySha256": "a91d986a64df64269241fbd9c8d09d81e97d42997c4980024891aa22917cbc9d"
+    "bodySha256": "a91d986a64df64269241fbd9c8d09d81e97d42997c4980024891aa22917cbc9d",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "indexTags",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/parsing.ts",
-    "bodySha256": "ae14e995f1d3901b7d6c0e2d6eacc03bd617974096c3e1c528c2463eb8a546f1"
+    "bodySha256": "ae14e995f1d3901b7d6c0e2d6eacc03bd617974096c3e1c528c2463eb8a546f1",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "parseIdea",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/parsing.ts",
-    "bodySha256": "d97e5027c55ad67708f2adec0d32773196bff29e0913c6ba6bd0b5c0a7b53260"
+    "bodySha256": "d97e5027c55ad67708f2adec0d32773196bff29e0913c6ba6bd0b5c0a7b53260",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "parseAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/parsing.ts",
-    "bodySha256": "2c4e17fe80810a7d1ed4f948c2f270b0a3491761171ca2838ac8f37a33ab7ae1"
+    "bodySha256": "2c4e17fe80810a7d1ed4f948c2f270b0a3491761171ca2838ac8f37a33ab7ae1",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "escapeLike",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/parsing.ts",
-    "bodySha256": "6c05ce882b9f4f4f2543859fcc33af32e2ec3a8476d86506b575969a6ee80cc5"
+    "bodySha256": "6c05ce882b9f4f4f2543859fcc33af32e2ec3a8476d86506b575969a6ee80cc5",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "safeLibraryPath",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/storage-paths.ts",
-    "bodySha256": "7a8232a1730f12c245bfba803a57816ec051f5a5f9ba329f2a62963e50938e6b"
+    "bodySha256": "7a8232a1730f12c245bfba803a57816ec051f5a5f9ba329f2a62963e50938e6b",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "getLibraryAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/assets.ts",
-    "bodySha256": "cb1051404750fcc6f37b3c8caedaa12b1f02cbb8a3bff821d7c88f1fa64c4b94"
+    "bodySha256": "cb1051404750fcc6f37b3c8caedaa12b1f02cbb8a3bff821d7c88f1fa64c4b94",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "resolveLibraryAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/assets.ts",
-    "bodySha256": "9fb6e432920df6a9968b6606dd43ff8252bd52f0875b99d4603684d8725d2a0b"
+    "bodySha256": "9fb6e432920df6a9968b6606dd43ff8252bd52f0875b99d4603684d8725d2a0b",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "getLibraryIdea",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/ideas.ts",
-    "bodySha256": "080058aee6cded6a376f6b068ea2de901a8a8436540686926b7659ac6f477815"
+    "bodySha256": "080058aee6cded6a376f6b068ea2de901a8a8436540686926b7659ac6f477815",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "relatedIdeas",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/ideas.ts",
-    "bodySha256": "6fdd22b1932596c1bbcf7c9e8d7c9c4f0f1f0517db3d875409fb9183a8d28e89"
+    "bodySha256": "6fdd22b1932596c1bbcf7c9e8d7c9c4f0f1f0517db3d875409fb9183a8d28e89",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "ideaEchoes",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/ideas.ts",
-    "bodySha256": "574fd54dd934e754c4ce771b7517bcbbaa771580df767c1b15ebea18dca184c0"
+    "bodySha256": "574fd54dd934e754c4ce771b7517bcbbaa771580df767c1b15ebea18dca184c0",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "readLibrary",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/queries/snapshot.ts",
-    "bodySha256": "b58104f81ce014b4a8d6fbc0af6a613ee46960e8903a865bf1ea8337b7415e89"
+    "bodySha256": "b58104f81ce014b4a8d6fbc0af6a613ee46960e8903a865bf1ea8337b7415e89",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "saveLibraryIdea",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/ideas.ts",
-    "bodySha256": "9af241b462ac8f74109908c970893b8f103d36a4edfff9add686160b66ab7004"
+    "bodySha256": "9af241b462ac8f74109908c970893b8f103d36a4edfff9add686160b66ab7004",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "setLibraryHidden",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/ideas.ts",
-    "bodySha256": "a1a03c9f1c9ce35b816cc2a5931a3ba754dd133f1f684f49ec1c0430d5430cac"
+    "bodySha256": "a1a03c9f1c9ce35b816cc2a5931a3ba754dd133f1f684f49ec1c0430d5430cac",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "connectLibraryIdeas",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/ideas.ts",
-    "bodySha256": "8d66c145c8410e268cb408c0adff4abec5d403682e80124a0844eb396ceb7f78"
+    "bodySha256": "8d66c145c8410e268cb408c0adff4abec5d403682e80124a0844eb396ceb7f78",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "disconnectLibraryIdeas",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/ideas.ts",
-    "bodySha256": "113d11dedb9bdf3d5b28b080c07dc3613b4cb63e4261a2f9fa2fe835010cf688"
+    "bodySha256": "113d11dedb9bdf3d5b28b080c07dc3613b4cb63e4261a2f9fa2fe835010cf688",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "kinds",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/assets.ts",
-    "bodySha256": "b640810c90d316fc367d37fcf3fa321885f8cfdef6c830fe3533c0d30e0e47bf"
+    "bodySha256": "b640810c90d316fc367d37fcf3fa321885f8cfdef6c830fe3533c0d30e0e47bf",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "updateLibraryAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/assets.ts",
-    "bodySha256": "3753472c7d00a6daa6f12e48fd7b372e95ac72159cea0801b15993ecaf3e712a"
+    "bodySha256": "3753472c7d00a6daa6f12e48fd7b372e95ac72159cea0801b15993ecaf3e712a",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "importLibraryAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/assets.ts",
-    "bodySha256": "53bf7ce0970c42194fe7e74ba93dccafc6954d3d8e6e134adac90d92b0aff9e4"
+    "bodySha256": "53bf7ce0970c42194fe7e74ba93dccafc6954d3d8e6e134adac90d92b0aff9e4",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "recoverLibraryJobs",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/assets.ts",
-    "bodySha256": "e86343e5390c145ac8ffd84aba8adf44feb7be3055b7788d507b6a731fd5d19a"
+    "bodySha256": "e86343e5390c145ac8ffd84aba8adf44feb7be3055b7788d507b6a731fd5d19a",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "relinkLibraryAsset",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/assets.ts",
-    "bodySha256": "bfeeb0b41d588b49ff8318f9e1def2a9c5c1726d30f26a9f70ac2b0dfdf82df6"
+    "bodySha256": "bfeeb0b41d588b49ff8318f9e1def2a9c5c1726d30f26a9f70ac2b0dfdf82df6",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "saveLibraryIdeaBox",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/organization.ts",
-    "bodySha256": "c4d3af57e0a1ebbe239171009ecf29195d8f9f6a4a479a56d6de9e1066ec4d65"
+    "bodySha256": "c4d3af57e0a1ebbe239171009ecf29195d8f9f6a4a479a56d6de9e1066ec4d65",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "deleteLibraryIdeaBox",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/organization.ts",
-    "bodySha256": "9ce914d2745e76ebb429e4d7ae09634ee2aa04c4acc299b651695869d279e7bb"
+    "bodySha256": "9ce914d2745e76ebb429e4d7ae09634ee2aa04c4acc299b651695869d279e7bb",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "moveLibraryIdeasToBox",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/organization.ts",
-    "bodySha256": "fa8cc4dbc6228cae1a3827cb769e0ef4c921d9e3c83872fe00ff332f25f1f130"
+    "bodySha256": "fa8cc4dbc6228cae1a3827cb769e0ef4c921d9e3c83872fe00ff332f25f1f130",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "listAssetSelects",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/selects.ts",
-    "bodySha256": "d658348b94ff11e19d308c52e8766e1fcf81de2d7d82c652bbd10988cfba6d64"
+    "bodySha256": "d658348b94ff11e19d308c52e8766e1fcf81de2d7d82c652bbd10988cfba6d64",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "selectUsage",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/selects.ts",
-    "bodySha256": "c5c7a5ce4474a0dda51fb1b1ed03abe9d4c4ed8f6d2fe6ce98fa93455c6d69bd"
+    "bodySha256": "c5c7a5ce4474a0dda51fb1b1ed03abe9d4c4ed8f6d2fe6ce98fa93455c6d69bd",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "getAssetSelect",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/selects.ts",
-    "bodySha256": "9937b7f6f478c9f14e67eb680e72f6c99b250e2c3c89fb4c685b3f7714a4fa47"
+    "bodySha256": "9937b7f6f478c9f14e67eb680e72f6c99b250e2c3c89fb4c685b3f7714a4fa47",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "saveAssetSelect",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/selects.ts",
-    "bodySha256": "d52a9944fb6cd80050ad11c823b907421f6849b84549ac80e424943578213721"
+    "bodySha256": "d52a9944fb6cd80050ad11c823b907421f6849b84549ac80e424943578213721",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "hideAssetSelect",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/selects.ts",
-    "bodySha256": "f2cb01f75b1d27486d402547af27377c268fadfc3fc717eb5f0a1f54273b11a6"
+    "bodySha256": "f2cb01f75b1d27486d402547af27377c268fadfc3fc717eb5f0a1f54273b11a6",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "syncProjectCatalog",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/catalog.ts",
-    "bodySha256": "294d81b02c473164165c30a6aeab366f1b5ed7cc054559428f74b7fda2aff279"
+    "bodySha256": "294d81b02c473164165c30a6aeab366f1b5ed7cc054559428f74b7fda2aff279",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "listUsage",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/catalog.ts",
-    "bodySha256": "880454c88b24e8bdfe680cc709c557a9957a87d1bd20cdc0067fa46840948786"
+    "bodySha256": "880454c88b24e8bdfe680cc709c557a9957a87d1bd20cdc0067fa46840948786",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "operationMapping",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/catalog.ts",
-    "bodySha256": "dc59ea93163c40f8c710b826765528285fb49150016a0f2c8d7118e078552b00"
+    "bodySha256": "dc59ea93163c40f8c710b826765528285fb49150016a0f2c8d7118e078552b00",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "saveOperation",
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/catalog.ts",
-    "bodySha256": "508c18297fa04e4de37790a394f4f035c671f92a34ce036c729d5d1bbb5881e8"
+    "bodySha256": "508c18297fa04e4de37790a394f4f035c671f92a34ce036c729d5d1bbb5881e8",
+    "baselineFile": "src/library.ts"
   },
   {
     "name": "resolveProjectAsset",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/assets.ts",
-    "bodySha256": "ded259fa5120599fd249cdaabacd701e1af547fe8a827dbf60d43e8e26f8ef2d"
+    "bodySha256": "ded259fa5120599fd249cdaabacd701e1af547fe8a827dbf60d43e8e26f8ef2d",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "hydrateProject",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/assets.ts",
-    "bodySha256": "62583b6f4015e8ac5b2de2e231245e49f57d2fa6f3aa883877069dadf7ccf98c"
+    "bodySha256": "62583b6f4015e8ac5b2de2e231245e49f57d2fa6f3aa883877069dadf7ccf98c",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "projectEnvelope",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "a9437db9aef1980de96a1d8de08f464dd2bcfb4b4a15d481b2a7b999dbdb878a"
+    "bodySha256": "a9437db9aef1980de96a1d8de08f464dd2bcfb4b4a15d481b2a7b999dbdb878a",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "attachAssets",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "6a19c34cfd2920660e8cf9954b8c2ffa11dc64fc1d534a6e9870a6698f59a0b7"
+    "bodySha256": "6a19c34cfd2920660e8cf9954b8c2ffa11dc64fc1d534a6e9870a6698f59a0b7",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "bindSelect",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "1213946d8f29cb123430ee97fc700a73dc9f3f1c85f5452e910223b5da0b5ac1"
+    "bodySha256": "1213946d8f29cb123430ee97fc700a73dc9f3f1c85f5452e910223b5da0b5ac1",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "attachIdeas",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "18ea750a0aa893c800bb077b3fddb5e40d547874e3487c4d197b95c02794f509"
+    "bodySha256": "18ea750a0aa893c800bb077b3fddb5e40d547874e3487c4d197b95c02794f509",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "refreshIdea",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "cba71eb152a21ded36e7e205ac1dec32198885e1654a7b7e1e55865b8f2bfaa8"
+    "bodySha256": "cba71eb152a21ded36e7e205ac1dec32198885e1654a7b7e1e55865b8f2bfaa8",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "promoteProject",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/project-library.ts",
-    "bodySha256": "f57ca556ab70559ce9217444460992934a9694bd305c4714fed76bf365f62415"
+    "bodySha256": "f57ca556ab70559ce9217444460992934a9694bd305c4714fed76bf365f62415",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "reconcileCatalog",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/catalog.ts",
-    "bodySha256": "db54a037f2c8016f25500cc29f6d61509836cb815af9ce3df9c9999928d6b3fb"
+    "bodySha256": "db54a037f2c8016f25500cc29f6d61509836cb815af9ce3df9c9999928d6b3fb",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "examplePng",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/example.ts",
-    "bodySha256": "5f5fd9f3cf1ea49b3223068c524a247812511343e07a8b3f1c45f13af3484eea"
+    "bodySha256": "5f5fd9f3cf1ea49b3223068c524a247812511343e07a8b3f1c45f13af3484eea",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "createExample",
     "from": "src/modules/workspace/index.ts",
     "to": "src/modules/workspace/example.ts",
-    "bodySha256": "c02528e10214147c0097d17f152553b30c8f7e58722da93781cc819a07a93938"
+    "bodySha256": "c02528e10214147c0097d17f152553b30c8f7e58722da93781cc819a07a93938",
+    "baselineFile": "src/workspace.ts"
   },
   {
     "name": "fileSchema",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/manifest.ts",
-    "bodySha256": "c96b17e99fce584a7ef556ef5e3332d7bd64e1e50e4b7fa302d5e6154136179b"
+    "bodySha256": "c96b17e99fce584a7ef556ef5e3332d7bd64e1e50e4b7fa302d5e6154136179b",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "manifestSchema",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/manifest.ts",
-    "bodySha256": "a57054aafcbf5a60dcb64c873415338ce7066c2f1699848d5c361e8a9c6280ec"
+    "bodySha256": "a57054aafcbf5a60dcb64c873415338ce7066c2f1699848d5c361e8a9c6280ec",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "Missing",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/manifest.ts",
-    "bodySha256": "a55412edfcf2b34bdb57f7cbed9c295adf7ffe38f5a10ed9db5859e3ad35d63a"
+    "bodySha256": "a55412edfcf2b34bdb57f7cbed9c295adf7ffe38f5a10ed9db5859e3ad35d63a",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "exportPackage",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/export.ts",
-    "bodySha256": "dd51c46bf931d53ac0f33cd1abbab1164ea28b7fd8cb79df4106053329777c2a"
+    "bodySha256": "dd51c46bf931d53ac0f33cd1abbab1164ea28b7fd8cb79df4106053329777c2a",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "independentDocument",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/document.ts",
-    "bodySha256": "ec6d856c46096968a643b4f19e5bf71b14aaca3868720ca7c696a0b6e4d8ccd9"
+    "bodySha256": "ec6d856c46096968a643b4f19e5bf71b14aaca3868720ca7c696a0b6e4d8ccd9",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "validateDatabaseBounds",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/validation.ts",
-    "bodySha256": "ec165d138935563e82bfcccbac29810e065c728e640300b295c8889b79e3825b"
+    "bodySha256": "ec165d138935563e82bfcccbac29810e065c728e640300b295c8889b79e3825b",
+    "baselineFile": "src/project-package.ts"
   },
   {
     "name": "importPackage",
     "from": "src/modules/delivery/project-package.ts",
     "to": "src/modules/delivery/package/import.ts",
-    "bodySha256": "3be09954be7cf099cb5cbf425c3a898ea7bb90680b255151b257e20266f91123"
+    "bodySha256": "3be09954be7cf099cb5cbf425c3a898ea7bb90680b255151b257e20266f91123",
+    "baselineFile": "src/project-package.ts"
   }
 ]

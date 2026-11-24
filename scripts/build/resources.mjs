@@ -1,8 +1,9 @@
+import { sourceFingerprint } from './source-inputs.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-const root = path.resolve(import.meta.dirname, '..'),
+const root = path.resolve(import.meta.dirname, '../..'),
   target = path.join(root, '.build-resources');
 fs.mkdirSync(target, { recursive: true });
 const hash = (file) =>
@@ -32,38 +33,12 @@ try {
     encoding: 'utf8',
   }).trim();
 } catch {}
-const files = [];
-function visit(folder) {
-  for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
-    const file = path.join(folder, entry.name);
-    if (entry.isDirectory()) visit(file);
-    else files.push(path.relative(root, file).replaceAll('\\', '/'));
-  }
-}
-visit(path.join(root, 'src'));
-visit(path.join(root, 'scripts'));
-visit(path.join(root, 'licenses'));
-for (const name of [
-  'package.json',
-  'package-lock.json',
-  'forge.config.mts',
-  'vitest.config.mts',
-  'vite.main.config.mts',
-  'vite.preload.config.mts',
-  'vite.renderer.config.mts',
-  'index.html',
-  'LICENSE',
-])
-  files.push(name);
-const sourceTree = createHash('sha256');
-for (const name of files.sort())
-  sourceTree.update(name + '\0' + hash(path.join(root, name)) + '\n');
 const info = {
   version: JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
     .version,
   sourceCommit,
   dirty,
-  sourceTreeSha256: sourceTree.digest('hex'),
+  sourceTreeSha256: sourceFingerprint(root),
   lockSha256: hash(path.join(root, 'package-lock.json')),
   node: process.version,
   platform: process.platform,
