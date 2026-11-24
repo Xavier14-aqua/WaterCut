@@ -280,7 +280,7 @@ app.on('web-contents-created', (_event, wc) => {
         'shot list PDF shares the storyboard export data',
       );
       await click(wc, '.delivery-panel .section-heading button', '关闭');
-      await click(wc, '.rail button', '⚙存储');
+      await click(wc, '.rail button', '存储');
       folderTarget = path.join(temporary, 'machine-b-projects');
       fs.mkdirSync(folderTarget);
       await evaluate(
@@ -321,7 +321,7 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'destination environment has an empty independent library',
       );
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       openTarget = path.join(temporary, 'shared.watercut.zip');
       await click(wc, '.home-intro button', '导入项目包');
       await waitFor(

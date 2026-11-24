@@ -6,6 +6,7 @@ import type {
   ShotListFilter,
 } from '../../../shared/models';
 import { jianyingCompatibility } from '../../../shared/jianying-compatibility';
+import { Modal } from '../../ui/Modal';
 export function DeliveryPanel({
   project,
   busy,
@@ -46,7 +47,7 @@ export function DeliveryPanel({
       (a) => a.kind !== 'image' && a.metadata?.status !== 'ready',
     );
   return (
-    <div className="modal-backdrop">
+    <Modal label="版本与交付" onClose={onClose} canDismiss={!busy}>
       <section className="modal delivery-panel" aria-label="版本与交付">
         <div className="section-heading">
           <div>
@@ -364,6 +365,6 @@ export function DeliveryPanel({
           </button>
         </section>
       </section>
-    </div>
+    </Modal>
   );
 }

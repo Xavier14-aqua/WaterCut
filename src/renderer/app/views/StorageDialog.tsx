@@ -1,4 +1,5 @@
 import type { AppModel } from '../useAppController';
+import { Modal } from '../../ui/Modal';
 
 export function StorageDialog({ model }: { model: AppModel }) {
   const {
@@ -13,7 +14,7 @@ export function StorageDialog({ model }: { model: AppModel }) {
   } = model;
   return (
     showSettings && (
-      <div className="modal-backdrop">
+      <Modal label="本地存储" onClose={() => setShowSettings(false)}>
         <section className="modal">
           <div className="section-heading">
             <h2>本地存储</h2>
@@ -55,7 +56,7 @@ export function StorageDialog({ model }: { model: AppModel }) {
               </div>
             ))}
         </section>
-      </div>
+      </Modal>
     )
   );
 }

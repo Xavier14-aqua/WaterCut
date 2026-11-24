@@ -1,11 +1,12 @@
 import type { AppModel } from '../useAppController';
+import { Modal } from '../../ui/Modal';
 
 export function IncubationDialog({ model }: { model: AppModel }) {
   const { busy, order, orderWarning, project, run, setOrder, setView } = model;
   return (
     order &&
     project && (
-      <div className="modal-backdrop">
+      <Modal label="确认分镜顺序" onClose={() => setOrder(null)}>
         <section className="modal">
           <h2>确认分镜顺序</h2>
           <p>
@@ -76,7 +77,7 @@ export function IncubationDialog({ model }: { model: AppModel }) {
             </button>
           </div>
         </section>
-      </div>
+      </Modal>
     )
   );
 }

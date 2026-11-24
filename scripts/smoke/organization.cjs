@@ -156,7 +156,7 @@ app.on('web-contents-created', (_event, wc) => {
         "document.querySelectorAll('.react-flow__node-idea').length===3",
         'A board',
       );
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await waitFor(
         wc,
         "!!document.querySelector('.idea-layout-switch')",
@@ -518,7 +518,7 @@ app.on('web-contents-created', (_event, wc) => {
         await evaluate(wc, "document.querySelectorAll('.idea-box').length===0"),
         'switching project libraries does not carry boxes into another project',
       );
-      await click(wc, '.rail button', '▤工作室');
+      await click(wc, '.rail button', '工作室');
       await waitFor(
         wc,
         "document.querySelectorAll('.react-flow__node-idea').length===3",
@@ -542,7 +542,7 @@ app.on('web-contents-created', (_event, wc) => {
         'reloaded home',
       );
       await evaluate(wc, '(()=>{window.confirm=()=>true;return true;})()');
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await waitFor(
         wc,
         "document.querySelector('.idea-layout-switch button.active')?.textContent==='收纳盒与未收纳'&&document.querySelectorAll('.idea-box').length===1",

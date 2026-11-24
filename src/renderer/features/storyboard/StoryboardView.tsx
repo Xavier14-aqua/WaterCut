@@ -227,9 +227,18 @@ export function StoryboardView({
                     }}
                   >
                     <div className="shot-tile-header">
-                      <strong>
-                        {String(shot.position + 1).padStart(2, '0')}
-                      </strong>
+                      <button
+                        className="quiet shot-select"
+                        aria-label={`查看镜头${shot.position + 1}详情`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onSelect(shot.id);
+                        }}
+                      >
+                        <strong>
+                          {String(shot.position + 1).padStart(2, '0')}
+                        </strong>
+                      </button>
                       <span>{statusLabel[shot.status]}</span>
                       <small>{(duration / 1000).toFixed(1)}s</small>
                     </div>

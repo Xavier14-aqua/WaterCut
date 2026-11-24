@@ -295,7 +295,7 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'real synthetic video is probed before selects are offered',
       );
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await click(wc, '.library-browser>.segmented button', '素材');
       await waitFor(
         wc,
@@ -344,7 +344,7 @@ app.on('web-contents-created', (_event, wc) => {
       wav(audio);
       openTarget = audio;
       await evaluate(wc, 'window.watercut.importAsset(window.__dir)');
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.project-tile button', '进入工作室');
       await click(wc, '.workflow button', '分镜');
       await waitFor(
@@ -657,7 +657,7 @@ app.on('web-contents-created', (_event, wc) => {
         wc,
         "(async()=>{const input={kind:'scene',text:'雨夜中的旧回忆',tags:'雨夜',notes:'',payload:{colors:[],rhythm:'',timeOfDay:'',weather:'',environment:'',props:'',location:''},occurredAt:null};await window.watercut.saveLibraryIdea(input);await window.watercut.createIdea(window.__dir,{...input,text:'雨夜思路'});return true})()",
       );
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.project-tile button', '进入工作室');
       await click(wc, '.workflow button', '分镜');
       await waitFor(wc, "!!document.querySelector('.shot-tile')", 'shots');
@@ -692,7 +692,7 @@ app.on('web-contents-created', (_event, wc) => {
           !JSON.stringify(aiRequests[0].input).includes(state.directory),
         'native suggestion requests send only aliased text to a mocked provider',
       );
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.project-tile button', '进入工作室');
       await click(wc, '.workflow button', '分镜');
       await waitFor(

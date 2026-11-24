@@ -153,10 +153,10 @@ app.on('web-contents-created', (_event, wc) => {
         await api.connectLibraryIdeas(window.__anchor.id,target.id,'related','跨分页关系');
       })()`,
       );
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.home-page .section-heading button', '核对项目索引');
       await idle(wc);
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await waitFor(
         wc,
         "!!document.querySelector('.library-browser')",
@@ -451,7 +451,7 @@ app.on('web-contents-created', (_event, wc) => {
       );
       await click(wc, '.inspector .form-actions button', '保存编辑');
       await idle(wc);
-      await click(wc, '.rail button', '▤工作室');
+      await click(wc, '.rail button', '工作室');
       await waitFor(
         wc,
         "document.querySelector('.header-title input')?.value===window.__a.name",
@@ -722,7 +722,7 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'rough-cut preview uses the newly selected primary image',
       );
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.home-page .section-heading button', '核对项目索引');
       await idle(wc);
       await evaluate(

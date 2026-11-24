@@ -316,7 +316,7 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'timeline edge drag persists the image shot duration',
       );
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await waitFor(
         wc,
         "!!document.querySelector('.library-main')",
@@ -402,7 +402,7 @@ app.on('web-contents-created', (_event, wc) => {
         "(async()=>{const page=await window.watercut.importLibraryAssets();const asset=page.assets.find(a=>a.kind==='video');const image=page.assets.find(a=>a.kind==='image');let p=await window.watercut.createProject('视频播放验收');p=await window.watercut.attachLibraryAssets(p.directory,[asset.id,image.id]);for(const text of ['视频测试','图片测试','文字测试'])p=await window.watercut.addShot(p.directory,{description:text,durationMs:1200});p=await window.watercut.linkAsset(p.directory,p.shots[0].id,p.assets.find(a=>a.kind==='video').id);p=await window.watercut.updateTrim(p.directory,p.shots[0].id,1000,3000);p=await window.watercut.linkAsset(p.directory,p.shots[1].id,p.assets.find(a=>a.kind==='image').id);window.__videoDir=p.directory;window.__videoShot=p.shots[0].id;})()",
       );
       dialog.showOpenDialog = originalDialog;
-      await click(wc, '.rail button', '▦项目');
+      await click(wc, '.rail button', '项目');
       await click(wc, '.home-page .section-heading button', '核对项目索引');
       await waitFor(
         wc,

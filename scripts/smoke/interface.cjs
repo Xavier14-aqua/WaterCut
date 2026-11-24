@@ -65,6 +65,33 @@ async function settled(wc) {
     })()`,
   );
 }
+async function press(wc, keyCode, modifiers = []) {
+  // The capture window is hidden: emulate focus, then send trusted browser input.
+  // This exercises the control's default keyboard activation, not its handler.
+  if (!wc.debugger.isAttached()) {
+    wc.debugger.attach('1.3');
+    await wc.debugger.sendCommand('Emulation.setFocusEmulationEnabled', {
+      enabled: true,
+    });
+  }
+  const code = { Enter: 13, Tab: 9, Escape: 27, Space: 32 }[keyCode];
+  const event = {
+    key: keyCode === 'Space' ? ' ' : keyCode,
+    code: keyCode,
+    windowsVirtualKeyCode: code,
+    nativeVirtualKeyCode: code,
+    modifiers: modifiers.includes('shift') ? 8 : 0,
+  };
+  await wc.debugger.sendCommand('Input.dispatchKeyEvent', {
+    type: keyCode === 'Enter' ? 'keyDown' : 'rawKeyDown',
+    ...event,
+    ...(keyCode === 'Enter' ? { text: '\r' } : {}),
+  });
+  await wc.debugger.sendCommand('Input.dispatchKeyEvent', {
+    type: 'keyUp',
+    ...event,
+  });
+}
 async function capture(wc, name) {
   await settled(wc);
   const measurements = await evaluate(
@@ -76,7 +103,7 @@ async function capture(wc, name) {
     const luminance=c=>c.slice(0,3).map(n=>{n/=255;return n<=0.04045?n/12.92:((n+0.055)/1.055)**2.4}).reduce((sum,n,i)=>sum+n*[0.2126,0.7152,0.0722][i],0);
     const contrastFailures=[];let minimumTextContrast=21,measuredTextCount=0;
     for(const e of document.querySelectorAll('h1,h2,p.muted,.kind-label,.resource-card-body strong,.workflow button,.segmented button,.save-state,.preview-placeholder small')){
-      if(!e.getClientRects().length||e.matches(':disabled'))continue;
+      if(!e.getClientRects().length||e.matches(':disabled')||e.closest('[inert]'))continue;
       let parent=e,bg;
       while(parent){const c=rgb(getComputedStyle(parent).backgroundColor);if(c.length===3||c[3]===1){bg=c;break;}parent=parent.parentElement;}
       if(!bg)continue;
@@ -147,6 +174,10 @@ app.on('web-contents-created', (_event, wc) => {
     try {
       const window = BrowserWindow.fromWebContents(wc);
       await waitFor(wc, "!!document.querySelector('.home-intro')", 'home');
+      await evaluate(
+        wc,
+        "(()=>{window.__keyboardEvents=[];document.addEventListener('keydown',e=>{if(window.__keyboardEvents.length<60)window.__keyboardEvents.push({key:e.key,trusted:e.isTrusted,tag:e.target.tagName});},true);return true})()",
+      );
       await evaluate(
         wc,
         `(async()=>{
@@ -242,11 +273,19 @@ app.on('web-contents-created', (_event, wc) => {
           "!!document.querySelector('.shot-tile')",
           'shot details',
         );
-        await evaluate(wc, "document.querySelector('.shot-tile').click()");
+        await evaluate(wc, "document.querySelector('.shot-select').focus()");
+        await press(wc, 'Enter');
         await waitFor(
           wc,
           "!!document.querySelector('.inspector textarea')",
           'inspector fields',
+        );
+        assert(
+          await evaluate(
+            wc,
+            "document.querySelector('.inspector h2')?.textContent.trim()==='镜头 1'",
+          ),
+          'shot details open from the keyboard at ' + width + ' pixels',
         );
         await capture(wc, 'inspector-' + width);
         await click(wc, '.rail button', '总库');
@@ -261,14 +300,56 @@ app.on('web-contents-created', (_event, wc) => {
           'populated global library',
         );
         await capture(wc, 'library-' + width);
-        await click(wc, '.rail button', '存储');
+        await evaluate(wc, "document.querySelector('.rail-settings').focus()");
+        await press(wc, 'Enter');
         await waitFor(
           wc,
           "!!document.querySelector('.modal')",
           'storage dialog',
         );
+        assert(
+          await evaluate(
+            wc,
+            "!!document.querySelector('[role=dialog][aria-modal=true][aria-label=本地存储]')&&!!document.activeElement.closest('.modal')&&document.querySelector('.rail').inert&&document.querySelector('.app-content').inert",
+          ),
+          'modal focus starts inside a labelled dialog and isolates the background at ' +
+            width +
+            ' pixels',
+        );
         await capture(wc, 'storage-' + width);
-        await click(wc, '.modal button', '关闭');
+        await evaluate(wc, "document.querySelector('.modal button').focus()");
+        await press(wc, 'Tab', ['shift']);
+        const backward = await evaluate(
+          wc,
+          "document.activeElement===[...document.querySelectorAll('.modal button')].at(-1)",
+        );
+        await press(wc, 'Tab');
+        const forward = await evaluate(
+          wc,
+          "document.activeElement===document.querySelector('.modal button')",
+        );
+        await evaluate(wc, "document.querySelector('.rail-settings').focus()");
+        assert(
+          backward &&
+            forward &&
+            (await evaluate(wc, "!!document.activeElement.closest('.modal')")),
+          'Tab, Shift+Tab and background focus stay contained at ' +
+            width +
+            ' pixels',
+        );
+        await press(wc, 'Escape');
+        await waitFor(
+          wc,
+          "!document.querySelector('[role=dialog]')",
+          'Escape closes dialog',
+        );
+        assert(
+          await evaluate(
+            wc,
+            "document.activeElement===document.querySelector('.rail-settings')&&!document.querySelector('.rail').inert&&!document.querySelector('.app-content').inert",
+          ),
+          'Escape restores focus and background access at ' + width + ' pixels',
+        );
       }
       assert(
         await evaluate(
@@ -280,6 +361,16 @@ app.on('web-contents-created', (_event, wc) => {
       assert(
         screens.every((screen) => !screen.failedImages.length),
         'reference media have decoded in every captured viewport',
+      );
+      const keyboardEvents = await evaluate(wc, 'window.__keyboardEvents');
+      fs.writeFileSync(
+        path.join(output, 'keyboard-events.json'),
+        JSON.stringify(keyboardEvents, null, 2),
+      );
+      assert(
+        keyboardEvents.length >= 15 &&
+          keyboardEvents.every((event) => event.trusted),
+        'keyboard acceptance uses trusted input in the real renderer',
       );
       assert(
         !errors.length,

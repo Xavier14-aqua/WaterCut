@@ -1,11 +1,16 @@
 import { IdeaForm } from '../../features/inspiration';
 import type { AppModel } from '../useAppController';
+import { Modal } from '../../ui/Modal';
 
 export function IdeaEditorDialog({ model }: { model: AppModel }) {
   const { busy, editor, library, project, run, setEditor } = model;
   return (
     editor && (
-      <div className="modal-backdrop">
+      <Modal
+        label={editor === 'library' ? '记录到全局灵感库' : '记录到当前项目'}
+        onClose={() => setEditor(null)}
+        canDismiss={!busy}
+      >
         <section className="modal">
           <IdeaForm
             key={editor}
@@ -32,7 +37,7 @@ export function IdeaEditorDialog({ model }: { model: AppModel }) {
             }}
           />
         </section>
-      </div>
+      </Modal>
     )
   );
 }

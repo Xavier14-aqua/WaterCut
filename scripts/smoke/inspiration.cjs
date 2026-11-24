@@ -216,13 +216,13 @@ app.on('web-contents-created', (_event, wc) => {
         );
         await click(wc, '.inspector .section-heading button', '关闭');
       }
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '总库');
       await evaluate(
         wc,
         "window.watercut.saveLibraryIdea({kind:'note',text:'总库测试',tags:'',notes:'',payload:{colors:[],rhythm:'',timeOfDay:'',weather:'',environment:'',location:'',props:''},occurredAt:null,media:[]})",
       );
-      await click(wc, '.rail button', '▦项目');
-      await click(wc, '.rail button', '◈总库');
+      await click(wc, '.rail button', '项目');
+      await click(wc, '.rail button', '总库');
       await waitFor(
         () =>
           evaluate(
@@ -253,7 +253,7 @@ app.on('web-contents-created', (_event, wc) => {
         ),
         'card navigation produces no renderer errors',
       );
-      await click(wc, '.rail button', '▤工作室');
+      await click(wc, '.rail button', '工作室');
       await waitFor(
         () =>
           evaluate(
