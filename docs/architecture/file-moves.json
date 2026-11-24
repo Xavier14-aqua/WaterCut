@@ -85,7 +85,17 @@
   },
   {
     "from": "src/components/Resources.tsx",
-    "to": "src/renderer/features/library/Resources.tsx",
+    "to": "src/renderer/features/library/index.ts",
+    "firstMoveTo": "src/renderer/features/library/Resources.tsx",
+    "implementationFiles": [
+      "src/renderer/features/library/LibraryBrowser.tsx",
+      "src/renderer/features/inspiration/IdeaForm.tsx",
+      "src/renderer/features/resources/ResourceCards.tsx",
+      "src/renderer/features/resources/MediaPreview.tsx",
+      "src/renderer/features/resources/kinds.ts",
+      "src/renderer/platform/media-url.ts",
+      "src/renderer/platform/resource-drag.ts"
+    ],
     "importEdits": 8,
     "originalSha256": "b38984ff25c04238fbffc679ef8f5b36c01424eef5a076ee0679fa0ea54d737d"
   },

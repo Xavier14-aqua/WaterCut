@@ -1,6 +1,6 @@
 # WaterCut
 
-v1.4.4 整理运行边界、功能模块、保存协调与数据事务，继续使用免安装 ZIP。[架构与学习入口](./docs/architecture/README.md) 提供目录职责、功能定位和完整调用链；当前验收状态见 [v1.4.4 清单](./docs/releases/RELEASE_CHECKLIST.md)。
+v1.4.4 完成运行边界、功能模块、保存协调与数据事务重构，继续使用免安装 ZIP。**本机与独立云端均通过 149 项测试、212 项原生断言和分发审计。** [下载 v1.4.4 程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/45333299324/artifacts/14893070778)。[架构与学习入口](./docs/architecture/README.md) 提供目录职责、功能定位和完整调用链；完整记录见 [v1.4.4 清单](./docs/releases/RELEASE_CHECKLIST.md)。
 
 v1.4.3 修复 BGM 加载时反复定位画面导致的卡死，以及音频输出恢复竞态。**本机及两次独立云端完整验收均通过 141 项测试、212 项原生断言和分发审计。** [历史 v1.4.3 程序产物](https://github.com/Xavier14-aqua/WaterCut/actions/runs/44909766321/artifacts/14709485677)，详见 [BGM 修复记录](./docs/releases/RELEASE_NOTES-v1.4.3.md)。当前 Release 仍保留为 v1.4.1，新包通过 Actions 提供。
 
@@ -89,7 +89,7 @@ npm run audit:dist
 
 源码、测试、配置、许可证和文档进入 Git；`node_modules/`、`.vite/`、`out/`、私人项目与全局库不进入仓库。应用采用 MIT 许可证，ZIP 附带运行依赖及 Electron/Chromium 的许可文本。当前为未签名预览版，Windows 可能显示来源提示。
 
-阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。历史阶段 4A 包位于 `out/stage4a`；本次 v1.4.4 在独立工作目录构建与验收，通过后放入原项目的新输出目录，具体位置见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
+阶段 4A 使用 v1.4.0 起步，v1.4.1 完成剪映基础交接实机验收，后续补丁继续递增。历史阶段 4A 包位于 `out/stage4a`；本机 v1.4.4 最终包位于 `out/architecture-v1.4.4`，具体校验值见 [发布清单](./docs/releases/RELEASE_CHECKLIST.md)。使用前先退出旧版，再解压新 ZIP。原生验收素材保留在仓库外，不进入程序或 Git。
 
 - [技术路线图](./docs/product/技术落地路线图-v1.md)
 - [阶段 1、2 的实现与验收](./docs/acceptance/阶段1-2实现与验收.md)
