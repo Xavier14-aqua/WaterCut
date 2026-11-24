@@ -3,3 +3,4 @@ export { MediaSelectPanel } from './MediaSelectPanel';
 export { UsageList } from './UsageList';
 export { LibraryBrowser } from './LibraryBrowser';
 export { ProjectLibraryBrowser } from './ProjectLibraryBrowser';
+export { AssetInspector } from './AssetInspector';

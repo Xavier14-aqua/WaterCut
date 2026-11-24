@@ -5,3 +5,4 @@ export {
   IdeaLayoutSwitch,
   useIdeaBoxView,
 } from './IdeaBoxOrganizer';
+export { IdeaInspector } from './IdeaInspector';

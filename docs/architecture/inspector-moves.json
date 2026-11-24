@@ -1,0 +1,32 @@
+{
+  "from": "src/renderer/app/Inspector.tsx",
+  "baselineFile": "src/components/Inspector.tsx",
+  "sourceSha256": "271f8ee251344867490a4ac9a214a970154cfa2ea35a6a4f5dcabaee84ab3aaa",
+  "state": "src/renderer/app/inspector/useInspectorResources.ts",
+  "fragments": [
+    {
+      "name": "idea",
+      "to": "src/renderer/features/inspiration/IdeaInspector.tsx",
+      "sourceSha256": "06638c9eda4890794af6c4e4d8e76d96d844601992448df345ac8a5f9fde0a8d",
+      "extractedSha256": "3f0248ad83c616fb0535b575c180b4284e321b64c51d394286b2ef5e038931f8",
+      "substitutions": ["selection.scope -> scope"]
+    },
+    {
+      "name": "asset",
+      "to": "src/renderer/features/library/AssetInspector.tsx",
+      "sourceSha256": "db1232f39d67f5992baeaa4c8f71db7837bea14da04a6a6005bffcb21a0381c9",
+      "extractedSha256": "c5bc0a5f8b7f79c3703a6dab0230454ad5d590b5a1501d6936aede970a34c855",
+      "substitutions": [
+        "selection.scope -> scope",
+        "selected library/project id -> scopeId"
+      ]
+    },
+    {
+      "name": "shot",
+      "to": "src/renderer/features/storyboard/ShotInspector.tsx",
+      "sourceSha256": "a685cd67203a3fa139941ef3b5a7f862e2891ac1dc35f89bb5f1315b988102bc",
+      "extractedSha256": "a685cd67203a3fa139941ef3b5a7f862e2891ac1dc35f89bb5f1315b988102bc",
+      "substitutions": []
+    }
+  ]
+}
