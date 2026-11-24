@@ -1,3 +1,9 @@
+import {
+  workerMethods,
+  type DataModule,
+  type DataRequest,
+  type DataCancellation,
+} from '../contracts/worker';
 import { parentPort } from 'node:worker_threads';
 import * as project from '../modules/project/index';
 import * as library from '../modules/library/index';
@@ -7,7 +13,7 @@ import * as packages from '../modules/delivery/project-package';
 import * as media from '../modules/media/media';
 import * as proposals from '../modules/ai/proposals';
 import * as handoff from '../modules/delivery/jianying-handoff';
-const modules: Record<string, Record<string, unknown>> = {
+const modules: Record<DataModule, Record<string, unknown>> = {
   project,
   library,
   workspace,
@@ -19,8 +25,8 @@ const modules: Record<string, Record<string, unknown>> = {
 };
 const controllers = new Map<string, AbortController>();
 let queue: Promise<unknown> = Promise.resolve();
-parentPort!.on('message', (message) => {
-  if (message.cancel) {
+parentPort!.on('message', (message: DataRequest | DataCancellation) => {
+  if ('cancel' in message) {
     controllers.get(message.cancel)?.abort();
     return;
   }
@@ -31,7 +37,12 @@ parentPort!.on('message', (message) => {
     .catch(() => undefined)
     .then(async () => {
       try {
-        const fn = modules[module]?.[method];
+        const allowed =
+          Object.hasOwn(workerMethods, module) &&
+          (workerMethods[module] as readonly string[] | undefined)?.includes(
+            method,
+          );
+        const fn = allowed ? modules[module]?.[method] : undefined;
         if (typeof fn !== 'function') throw new Error('未知数据操作');
         const values = [...args];
         if (job) {

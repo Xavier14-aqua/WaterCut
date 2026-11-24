@@ -68,7 +68,7 @@ export function registerAiIPC(context: ApplicationContext) {
   ipcMain.handle('ai:generate', async (_event, directory, input) => {
     const dir = await allowedProject(directory),
       ids = z.array(z.string().uuid()).min(1).max(30).parse(input),
-      project = await data.call<Project>('project', 'readProject', [dir]),
+      project = await data.call('project', 'readProject', [dir]),
       selected = ids.map((id) => project.ideas.find((i) => i.id === id));
     if (selected.some((i) => !i)) throw new Error('所选灵感已不存在');
     const settings = readAISettings();
@@ -120,7 +120,7 @@ export function registerAiIPC(context: ApplicationContext) {
     try {
       const dir = await allowedProject(directory);
       if (controller.signal.aborted) throw new Error('AI 请求已取消');
-      const prepared = await data.call<any>('proposals', 'prepareAIRequest', [
+      const prepared = await data.call('proposals', 'prepareAIRequest', [
           dir,
           input,
         ]),

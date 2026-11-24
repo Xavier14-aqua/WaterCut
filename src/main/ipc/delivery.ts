@@ -73,7 +73,7 @@ export function registerDeliveryIPC(context: ApplicationContext) {
           includeMedia: z.boolean(),
         })
         .parse(input);
-    const project = await data.call<Project>('project', 'readProject', [dir]);
+    const project = await data.call('project', 'readProject', [dir]);
     const target = await dialog.showSaveDialog({
       title: '导出独立项目包',
       defaultPath: `${project.name.replace(/[<>:"/\\|?*]/g, '_')}.watercut.zip`,
@@ -108,7 +108,7 @@ export function registerDeliveryIPC(context: ApplicationContext) {
     });
     if (choice.canceled) return null;
     return importJob(event.sender, async (options) => {
-      const p = await data.call<Project>(
+      const p = await data.call(
         'packages',
         'importPackage',
         [choice.filePaths[0], activeProjectsRoot()],
@@ -129,14 +129,10 @@ export function registerDeliveryIPC(context: ApplicationContext) {
         })
         .parse(input),
       root = activeLibraryRoot();
-    const envelope = await data.call<{
-      project: Project;
-      files: Array<{
-        id: string;
-        file: string | null;
-        thumbnail: string;
-      }>;
-    }>('workspace', 'projectEnvelope', [dir, root]);
+    const envelope = await data.call('workspace', 'projectEnvelope', [
+      dir,
+      root,
+    ]);
     const rows = exportRows(
         envelope.project,
         settings.checklist,
@@ -198,7 +194,7 @@ export function registerDeliveryIPC(context: ApplicationContext) {
     assertExternalDataRoot(parent);
     return importJob(event.sender, async (options) => {
       await data.call('media', 'probeProject', [dir, root], options);
-      const project = await data.call<Project>('workspace', 'hydrateProject', [
+      const project = await data.call('workspace', 'hydrateProject', [
           dir,
           root,
         ]),
@@ -235,7 +231,7 @@ export function registerDeliveryIPC(context: ApplicationContext) {
     async (_event, directory, input = { onlyGaps: true }) => {
       const filter = shotListFilterSchema.parse(input);
       const dir = await allowedProject(directory),
-        project = await data.call<Project>('workspace', 'hydrateProject', [
+        project = await data.call('workspace', 'hydrateProject', [
           dir,
           activeLibraryRoot(),
         ]);

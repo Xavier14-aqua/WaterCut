@@ -25,7 +25,7 @@ export async function writeStoryboardPDF(
   }>,
   target: string,
   options: PDFOptions,
-  job: JobOptions = {},
+  job: Pick<JobOptions, 'signal'> = {},
 ) {
   checkCancelled(job.signal);
   const images: Record<string, string> = {};

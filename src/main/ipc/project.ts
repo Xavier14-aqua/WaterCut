@@ -1,3 +1,4 @@
+import type { DataMethod } from '../../contracts/worker';
 import { dialog, ipcMain } from 'electron';
 import path from 'node:path';
 import { z } from 'zod';
@@ -9,7 +10,7 @@ import {
 import type { ApplicationContext } from '../services/application-context';
 
 export function registerProjectIPC(context: ApplicationContext) {
-  const mutations: Record<string, string> = {
+  const mutations: Record<string, DataMethod<'project'>> = {
     'project:rename': 'renameProject',
     'project:archive': 'archiveProject',
     'shot:add': 'addShot',
@@ -69,7 +70,7 @@ export function registerProjectIPC(context: ApplicationContext) {
   ipcMain.handle('project:root', () => activeProjectsRoot());
 
   ipcMain.handle('project:create', async (event, name) => {
-    const project = await data.call<Project>('project', 'createProject', [
+    const project = await data.call('project', 'createProject', [
       activeProjectsRoot(),
       name,
     ]);
@@ -159,7 +160,7 @@ export function registerProjectIPC(context: ApplicationContext) {
   });
 
   ipcMain.handle('project:example', async (event) => {
-    const project = await data.call<Project>('workspace', 'createExample', [
+    const project = await data.call('workspace', 'createExample', [
       activeProjectsRoot(),
       activeLibraryRoot(),
     ]);

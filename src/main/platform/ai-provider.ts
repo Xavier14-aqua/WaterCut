@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { DraftShot, Idea } from '../../modules/project/index';
+import type { DraftShot, Idea } from '../../shared/models';
 import {
   responseSchema,
   type ProposalKind,

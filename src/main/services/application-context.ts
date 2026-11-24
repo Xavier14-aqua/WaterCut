@@ -1,3 +1,5 @@
+import { createFileJobs } from './file-job-registry';
+import type { DataMethod, DataArguments } from '../../contracts/worker';
 import { logUIError } from '../platform/error-log';
 import {
   storage,
@@ -12,9 +14,16 @@ import path from 'node:path';
 import { relocatedProjectPath } from '../platform/storage-paths';
 import { WindowCloseGuard } from '../windows/window-close';
 import { z } from 'zod';
-import type { LibraryAsset, LibraryPage, Project } from '../../shared/models';
+import type {
+  LibraryAsset,
+  LibraryPage,
+  LibraryQuery,
+  Project,
+} from '../../shared/models';
 
 export function createApplicationContext(data: DataClient) {
+  const { activeImports, importJob } = createFileJobs();
+
   const mediaPaths = new Map<
     string,
     {
@@ -22,8 +31,6 @@ export function createApplicationContext(data: DataClient) {
       root: string;
     }
   >();
-
-  const activeImports = new Map<number, AbortController>();
 
   const activeAI = new Map<
     string,
@@ -47,14 +54,10 @@ export function createApplicationContext(data: DataClient) {
     sender?: WebContents,
   ): Promise<Project> {
     const root = activeLibraryRoot();
-    const envelope = await data.call<{
-      project: Project;
-      files: Array<{
-        id: string;
-        file: string | null;
-        thumbnail: string;
-      }>;
-    }>('workspace', 'projectEnvelope', [directory, root]);
+    const envelope = await data.call('workspace', 'projectEnvelope', [
+      directory,
+      root,
+    ]);
     knownProjects.add(path.resolve(directory).toLowerCase());
     for (const file of envelope.files) {
       const fileRoot =
@@ -89,7 +92,7 @@ export function createApplicationContext(data: DataClient) {
       path.dirname(resolved).toLowerCase() ===
       path.resolve(activeProjectsRoot()).toLowerCase();
     if (!knownProjects.has(key) && !underProjectRoot) {
-      const catalog = await data.call<LibraryPage>('library', 'readLibrary', [
+      const catalog = await data.call('library', 'readLibrary', [
         activeLibraryRoot(),
         {
           limit: 1,
@@ -106,13 +109,16 @@ export function createApplicationContext(data: DataClient) {
   }
 
   async function changeProject(
-    method: string,
+    method: DataMethod<'project'>,
     directory: unknown,
     args: unknown[],
     sender: WebContents,
   ) {
     const dir = await allowedProject(directory);
-    await data.call('project', method, [dir, ...args]);
+    await data.call('project', method, [dir, ...args] as DataArguments<
+      'project',
+      typeof method
+    >);
     return projectResult(dir, sender);
   }
 
@@ -129,41 +135,14 @@ export function createApplicationContext(data: DataClient) {
     );
   }
 
-  async function libraryResult(query: unknown = {}): Promise<LibraryPage> {
+  async function libraryResult(query: LibraryQuery = {}): Promise<LibraryPage> {
     const root = activeLibraryRoot(),
-      page = await data.call<LibraryPage>('library', 'readLibrary', [
-        root,
-        query,
-      ]);
+      page = await data.call('library', 'readLibrary', [root, query]);
     for (const asset of [...page.assets, ...page.referenceAssets])
       registerLibraryAsset(asset, root);
     return page;
   }
 
-  async function importJob<T>(
-    sender: WebContents,
-    action: (options: {
-      signal: AbortSignal;
-      onProgress: (progress: any) => void;
-    }) => Promise<T>,
-  ): Promise<T | null> {
-    if (activeImports.has(sender.id)) throw new Error('已有导入任务正在进行');
-    const controller = new AbortController();
-    activeImports.set(sender.id, controller);
-    try {
-      return await action({
-        signal: controller.signal,
-        onProgress: (progress) => {
-          if (!sender.isDestroyed()) sender.send('asset:progress', progress);
-        },
-      });
-    } catch (error) {
-      if (controller.signal.aborted) return null;
-      throw error;
-    } finally {
-      activeImports.delete(sender.id);
-    }
-  }
   return {
     data,
     mediaPaths,

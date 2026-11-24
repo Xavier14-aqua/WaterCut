@@ -41,20 +41,19 @@ export function registerLibraryIPC(context: ApplicationContext) {
 
   ipcMain.handle('library:get-idea', async (_event, id) => {
     const root = activeLibraryRoot(),
-      idea = await data.call<any>('library', 'getLibraryIdea', [root, id]);
+      idea = await data.call('library', 'getLibraryIdea', [root, id]);
     for (const media of idea.media) {
-      const asset = await data.call<LibraryAsset>(
-        'library',
-        'getLibraryAsset',
-        [root, media.assetId],
-      );
+      const asset = await data.call('library', 'getLibraryAsset', [
+        root,
+        media.assetId,
+      ]);
       registerLibraryAsset(asset, root);
     }
     return idea;
   });
 
   ipcMain.handle('library:get-asset', async (_event, id) => {
-    const asset = await data.call<LibraryAsset>('library', 'getLibraryAsset', [
+    const asset = await data.call('library', 'getLibraryAsset', [
       activeLibraryRoot(),
       id,
     ]);
@@ -139,7 +138,7 @@ export function registerLibraryIPC(context: ApplicationContext) {
       const root = activeLibraryRoot();
       for (let index = 0; index < choice.filePaths.length; index++) {
         if (options.signal.aborted) throw new Error('导入已取消');
-        const asset = await data.call<LibraryAsset>(
+        const asset = await data.call(
           'library',
           'importLibraryAsset',
           [root, choice.filePaths[index]],
@@ -185,7 +184,7 @@ export function registerLibraryIPC(context: ApplicationContext) {
     });
     if (choice.canceled) return null;
     return importJob(event.sender, async (options) => {
-      const asset = await data.call<LibraryAsset>(
+      const asset = await data.call(
         'library',
         'relinkLibraryAsset',
         [activeLibraryRoot(), id, choice.filePaths[0]],
