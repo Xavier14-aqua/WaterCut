@@ -1,3 +1,4 @@
+import { SaveCoordinator } from './save/SaveCoordinator';
 import { createProjectEditors } from './editing/project-editors';
 import { useEffect, useRef, useState } from 'react';
 import type {
@@ -68,12 +69,20 @@ export function useAppController() {
   const projectRef = useRef<Project | null>(null),
     busyRef = useRef(false),
     editorRef = useRef(editor),
-    running = useRef<Promise<unknown>>(Promise.resolve()),
-    pending = useRef(new Map<string, SaveTask>()),
-    timers = useRef(new Map<string, number>()),
-    chain = useRef<Promise<unknown>>(Promise.resolve());
+    running = useRef<Promise<unknown>>(Promise.resolve());
   const reported = useRef(new Set<string>());
   const libraryIdRef = useRef('');
+  const coordinatorRef = useRef<SaveCoordinator | null>(null);
+  const saveHandlers = {
+    currentProjectId: () => projectRef.current?.id,
+    apply: applyProject,
+    notify: setMessage,
+    formatError: friendly,
+  };
+  if (!coordinatorRef.current)
+    coordinatorRef.current = new SaveCoordinator(saveHandlers);
+  const saveCoordinator = coordinatorRef.current;
+  saveCoordinator.updateHandlers(saveHandlers);
   editorRef.current = editor;
   function applyProject(remote: Project) {
     const local = projectRef.current;
@@ -82,23 +91,23 @@ export function useAppController() {
       remote = {
         ...remote,
         shots: remote.shots.map((s) =>
-          pending.current.has(`shot:${s.id}`) ||
-          pending.current.has(`meta:${s.id}`)
+          saveCoordinator.hasPending(remote.id, `shot:${s.id}`) ||
+          saveCoordinator.hasPending(remote.id, `meta:${s.id}`)
             ? (local.shots.find((v) => v.id === s.id) ?? s)
             : s,
         ),
         ideas: remote.ideas.map((i) =>
-          pending.current.has(`idea:${i.id}`)
+          saveCoordinator.hasPending(remote.id, `idea:${i.id}`)
             ? (local.ideas.find((v) => v.id === i.id) ?? i)
             : i,
         ),
         shotAssets: remote.shotAssets.map((b) =>
-          pending.current.has(`trim:${b.shotId}`)
+          saveCoordinator.hasPending(remote.id, `trim:${b.shotId}`)
             ? (local.shotAssets.find((v) => v.shotId === b.shotId) ?? b)
             : b,
         ),
         scriptBlocks: remote.scriptBlocks.map((b) =>
-          pending.current.has(`block:${b.id}`)
+          saveCoordinator.hasPending(remote.id, `block:${b.id}`)
             ? (local.scriptBlocks.find((v) => v.id === b.id) ?? b)
             : b,
         ),
@@ -136,51 +145,13 @@ export function useAppController() {
   function refreshed() {
     void reloadLibrary().catch((e) => setMessage(friendly(e)));
   }
-  function enqueue(task: SaveTask) {
-    chain.current = chain.current
-      .catch(() => undefined)
-      .then(async () => {
-        setMessage('保存中…');
-        try {
-          const value = await task.action();
-          applyProject(value);
-          if (!pending.current.size) setMessage('已保存');
-        } catch (error) {
-          if (!pending.current.has(task.key))
-            pending.current.set(task.key, task);
-          setMessage(`保存失败，请重试：${friendly(error)}`);
-          throw error;
-        }
-      });
-    return chain.current;
-  }
+
   function schedule(key: string, action: () => Promise<Project>) {
-    const previous = timers.current.get(key);
-    if (previous) clearTimeout(previous);
-    pending.current.set(key, {
-      key,
-      action,
-    });
-    setMessage('未保存');
-    timers.current.set(
-      key,
-      window.setTimeout(() => {
-        timers.current.delete(key);
-        const task = pending.current.get(key);
-        pending.current.delete(key);
-        if (task) void enqueue(task).catch(() => undefined);
-      }, 500),
-    );
+    const id = projectRef.current?.id;
+    if (id) saveCoordinator.schedule(id, key, action);
   }
-  async function flush() {
-    for (const timer of timers.current.values()) clearTimeout(timer);
-    timers.current.clear();
-    const tasks = [...pending.current.values()];
-    pending.current.clear();
-    const outcomes = await Promise.allSettled(tasks.map(enqueue));
-    await chain.current.catch(() => undefined);
-    if (outcomes.some((v) => v.status === 'rejected') || pending.current.size)
-      throw new Error('部分编辑尚未保存，请检查失败提示后重试');
+  function flush() {
+    return saveCoordinator.flush();
   }
   async function run(
     action: () => Promise<unknown>,
@@ -243,7 +214,7 @@ export function useAppController() {
     return () => {
       offProgress();
       offClose();
-      for (const timer of timers.current.values()) clearTimeout(timer);
+      saveCoordinator.clearTimers();
     };
   }, []);
   function readRecent(): string[] {
