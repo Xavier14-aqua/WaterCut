@@ -718,5 +718,113 @@
     "from": "src/modules/library/index.ts",
     "to": "src/modules/library/services/catalog.ts",
     "bodySha256": "508c18297fa04e4de37790a394f4f035c671f92a34ce036c729d5d1bbb5881e8"
+  },
+  {
+    "name": "resolveProjectAsset",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/assets.ts",
+    "bodySha256": "ded259fa5120599fd249cdaabacd701e1af547fe8a827dbf60d43e8e26f8ef2d"
+  },
+  {
+    "name": "hydrateProject",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/assets.ts",
+    "bodySha256": "62583b6f4015e8ac5b2de2e231245e49f57d2fa6f3aa883877069dadf7ccf98c"
+  },
+  {
+    "name": "projectEnvelope",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "a9437db9aef1980de96a1d8de08f464dd2bcfb4b4a15d481b2a7b999dbdb878a"
+  },
+  {
+    "name": "attachAssets",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "6a19c34cfd2920660e8cf9954b8c2ffa11dc64fc1d534a6e9870a6698f59a0b7"
+  },
+  {
+    "name": "bindSelect",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "1213946d8f29cb123430ee97fc700a73dc9f3f1c85f5452e910223b5da0b5ac1"
+  },
+  {
+    "name": "attachIdeas",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "18ea750a0aa893c800bb077b3fddb5e40d547874e3487c4d197b95c02794f509"
+  },
+  {
+    "name": "refreshIdea",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "cba71eb152a21ded36e7e205ac1dec32198885e1654a7b7e1e55865b8f2bfaa8"
+  },
+  {
+    "name": "promoteProject",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/project-library.ts",
+    "bodySha256": "f57ca556ab70559ce9217444460992934a9694bd305c4714fed76bf365f62415"
+  },
+  {
+    "name": "reconcileCatalog",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/catalog.ts",
+    "bodySha256": "db54a037f2c8016f25500cc29f6d61509836cb815af9ce3df9c9999928d6b3fb"
+  },
+  {
+    "name": "examplePng",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/example.ts",
+    "bodySha256": "5f5fd9f3cf1ea49b3223068c524a247812511343e07a8b3f1c45f13af3484eea"
+  },
+  {
+    "name": "createExample",
+    "from": "src/modules/workspace/index.ts",
+    "to": "src/modules/workspace/example.ts",
+    "bodySha256": "c02528e10214147c0097d17f152553b30c8f7e58722da93781cc819a07a93938"
+  },
+  {
+    "name": "fileSchema",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/manifest.ts",
+    "bodySha256": "c96b17e99fce584a7ef556ef5e3332d7bd64e1e50e4b7fa302d5e6154136179b"
+  },
+  {
+    "name": "manifestSchema",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/manifest.ts",
+    "bodySha256": "a57054aafcbf5a60dcb64c873415338ce7066c2f1699848d5c361e8a9c6280ec"
+  },
+  {
+    "name": "Missing",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/manifest.ts",
+    "bodySha256": "a55412edfcf2b34bdb57f7cbed9c295adf7ffe38f5a10ed9db5859e3ad35d63a"
+  },
+  {
+    "name": "exportPackage",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/export.ts",
+    "bodySha256": "dd51c46bf931d53ac0f33cd1abbab1164ea28b7fd8cb79df4106053329777c2a"
+  },
+  {
+    "name": "independentDocument",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/document.ts",
+    "bodySha256": "ec6d856c46096968a643b4f19e5bf71b14aaca3868720ca7c696a0b6e4d8ccd9"
+  },
+  {
+    "name": "validateDatabaseBounds",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/validation.ts",
+    "bodySha256": "ec165d138935563e82bfcccbac29810e065c728e640300b295c8889b79e3825b"
+  },
+  {
+    "name": "importPackage",
+    "from": "src/modules/delivery/project-package.ts",
+    "to": "src/modules/delivery/package/import.ts",
+    "bodySha256": "3be09954be7cf099cb5cbf425c3a898ea7bb90680b255151b257e20266f91123"
   }
 ]
